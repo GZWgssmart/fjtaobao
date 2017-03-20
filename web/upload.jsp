@@ -34,10 +34,10 @@
                 <div>
                     <label>表格类型：</label>
 
-                    <select class="combobox">
-                        <option value="PA">小表格</option>
-                        <option value="CT">大表格1</option>
-                        <option value="NY">大表格2</option>
+                    <select class="combobox" onchange="checkType(this)">
+                        <option value="min">小表格</option>
+                        <option value="max1">大表格1</option>
+                        <option value="max2">大表格2</option>
                     </select>
                 </div>
                 <div>
@@ -45,7 +45,7 @@
                     <input id="exampleInputFile" type="file" style="display:inline;"/>
                 </div>
                 <h4>设置文件属性：</h4>
-                <div>
+                <div id="days">
                     <label>天数：</label>
                     <select class="combobox">
                         <option value="PA">2</option>
@@ -96,6 +96,19 @@
         </div>
     </div>
 </div>
+
+<script>
+    function checkType(comboBox) {
+        var val = comboBox.value;
+        var div = document.getElementById("days");
+
+        if (val == "min") {
+            div.style = "display: black;";
+        } else {
+            div.style = "display: none;";
+        }
+    }
+</script>
 
 </body>
 </html>
