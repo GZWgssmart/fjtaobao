@@ -1,0 +1,4 @@
+{"total":2,"rows":[
+  {"id":"1","name":"20170320001","brand":"A","pType":"A","days":3,"createTime":"2017-03-20"},
+  {"id":"2","name":"20170320002","brand":"B","pType":"B","days":5,"createTime":"2017-03-20"}
+]}
