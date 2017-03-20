@@ -23,7 +23,7 @@
 <h3 style="text-align: center;">
     详情补货建议
 </h3>
-<table class="easyui-datagrid" title="商品详细列表" style="width:98%;height:250px;"
+<table class="easyui-datagrid" title="商品详细列表" style="width:100%;height:500px;"
        data-options="toolbar:'#tb',
                         singleSelect:false,
                         collapsible:true,
@@ -35,7 +35,7 @@
                         pageSize:20" style="height:100%;">
     <thead>
     <tr>
-        <th data-options="field:'id', checkbox:true">商品id</th>
+        <th data-options="field:'id'">商品id</th>
         <th data-options="field:'productNo',width:100,align:'center'">商品编号</th>
         <th data-options="field:'name',width:100,align:'center'">商品名称</th>
         <th data-options="field:'days',width:60,align:'center'">周期</th>
@@ -59,7 +59,7 @@
         <th data-options="field:'totalSales',width:60,align:'center'">西安销量</th>
         <th data-options="field:'totalStock',width:60,align:'center'">固安库存</th>
         <th data-options="field:'totalSales',width:60,align:'center'">固安销量</th>
-        <th data-options="field:'totalSales',width:80,align:'center'">建议补货数</th>
+        <th data-options="field:'totalSales',width:100,align:'center'">建议补货数</th>
     </tr>
     </thead>
 </table>
