@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>查看文件</title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=path %>/css/bootstrap.min.css" rel="stylesheet">
     <link href="<%=path %>/css/layoutit.css" rel="stylesheet">
     <link href="<%=path %>/css/default.css" rel="stylesheet">
     <link href="<%=path %>/css/base.css" rel="stylesheet">
@@ -39,11 +39,11 @@
                 <h3 style="text-align: center;">
                     补货建议
                 </h3>
-                <table class="easyui-datagrid" title="文档列表" style="width:95%;height:250px"
+                <table class="easyui-datagrid" title="文档列表" style="width:95%;height:500px;"
                        data-options="toolbar:'#tb',
                         singleSelect:false,
                         collapsible:true,
-                        url:'test.json',
+                        url:'file.json',
                         method:'get',
                         rownumbers:true,
                         autoRowHeight:true,
@@ -56,6 +56,7 @@
                         <th data-options="field:'days',width:100,align:'center'">周期</th>
                         <th data-options="field:'brand',width:100,align:'center'">商品品牌</th>
                         <th data-options="field:'pType',width:100,align:'center'">商品类型</th>
+                        <th data-options="field:'pStatus',width:100,align:'center'">商品状态</th>
                         <th data-options="field:'createTime',width:250,align:'center'">文档上传时间</th>
                     </tr>
                     </thead>
@@ -84,12 +85,11 @@
                             <option value="NY">西安</option>
                             <option value="PA">固安</option>
                         </select>
-                        <a href="javascript:;"
-                           onclick="showEditCheckWin('${sessionScope.emp.empId }', '${sessionScope.emp.name }');"
+                        <a href="<%=path %>/file_detail.jsp"
                            class="easyui-linkbutton" iconCls="icon-search">查看补货建议</a>
                     </div>
                 </div>
-                <div style="text-align: right;"><a href="<%=path %>/index.jsp">返回首页</a></div>
+                <div style="text-align: right; margin-right: 50px;"><a href="<%=path %>/index.jsp">返回首页</a></div>
             </div>
         </div>
     </div>

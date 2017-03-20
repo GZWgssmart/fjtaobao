@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>上传文件</title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=path %>/css/bootstrap.min.css" rel="stylesheet">
     <link href="<%=path %>/css/layoutit.css" rel="stylesheet">
     <link href="<%=path %>/css/default.css" rel="stylesheet">
     <link href="<%=path %>/css/base.css" rel="stylesheet">

@@ -12,9 +12,16 @@
 <html>
 <head>
     <title>主页</title>
+    <link href="<%=path %>/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <a href="<%=path %>/upload.jsp">上传</a>
-    <a href="<%=path %>/look.jsp">查看文件</a>
+    <p style="text-align: center; margin-top: 300px;">
+        <a href="<%=path %>/upload.jsp">
+            <button type="button" class="btn btn-primary btn-lg">上传文件</button>
+        </a>
+        <a href="<%=path %>/look.jsp">
+            <button type="button" class="btn btn-default btn-lg">查看文件</button>
+        </a>
+    </p>
 </body>
 </html>
