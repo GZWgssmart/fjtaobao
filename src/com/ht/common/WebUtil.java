@@ -1,10 +1,13 @@
-package com.ht.common;
+﻿package com.ht.common;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.List;
 
 public class WebUtil {
+
+	public static String DEFAULT_UPLOAD = "upload"; // 用来保存上传图片的文件目录
+	public static String SON_FILE = "";
 
 	/**
 	 * 用来获取到url地址栏的最后一个字段
@@ -15,6 +18,17 @@ public class WebUtil {
 		String uri = req.getRequestURI();
 		return uri.substring(uri.lastIndexOf("/") + 1);
 	}
+
+	public static String mkUpload(HttpServletRequest req, String fileName) {
+		SON_FILE = DEFAULT_UPLOAD + "/" + fileName;
+		String path = req.getServletContext().getRealPath("/");
+		File file = new File(path, SON_FILE);
+		if (!file.exists()) {
+			file.mkdirs();
+		}
+		return file.getAbsolutePath();
+	}
+
 
 	/**
 	 * 用来指定获取url地址栏的字段，index=1表示获取倒数第一个字段，index=2表示获取倒数第二个字段，用于分页技术
@@ -32,15 +46,5 @@ public class WebUtil {
 		} else {
 			return uri;
 		}
-	}
-
-	/**
-	 * 用于获取网站在服务器端的真实路径
-	 * @param req
-	 * @return
-	 */
-	public static String mkUpload(HttpServletRequest req, String fileName) {
-		String path = req.getServletContext().getRealPath("/");
-		return path;
 	}
 }
