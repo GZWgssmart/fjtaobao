@@ -1,4 +1,4 @@
-{"total":2,"rows":[
+{"total":8,"rows":[
   {"id":"1","name":"20170320001","brand":"A","pType":"A","days":3,"createTime":"2017-03-21","pStatus":"上柜"},
   {"id":"2","name":"20170320002","brand":"B","pType":"B","days":5,"createTime":"2017-03-21","pStatus":"上柜"},
   {"id":"3","name":"20170320001","brand":"A","pType":"A","days":7,"createTime":"2017-03-21","pStatus":"上柜"},

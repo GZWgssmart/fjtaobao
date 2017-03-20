@@ -118,14 +118,13 @@
                 if (!isNaN(days) && days > 0 && days < 32) {
                     alert("yes")
                 } else {
-                    alert("天数只能输入1-31之间的数字");
+                    $.messager.alert("提示", "天数只能输入1-31之间的数字", "error");
                 }
-                //alert(days + "," + city)
             } else {
-                alert("只能选择同一天的文档哦！");
+                $.messager.alert("提示", "只能选择同一天的文档哦！", "error");
             }
         } else {
-            alert("请选择你要查看的文档");
+            $.messager.alert("提示", "请选择你要查看的文档", "error");
         }
     }
 </script>
