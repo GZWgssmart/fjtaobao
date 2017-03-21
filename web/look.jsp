@@ -116,7 +116,7 @@
             }
             if (flag) {
                 if (!isNaN(days) && days > 0 && days < 32) {
-                    alert("yes")
+                    window.location.href = "/file_detail.jsp";
                 } else {
                     $.messager.alert("提示", "天数只能输入1-31之间的数字", "error");
                 }
