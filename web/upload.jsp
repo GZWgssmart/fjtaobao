@@ -70,7 +70,7 @@
                     </select>
                 </div>
                 <div>
-                    <label>商品分类：</label>
+                    <label>商品分类</label>
                     <select name="ptype" class="combobox">
                         <option value="全部">全部</option>
                         <option value="A">A</option>
