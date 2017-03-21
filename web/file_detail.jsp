@@ -25,7 +25,7 @@
 </h3>
 <table class="easyui-datagrid" title="商品详细列表" style="width:100%;height:500px;"
        data-options="toolbar:'#tb',
-                        singleSelect:false,
+                        singleSelect:true,
                         collapsible:true,
                         url:'file.json',
                         method:'get',
@@ -38,28 +38,32 @@
         <th data-options="field:'id'">商品id</th>
         <th data-options="field:'productNo',width:100,align:'center'">商品编号</th>
         <th data-options="field:'name',width:100,align:'center'">商品名称</th>
-        <th data-options="field:'days',width:60,align:'center'">周期</th>
         <th data-options="field:'brand',width:60,align:'center'">商品品牌</th>
         <th data-options="field:'pType',width:60,align:'center'">商品类型</th>
-        <th data-options="field:'totalStock',width:60,align:'center'">全国库存</th>
-        <th data-options="field:'totalSales',width:60,align:'center'">全国销量</th>
-        <th data-options="field:'totalStock',width:60,align:'center'">北京库存</th>
-        <th data-options="field:'totalSales',width:60,align:'center'">北京销量</th>
-        <th data-options="field:'totalStock',width:60,align:'center'">上海库存</th>
-        <th data-options="field:'totalSales',width:60,align:'center'">上海销量</th>
-        <th data-options="field:'totalStock',width:60,align:'center'">广州库存</th>
-        <th data-options="field:'totalSales',width:60,align:'center'">广州销量</th>
-        <th data-options="field:'totalStock',width:60,align:'center'">成都库存</th>
-        <th data-options="field:'totalSales',width:60,align:'center'">成都销量</th>
-        <th data-options="field:'totalStock',width:60,align:'center'">武汉库存</th>
-        <th data-options="field:'totalSales',width:60,align:'center'">武汉销量</th>
-        <th data-options="field:'totalStock',width:60,align:'center'">沈阳库存</th>
-        <th data-options="field:'totalSales',width:60,align:'center'">沈阳销量</th>
-        <th data-options="field:'totalStock',width:60,align:'center'">西安库存</th>
-        <th data-options="field:'totalSales',width:60,align:'center'">西安销量</th>
-        <th data-options="field:'totalStock',width:60,align:'center'">固安库存</th>
-        <th data-options="field:'totalSales',width:60,align:'center'">固安销量</th>
-        <th data-options="field:'totalSales',width:100,align:'center'">建议补货数</th>
+        <th data-options="field:'totalStock',width:70,align:'center'">全国总库存</th>
+        <th data-options="field:'totalSales',width:70,align:'center'">全国总销量</th>
+        <th data-options="field:'totalStockCount',width:90,align:'center'">全国总库存额</th>
+        <th data-options="field:'totalSalesCount',width:90,align:'center'">全国总销量额</th>
+        <th data-options="field:'bjStock',width:60,align:'center'">北京库存</th>
+        <th data-options="field:'bjSales',width:60,align:'center'">北京销量</th>
+        <th data-options="field:'shStock',width:60,align:'center'">上海库存</th>
+        <th data-options="field:'shSales',width:60,align:'center'">上海销量</th>
+        <th data-options="field:'gzStock',width:60,align:'center'">广州库存</th>
+        <th data-options="field:'gzSales',width:60,align:'center'">广州销量</th>
+        <th data-options="field:'cdStock',width:60,align:'center'">成都库存</th>
+        <th data-options="field:'cdSales',width:60,align:'center'">成都销量</th>
+        <th data-options="field:'whStock',width:60,align:'center'">武汉库存</th>
+        <th data-options="field:'whSales',width:60,align:'center'">武汉销量</th>
+        <th data-options="field:'syStock',width:60,align:'center'">沈阳库存</th>
+        <th data-options="field:'sySales',width:60,align:'center'">沈阳销量</th>
+        <th data-options="field:'xaStock',width:60,align:'center'">西安库存</th>
+        <th data-options="field:'xaSales',width:60,align:'center'">西安销量</th>
+        <th data-options="field:'gaStock',width:60,align:'center'">固安库存</th>
+        <th data-options="field:'gaSales',width:60,align:'center'">固安销量</th>
+        <th data-options="field:'days',width:60,align:'center'">周期</th>
+        <th data-options="field:'turnoverDays',width:60,align:'center'">周转天数</th>
+        <th data-options="field:'growthRate',width:60,align:'center'">增长率</th>
+        <th data-options="field:'count',width:60,align:'center'">补货数</th>
     </tr>
     </thead>
 </table>
