@@ -1,9 +1,7 @@
 package com.ht.bean;
 
-import jxl.write.DateTime;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Created by ArrayBin on 2017/3/17.
@@ -19,7 +17,7 @@ public class Files {
     private String fType; //文档类型
     private String fStatus; //文档状态
     private String fPath; //文件路径
-    private Timestamp createTime; //创建时间
+    private Date createTime; //文件创建时间
 
     public int getId() {
         return id;
@@ -93,11 +91,11 @@ public class Files {
         this.fPath = fPath;
     }
 
-    public Timestamp getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Timestamp createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -116,4 +114,7 @@ public class Files {
                 ", createTime=" + createTime +
                 '}';
     }
+
+
+
 }

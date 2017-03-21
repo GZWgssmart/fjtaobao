@@ -5,6 +5,9 @@ import com.ht.bean.Product;
 import com.ht.common.Constants;
 import com.ht.common.Methods;
 import com.ht.common.WebUtil;
+import com.ht.common.tool.ImportExcel;
+import com.ht.common.tool.ImportExcelUtil;
+import com.ht.common.util.ExcelReader;
 import com.ht.common.util.ExcelUtil;
 import com.ht.common.util.ExcelWorkSheet;
 import com.ht.dao.FilesDAO;
@@ -30,9 +33,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by ArrayBin on 2017/3/17.
@@ -82,6 +86,7 @@ public class FilesServlet extends HttpServlet {
         if (method.equals("aa")) {
             queryFiles(req, resp);
         } else if (method.equals("bb")) {
+            System.out.printf("fsfsdfssfdsdfsdsdf");
             addFiles(req, resp);
         }
     }
@@ -91,19 +96,6 @@ public class FilesServlet extends HttpServlet {
         for (Files files1 : files) {
             System.out.printf(files1.getName() + "ssdfsddfdsdsfdsdf");
         }
-    }
-
-    private Workbook createWorkBook(InputStream is) throws IOException {
-
-        if (excelFileFileName.toLowerCase().endsWith("xls")) {
-            return new HSSFWorkbook(is);
-        }
-
-        if (excelFileFileName.toLowerCase().endsWith("xlsx")) {
-        }
-
-        return null;
-
     }
 
 
@@ -121,9 +113,7 @@ public class FilesServlet extends HttpServlet {
                     if (fileItem.isFormField()) { // 判断FileItem是否为普通的表单字段
                         String fieldName = fileItem.getFieldName();// 获取普通表单字段的name值
                         String fieldValue = fileItem.getString(Constants.DEFAULT_CODING);// 获取普通表单字段的value值
-                        if (fieldName.equals("name")) {
-                            files.setName(fieldValue);
-                        } else if (fieldName.equals("days")){
+                        if (fieldName.equals("days")){
                             int days = 0;
                             try{
                                 days = Integer.valueOf(fieldValue);
@@ -141,10 +131,13 @@ public class FilesServlet extends HttpServlet {
                         }  else if(fieldName.equals("fpath")){
                             files.setName(fieldValue);
                         }
+                        files.setfStatus("激活");
+                        java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
+                        files.setCreateTime(currentDate);
                     } else { // 否则为文件字段
-                        System.out.printf("fsfsdfjsjfsjsjfdjsdf");
-                        String newFileName = System.currentTimeMillis()+ ".xlsx";
                         String fileName = fileItem.getName();// 获取文件的名称
+                        String prefix=fileName.substring(fileName.lastIndexOf(".")+1);
+                        String newFileName = System.currentTimeMillis()+ "." + prefix;
                         // 需要获取图片数据，把图片保存到本地服务器的某个目录里，并把路径保存到数据库
                         // 1、获取图片数据
                         InputStream in = fileItem.getInputStream(); // 获取文件输入流
@@ -152,20 +145,51 @@ public class FilesServlet extends HttpServlet {
                         String upload = WebUtil.mkUpload(req, "upload"); // 创建保存上传的文件的目录
                         // new File(upload  + "/" + fileItem.getName())   上传的文件目录 + / + 文件名
                         if(fileName != null && !fileName.equals("")) {
-                            System.out.printf("alfslfdsfdlfsdlflfsd");
                             FileUtils.copyInputStreamToFile(in, new File(upload  + "/" +Methods.createNewFolder()+"/"+ newFileName));
                             // 3、把文件的路径保存到数据库
-                            files.setfPath(Constants.PATH_UPLOAD+ "/" + Methods.createNewFolder() + "/"+newFileName);
+                            files.setName(fileName);
+                            files.setfPath(Constants.PATH_UPLOAD+ "/" + Methods.createNewFolder() + "/"+fileName);
                         }
                     }
                 }
+                filesDAO.addFiles(files);
                req.getRequestDispatcher("").forward(req, resp);
             } catch (FileUploadException e) {
                 e.printStackTrace();
             }
         } else {
+
+        }
+
+    }
+
+    public void inputExcel(String url) {
+        Product product = new Product();
+        try {
+
+            // 对读取Excel表格标题测试
+            InputStream is = new FileInputStream(url);
+            ExcelReader excelReader = new ExcelReader();
+            String[] title = excelReader.readExcelTitle(is);
+            System.out.println("获得Excel表格的标题:");
+            for (String s : title) {
+                System.out.print(s + " ");
+            }
+
+            // 对读取Excel表格内容测试
+            InputStream is2 = new FileInputStream(url);
+            Map<Integer, String> map = excelReader.readExcelContent(is2);
+            System.out.println("获得Excel表格的内容:");
+            for (int i = 1; i <= map.size(); i++) {
+                System.out.println(map.get(i));
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("未找到指定路径的文件!");
+            e.printStackTrace();
         }
     }
+
 
     /**
      * 用于新建文件夹来接收上传的文件

@@ -6,6 +6,7 @@ package com.ht.bean;
 public class Product {
     private int id; //主键
     private String productNo; //商品编号
+    private int days;
     private int fileId; //文件id
     private String name; //商品名称
     private String brand; //商品品牌
@@ -30,4 +31,243 @@ public class Product {
     private int gaSales; //固安销量
     private int gaStock; //固安库存
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getProductNo() {
+        return productNo;
+    }
+
+    public void setProductNo(String productNo) {
+        this.productNo = productNo;
+    }
+
+    public int getDays() {
+        return days;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
+    }
+
+    public int getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(int fileId) {
+        this.fileId = fileId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getTotalSales() {
+        return totalSales;
+    }
+
+    public void setTotalSales(int totalSales) {
+        this.totalSales = totalSales;
+    }
+
+    public int getTotalStock() {
+        return totalStock;
+    }
+
+    public void setTotalStock(int totalStock) {
+        this.totalStock = totalStock;
+    }
+
+    public int getBjSales() {
+        return bjSales;
+    }
+
+    public void setBjSales(int bjSales) {
+        this.bjSales = bjSales;
+    }
+
+    public int getBjStock() {
+        return bjStock;
+    }
+
+    public void setBjStock(int bjStock) {
+        this.bjStock = bjStock;
+    }
+
+    public int getShSales() {
+        return shSales;
+    }
+
+    public void setShSales(int shSales) {
+        this.shSales = shSales;
+    }
+
+    public int getShStock() {
+        return shStock;
+    }
+
+    public void setShStock(int shStock) {
+        this.shStock = shStock;
+    }
+
+    public int getGzSales() {
+        return gzSales;
+    }
+
+    public void setGzSales(int gzSales) {
+        this.gzSales = gzSales;
+    }
+
+    public int getGzStock() {
+        return gzStock;
+    }
+
+    public void setGzStock(int gzStock) {
+        this.gzStock = gzStock;
+    }
+
+    public int getCdSales() {
+        return cdSales;
+    }
+
+    public void setCdSales(int cdSales) {
+        this.cdSales = cdSales;
+    }
+
+    public int getCdStock() {
+        return cdStock;
+    }
+
+    public void setCdStock(int cdStock) {
+        this.cdStock = cdStock;
+    }
+
+    public int getWhSales() {
+        return whSales;
+    }
+
+    public void setWhSales(int whSales) {
+        this.whSales = whSales;
+    }
+
+    public int getWhStock() {
+        return whStock;
+    }
+
+    public void setWhStock(int whStock) {
+        this.whStock = whStock;
+    }
+
+    public int getSySales() {
+        return sySales;
+    }
+
+    public void setSySales(int sySales) {
+        this.sySales = sySales;
+    }
+
+    public int getSyStock() {
+        return syStock;
+    }
+
+    public void setSyStock(int syStock) {
+        this.syStock = syStock;
+    }
+
+    public int getXaSales() {
+        return xaSales;
+    }
+
+    public void setXaSales(int xaSales) {
+        this.xaSales = xaSales;
+    }
+
+    public int getXaStock() {
+        return xaStock;
+    }
+
+    public void setXaStock(int xaStock) {
+        this.xaStock = xaStock;
+    }
+
+    public int getGaSales() {
+        return gaSales;
+    }
+
+    public void setGaSales(int gaSales) {
+        this.gaSales = gaSales;
+    }
+
+    public int getGaStock() {
+        return gaStock;
+    }
+
+    public void setGaStock(int gaStock) {
+        this.gaStock = gaStock;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", productNo='" + productNo + '\'' +
+                ", days=" + days +
+                ", fileId=" + fileId +
+                ", name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", status='" + status + '\'' +
+                ", price=" + price +
+                ", totalSales=" + totalSales +
+                ", totalStock=" + totalStock +
+                ", bjSales=" + bjSales +
+                ", bjStock=" + bjStock +
+                ", shSales=" + shSales +
+                ", shStock=" + shStock +
+                ", gzSales=" + gzSales +
+                ", gzStock=" + gzStock +
+                ", cdSales=" + cdSales +
+                ", cdStock=" + cdStock +
+                ", whSales=" + whSales +
+                ", whStock=" + whStock +
+                ", sySales=" + sySales +
+                ", syStock=" + syStock +
+                ", xaSales=" + xaSales +
+                ", xaStock=" + xaStock +
+                ", gaSales=" + gaSales +
+                ", gaStock=" + gaStock +
+                '}';
+    }
 }

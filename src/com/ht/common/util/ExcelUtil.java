@@ -4,6 +4,8 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.write.Label;
@@ -50,7 +52,8 @@ public class ExcelUtil {
 			book = Workbook.getWorkbook(new File(filePath));
 			Sheet sheet = book.getSheet(0);
 			Field[] fi = cl.getDeclaredFields();
-			for(int i = 3;i<sheet.getRows();i++){
+
+			for(int i = 1;i<sheet.getRows();i++){
 				Object ob = cl.newInstance();
 				for(int j = 0;j<fi.length;j++){
 					fi[j].setAccessible(true);

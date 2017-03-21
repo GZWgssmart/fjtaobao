@@ -23,7 +23,7 @@ public class FilesDAOImpl extends BaseDAO implements FilesDAO {
         files.setfType(rs.getString("ftype"));
         files.setfStatus(rs.getString("fstatus"));
         files.setfPath(rs.getString("fpath"));
-        files.setCreateTime(rs.getTimestamp("createtime"));
+        files.setCreateTime(rs.getDate("createtime"));
         return files;
     }
 
@@ -42,7 +42,7 @@ public class FilesDAOImpl extends BaseDAO implements FilesDAO {
             ps.setString(6, files.getfType());
             ps.setString(7, files.getfStatus());
             ps.setString(8, files.getfPath());
-            ps.setTimestamp(9,files.getCreateTime());
+            ps.setDate(9,  files.getCreateTime());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
