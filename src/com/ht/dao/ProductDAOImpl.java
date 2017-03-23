@@ -1,13 +1,50 @@
 package com.ht.dao;
 
 import com.ht.bean.Product;
+import com.ht.bean.ProductInfo;
+import com.ht.common.bean.Pager4EasyUI;
+
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ArrayBin on 2017/3/20.
  */
 public class ProductDAOImpl extends BaseDAO implements ProductDAO {
+
+    private ProductInfo setProduct(ProductInfo product, ResultSet rs) throws SQLException {
+        product.setId(rs.getInt("id"));
+        product.setProductNo(rs.getString("productno"));
+        product.setName(rs.getString("name"));
+        product.setPrice(rs.getDouble("price"));
+        product.setStatus(rs.getString("status"));
+        product.setDays(rs.getInt("days"));
+        product.setBrand(rs.getString("brand"));
+        product.setFileId(rs.getInt("fileid"));
+        product.setTotalSales(rs.getInt("totalsales"));
+        product.setTotalStock(rs.getInt("totalstock"));
+        product.setBjSales(rs.getInt("bjsales"));
+        product.setBjStock(rs.getInt("bjstock"));
+        product.setShSales(rs.getInt("shsales"));
+        product.setShStock(rs.getInt("shstock"));
+        product.setGzSales(rs.getInt("gzsales"));
+        product.setGzStock(rs.getInt("gzstock"));
+        product.setCdSales(rs.getInt("cdsales"));
+        product.setCdStock(rs.getInt("cdstock"));
+        product.setWhSales(rs.getInt("whsales"));
+        product.setWhStock(rs.getInt("whstock"));
+        product.setSySales(rs.getInt("sysales"));
+        product.setSyStock(rs.getInt("systock"));
+        product.setXaSales(rs.getInt("xasales"));
+        product.setXaStock(rs.getInt("xastock"));
+        product.setGaSales(rs.getInt("gasales"));
+        product.setGaStock(rs.getInt("gastock"));
+        return product;
+    }
+
     @Override
     public void addProduct(Product product) {
         getConn();
@@ -48,5 +85,44 @@ public class ProductDAOImpl extends BaseDAO implements ProductDAO {
             close();
         }
 
+    }
+
+    @Override
+    public Pager4EasyUI<ProductInfo> pager(Pager4EasyUI<ProductInfo> pager, String fileId) {
+        getConn();
+        String sql = "select * from t_product where fileid in ("+ fileId +") limit " + pager.getBeginIndex() + ", " + pager.getPageSize();
+        List<ProductInfo> productList = new ArrayList<ProductInfo>();
+        try {
+            PreparedStatement ps  =  conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ProductInfo product = new ProductInfo();
+                setProduct(product, rs);
+                productList.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        pager.setRows(productList);
+        close();
+        return pager;
+    }
+
+    @Override
+    public int count(String fileId) {
+        getConn();
+        String sql = "select count(*) from t_product where fileid in (" + fileId + ")";
+        int count = 0;
+        try {
+            PreparedStatement ps  =  conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        close();
+        return count;
     }
 }

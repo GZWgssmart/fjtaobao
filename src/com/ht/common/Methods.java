@@ -1,6 +1,7 @@
 package com.ht.common;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -27,6 +28,20 @@ public class Methods {
 
     public static String getRootPath(HttpServletRequest request) {
         return request.getServletContext().getRealPath("/");
+    }
+
+    public static double division(double a ,double b){
+        double num =a/b;
+
+        DecimalFormat df = new DecimalFormat("#.0");
+
+        return Double.valueOf(df.format(num));
+
+    }
+
+    public static int division(double a) {
+        DecimalFormat df = new DecimalFormat("#");
+        return Integer.valueOf(df.format(a));
     }
 
 }

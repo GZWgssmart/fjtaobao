@@ -66,7 +66,7 @@
 
                 <div id="tb" style="padding:5px;height:auto">
                     <div style="margin-bottom:5px">
-                        <label>选择天数：</label>
+                        <label>选择补货天数：</label>
                         <select class="easyui-combobox" id="days" style="width:100px;">
                             <option>28</option>
                             <option>30</option>
@@ -105,6 +105,7 @@
         var length = rows.length;
         var days = $("#days").combobox('getValue');
         var city = $("#city").combobox('getValue');
+        var ids = "";
         if (length > 0) {
 
             var flag = true;
@@ -117,10 +118,15 @@
                     }
 
                 }
+                if (ids == "") {
+                    ids = rows[i].id;
+                } else {
+                    ids += "," + rows[i].id;
+                }
             }
             if (flag) {
                 if (!isNaN(days) && days > 0 && days < 32) {
-                    window.location.href = "/file_detail.jsp";
+                    window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids;
                 } else {
                     $.messager.alert("提示", "天数只能输入1-31之间的数字", "error");
                 }

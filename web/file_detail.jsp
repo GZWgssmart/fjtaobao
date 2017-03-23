@@ -27,7 +27,7 @@
        data-options="toolbar:'#tb',
                         singleSelect:true,
                         collapsible:true,
-                        url:'file.json',
+                        url:'<%=path %>/files/pager1',
                         method:'get',
                         rownumbers:true,
                         autoRowHeight:true,
@@ -39,7 +39,7 @@
         <th data-options="field:'productNo',width:100,align:'center'">商品编号</th>
         <th data-options="field:'name',width:100,align:'center'">商品名称</th>
         <th data-options="field:'brand',width:60,align:'center'">商品品牌</th>
-        <th data-options="field:'pType',width:60,align:'center'">商品类型</th>
+        <th data-options="field:'status',width:60,align:'center'">商品状态</th>
         <th data-options="field:'totalStock',width:70,align:'center'">全国总库存</th>
         <th data-options="field:'totalSales',width:70,align:'center'">全国总销量</th>
         <th data-options="field:'totalStockCount',width:90,align:'center'">全国总库存额</th>

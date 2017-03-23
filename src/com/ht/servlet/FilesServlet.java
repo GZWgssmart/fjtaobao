@@ -3,6 +3,7 @@ package com.ht.servlet;
 import com.alibaba.fastjson.JSON;
 import com.ht.bean.Files;
 import com.ht.bean.Product;
+import com.ht.bean.ProductInfo;
 import com.ht.common.Constants;
 import com.ht.common.Methods;
 import com.ht.common.WebUtil;
@@ -28,6 +29,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +43,10 @@ public class FilesServlet extends HttpServlet {
     private ProductService productService;
     private int total;
     private List<Files> rows;
+
+    private int days;
+    private String city;
+    private String ids;
 
 
     public FilesServlet() {
@@ -56,6 +63,10 @@ public class FilesServlet extends HttpServlet {
             addFiles(req, resp);
         } else if (method.equals("pager")) {
             searchFilePager(req, resp);
+        } else if (method.equals("search")) {
+            setCondition(req, resp);
+        } else if (method.equals("pager1")) {
+            searchProductPager(req, resp);
         }
     }
 
@@ -207,6 +218,165 @@ public class FilesServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
+
+
+    private void setCondition(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String daysStr = req.getParameter("days");
+        String cityStr = req.getParameter("city");
+        String idsStri = req.getParameter("ids");
+        days = 28;
+        city = "all";
+        if (daysStr != null && !"".equals(daysStr) && cityStr != null && !"".equals(cityStr) && idsStri != null && !"".equals(idsStri)) {
+            try {
+                days = Integer.valueOf(daysStr);
+                city = cityStr;
+                ids = idsStri;
+            } catch (NumberFormatException e) {
+
+            }
+            resp.sendRedirect("/file_detail.jsp");
+        } else {
+            resp.sendRedirect("/look.jsp");
+        }
+    }
+
+    private void searchProductPager(HttpServletRequest req, HttpServletResponse resp) {
+        int page = 1;
+        int rows = 20;
+        try {
+            page = Integer.valueOf(req.getParameter("page"));
+            rows = Integer.valueOf(req.getParameter("rows"));
+        } catch (NumberFormatException e) {
+
+        }
+        Pager4EasyUI<ProductInfo> pager = new Pager4EasyUI<ProductInfo>();
+        pager.setPageNo(page);
+        pager.setPageSize(rows);
+        pager = productService.pager(pager, ids);
+        List<ProductInfo> pis = pager.getRows();
+        for (ProductInfo pi : pis) {
+            double totalStockCount = pi.getTotalStock() * pi.getPrice();
+            double totalSalesCount = pi.getTotalSales() * pi.getPrice();
+            double turnoverDays = 0.0;
+            double count = 0.0;
+
+            if (city.equals("all")) {
+                if (pi.getTotalStock() != 0 && pi.getTotalSales() != 0) {
+                    turnoverDays = pi.getTotalStock() * 1.0 / pi.getTotalSales();
+                    if (pi.getDays() != 0) {
+                        double temp = Methods.division(pi.getTotalSales(), pi.getDays());
+                        count =  temp * days - pi.getTotalStock();
+                        if (count <= 0) {
+                            count = 0;
+                        }
+                    }
+                }
+            } else if (city.equals("bj")) {
+                if (pi.getBjStock() != 0 && pi.getBjSales() != 0) {
+                    turnoverDays = pi.getBjStock() / pi.getBjSales();
+                    if (pi.getDays() != 0) {
+                        double temp = Methods.division(pi.getBjSales(), pi.getDays());
+                        count =  temp * days - pi.getBjStock();
+                        if (count <= 0) {
+                            count = 0;
+                        }
+                    }
+                }
+            } else if (city.equals("sh")) {
+                if (pi.getShStock() != 0 && pi.getShSales() != 0) {
+                    turnoverDays = pi.getShStock() / pi.getShSales();
+                    if (pi.getDays() != 0) {
+                        double temp = Methods.division(pi.getShSales(), pi.getDays());
+                        count =  temp * days - pi.getShStock();
+                        if (count <= 0) {
+                            count = 0;
+                        }
+                    }
+                }
+            } else if (city.equals("gz")) {
+                if (pi.getGzStock() != 0 && pi.getGzSales() != 0) {
+                    turnoverDays = pi.getGzStock() / pi.getGzSales();
+                    if (pi.getDays() != 0) {
+                        double temp = Methods.division(pi.getGzSales(), pi.getDays());
+                        count =  temp * days - pi.getGzStock();
+                        if (count <= 0) {
+                            count = 0;
+                        }
+                    }
+                }
+            } else if (city.equals("cd")) {
+                if (pi.getCdStock() != 0 && pi.getCdSales() != 0) {
+                    turnoverDays = pi.getCdStock() / pi.getCdSales();
+                    if (pi.getDays() != 0) {
+                        double temp = Methods.division(pi.getCdSales(), pi.getDays());
+                        count =  temp * days - pi.getCdStock();
+                        if (count <= 0) {
+                            count = 0;
+                        }
+                    }
+                }
+            } else if (city.equals("wh")) {
+                if (pi.getWhStock() != 0 && pi.getWhSales() != 0) {
+                    turnoverDays = pi.getWhStock() / pi.getWhSales();
+                    if (pi.getDays() != 0) {
+                        double temp = Methods.division(pi.getWhSales(), pi.getDays());
+                        count =  temp * days - pi.getWhStock();
+                        if (count <= 0) {
+                            count = 0;
+                        }
+                    }
+                }
+            } else if (city.equals("sy")) {
+                if (pi.getSyStock() != 0 && pi.getSySales() != 0) {
+                    turnoverDays = pi.getSyStock() / pi.getSySales();
+                    if (pi.getDays() != 0) {
+                        double temp = Methods.division(pi.getWhSales(), pi.getDays());
+                        count =  temp * days - pi.getWhStock();
+                        if (count <= 0) {
+                            count = 0;
+                        }
+                    }
+                }
+            } else if (city.equals("xa")) {
+                if (pi.getXaStock() != 0 && pi.getXaSales() != 0) {
+                    turnoverDays = pi.getXaStock() / pi.getXaSales();
+                    if (pi.getDays() != 0) {
+                        double temp = Methods.division(pi.getXaSales(), pi.getDays());
+                        count =  temp * days - pi.getXaStock();
+                        if (count <= 0) {
+                            count = 0;
+                        }
+                    }
+                }
+            } else if (city.equals("ga")) {
+                if (pi.getGaStock() != 0 && pi.getGaSales() != 0) {
+                    turnoverDays = pi.getGzStock() / pi.getGaSales();
+                    if (pi.getDays() != 0) {
+                        double temp = Methods.division(pi.getGaSales(), pi.getDays());
+                        count =  temp * days - pi.getGaStock();
+                        if (count <= 0) {
+                            count = 0;
+                        }
+                    }
+                }
+            }
+            BigDecimal decimal = new BigDecimal(turnoverDays);
+            turnoverDays = decimal.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
+            pi.setTotalStockCount((int) totalStockCount);
+            pi.setTotalSalesCount((int) totalSalesCount);
+            pi.setTurnoverDays(turnoverDays);
+            pi.setCount(Methods.division(count));
+        }
+        resp.setContentType("text/json;charset=utf-8");
+        try {
+            PrintWriter pw = resp.getWriter();
+            pw.write(JSON.toJSONString(pager));
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

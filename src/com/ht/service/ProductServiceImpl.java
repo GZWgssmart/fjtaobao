@@ -1,6 +1,8 @@
 package com.ht.service;
 
 import com.ht.bean.Product;
+import com.ht.bean.ProductInfo;
+import com.ht.common.bean.Pager4EasyUI;
 import com.ht.dao.ProductDAO;
 import com.ht.dao.ProductDAOImpl;
 
@@ -18,5 +20,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void addProduct(Product product) {
         productDAO.addProduct(product);
+    }
+
+    @Override
+    public Pager4EasyUI<ProductInfo> pager(Pager4EasyUI<ProductInfo> pager, String fileId) {
+        pager = productDAO.pager(pager,  fileId);
+        pager.setTotal(productDAO.count(fileId));
+        return pager;
     }
 }
