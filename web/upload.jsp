@@ -30,7 +30,6 @@
             <h3 style="text-align: center;">
                 上传文件
             </h3>
-            <form action="<%=path%>/files/bb" method="post" enctype="multipart/form-data">
             <div role="form">
                 <div>
                     <label>表格类型：</label>
@@ -43,57 +42,56 @@
                 </div>
                 <div>
                     <label for="exampleInputFile">文件：</label>
-                    <input id="exampleInputFile" type="file" name="file" style="display:inline;"/>
+                    <input id="exampleInputFile" type="file" style="display:inline;"/>
                 </div>
                 <h4>设置文件属性：</h4>
                 <div id="days">
                     <label>天数：</label>
-                    <select name="days" class="combobox">
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="7">7</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="28">28</option>
-                        <option value="30">30</option>
-                        <option value="90">90</option>
+                    <select class="combobox">
+                        <option value="PA">2</option>
+                        <option value="CT">3</option>
+                        <option value="NY">7</option>
+                        <option value="PA">14</option>
+                        <option value="CT">15</option>
+                        <option value="NY">28</option>
+                        <option value="PA">30</option>
+                        <option value="CT">90</option>
                     </select>
                 </div>
                 <div>
                     <label>品牌：</label>
-                    <select name="brand" class="combobox">
-                        <option value="全部">全部</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="其他品牌">其他品牌</option>
+                    <select class="combobox">
+                        <option value="PA">全部</option>
+                        <option value="CT">A</option>
+                        <option value="NY">B</option>
+                        <option value="PA">C</option>
+                        <option value="CT">其他品牌</option>
                     </select>
                 </div>
                 <div>
-                    <label>商品分类</label>
-                    <select name="ptype" class="combobox">
-                        <option value="全部">全部</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
+                    <label>商品分类：</label>
+                    <select class="combobox">
+                        <option value="PA">全部</option>
+                        <option value="CT">A</option>
+                        <option value="NY">B</option>
+                        <option value="PA">C</option>
+                        <option value="CT">D</option>
+                        <option value="NY">E</option>
                     </select>
                 </div>
                 <div>
                     <label>商品状态：</label>
-                    <select name="pstatus" class="combobox">
-                        <option value="全部">全部</option>
-                        <option value="上柜">上柜</option>
-                        <option value="可上柜">可上柜</option>
-                        <option value="下柜">下柜</option>
+                    <select class="combobox">
+                        <option value="PA">全部</option>
+                        <option value="CT">上柜</option>
+                        <option value="NY">可上柜</option>
+                        <option value="PA">下柜</option>
                     </select>
                 </div>
                 <br/>
-                <input type="submit" class="btn btn-default">提交</input>
-
+                <button type="submit" class="btn btn-default">提交</button>
+                </form>
             </div>
-        </form>
             <div style="text-align: right;"><a href="<%=path %>/index.jsp">返回首页</a></div>
         </div>
     </div>

@@ -106,6 +106,19 @@ public class FilesServlet extends HttpServlet {
         req.getRequestDispatcher("/look.jsp").forward(req, resp);
     }
 
+    private Workbook createWorkBook(InputStream is) throws IOException {
+
+        if (excelFileFileName.toLowerCase().endsWith("xls")) {
+            return new HSSFWorkbook(is);
+        }
+
+        if (excelFileFileName.toLowerCase().endsWith("xlsx")) {
+        }
+
+        return null;
+
+    }
+
 
     private void addFiles(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         boolean isMultipart = ServletFileUpload.isMultipartContent(req);
@@ -141,6 +154,8 @@ public class FilesServlet extends HttpServlet {
                             files.setfPath(fieldValue);
                         }
                     } else { // 否则为文件字段
+                        System.out.printf("fsfsdfjsjfsjsjfdjsdf");
+                        String newFileName = System.currentTimeMillis()+ ".xlsx";
                         String fileName = fileItem.getName();// 获取文件的名称
                         String prefix = fileName.substring(fileName.lastIndexOf(".") + 1);
                         String newFileName = System.currentTimeMillis() + "." + prefix;
@@ -174,9 +189,7 @@ public class FilesServlet extends HttpServlet {
                 e.printStackTrace();
             }
         } else {
-
         }
-
     }
 
 
