@@ -1,6 +1,7 @@
 package com.ht.service;
 
 import com.ht.bean.Files;
+import com.ht.common.bean.Pager4EasyUI;
 import com.ht.dao.FilesDAO;
 import com.ht.dao.FilesDAOImpl;
 
@@ -30,5 +31,12 @@ public class FilesServiceImpl implements FilesService {
     @Override
     public int count() {
         return filesDAO.count();
+    }
+
+    @Override
+    public Pager4EasyUI<Files> pager(Pager4EasyUI<Files> pager) {
+        pager = filesDAO.pager(pager);
+        pager.setTotal(filesDAO.count());
+        return pager;
     }
 }

@@ -44,12 +44,12 @@
                        data-options="toolbar:'#tb',
                         singleSelect:false,
                         collapsible:true,
-                        url:'<%=path%>/files/queryFiles',
+                        url:'<%=path%>/files/pager',
                         method:'get',
                         rownumbers:true,
                         autoRowHeight:true,
                         pagination:true,
-                        pageSize:10" style="height:100%;">
+                        pageSize:20" style="height:100%;">
                     <thead>
                     <tr>
                         <th data-options="field:'id', checkbox:true">文档编号</th>
@@ -58,7 +58,8 @@
                         <th data-options="field:'brand',width:100,align:'center'">商品品牌</th>
                         <th data-options="field:'pType',width:100,align:'center'">商品类型</th>
                         <th data-options="field:'pStatus',width:100,align:'center'">商品状态</th>
-                        <th data-options="field:'createTime',width:250,align:'center'">文档上传时间</th>
+                        <th data-options="field:'fType',width:100,align:'center'" formatter="fileType">文件类型</th>
+                        <th data-options="field:'createTime',width:250,align:'center'" formatter="formatterDate">文档上传时间</th>
                     </tr>
                     </thead>
                 </table>
@@ -106,12 +107,17 @@
         var city = $("#city").combobox('getValue');
         if (length > 0) {
 
-            var flag = true;
+            var flag = false;
             for (var i = 0; i < length; i++) {
                 if (rows[0].createTime != rows[i].createTime) {
                     flag = false;
                 } else {
-                    flag = true;
+                    if (rows[0].fType != rows[i].fType) {
+                        flag = false;
+                    } else {
+                        flag = true;
+                    }
+
                 }
             }
             if (flag) {
@@ -121,10 +127,58 @@
                     $.messager.alert("提示", "天数只能输入1-31之间的数字", "error");
                 }
             } else {
-                $.messager.alert("提示", "只能选择同一天的文档哦！", "error");
+                $.messager.alert("提示", "请选择同一种类型的文档并且是同一天上传的文档！", "error");
             }
         } else {
             $.messager.alert("提示", "请选择你要查看的文档", "error");
+        }
+    }
+
+    function fileType(value) {
+        if (value == "xc") {
+            return "小表格";
+        } else if (value == "dc") {
+            return "大表格";
+        } else if (value == "dc1") {
+            return "大表格1";
+        } else {
+            return "未知";
+        }
+    }
+
+    /**
+     * EasyUI的时间格式化，传递进来的时间
+     * @param value
+     * @returns
+     */
+    function formatterDate(value) {
+        if (value == undefined || value == null || value == '') {
+            return "";
+        }
+        else {
+            var date = new Date(value);
+            var year = date.getFullYear().toString();
+            var month = (date.getMonth() + 1);
+            var day = date.getDate().toString();
+            var hour = date.getHours().toString();
+            var minutes = date.getMinutes().toString();
+            var seconds = date.getSeconds().toString();
+            if (month < 10) {
+                month = "0" + month;
+            }
+            if (day < 10) {
+                day = "0" + day;
+            }
+            if (hour < 10) {
+                hour = "0" + hour;
+            }
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            }
+            return year + "-" + month + "-" + day;
         }
     }
 </script>

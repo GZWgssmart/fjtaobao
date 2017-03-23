@@ -1,6 +1,7 @@
 package com.ht.dao;
 
 import com.ht.bean.Files;
+import com.ht.common.bean.Pager4EasyUI;
 
 import java.util.List;
 
@@ -24,6 +25,13 @@ public interface FilesDAO {
      * 查询所有的文档总数
      */
     public int count();
+
+    /**
+     * 分页查询所有文档
+     * @param pager
+     * @return
+     */
+    public Pager4EasyUI<Files> pager(Pager4EasyUI<Files> pager);
 
 
 

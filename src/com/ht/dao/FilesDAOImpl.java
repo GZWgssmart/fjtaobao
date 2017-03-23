@@ -91,4 +91,27 @@ public class FilesDAOImpl extends BaseDAO implements FilesDAO {
         }
         return count;
     }
+
+    @Override
+    public Pager4EasyUI<Files> pager(Pager4EasyUI<Files> pager) {
+        getConn();
+        String sql = "select * from t_file limit " + pager.getBeginIndex() + ", " + pager.getPageSize();
+        List<Files> filesList = new ArrayList<>();
+        try {
+            PreparedStatement ps  =  conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Files files = new Files();
+                setFiles(files, rs);
+                filesList.add(files);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        pager.setRows(filesList);
+        close();
+        return pager;
+    }
+
+
 }

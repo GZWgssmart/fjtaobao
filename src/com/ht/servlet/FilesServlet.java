@@ -1,5 +1,6 @@
 package com.ht.servlet;
 
+import com.alibaba.fastjson.JSON;
 import com.ht.bean.Files;
 import com.ht.bean.Product;
 import com.ht.common.Constants;
@@ -52,6 +53,8 @@ public class FilesServlet extends HttpServlet {
             queryFiles(req, resp);
         } else if (method.equals("addFile")) {
             addFiles(req, resp);
+        } else if (method.equals("pager")) {
+            searchFilePager(req, resp);
         }
     }
 
@@ -139,7 +142,7 @@ public class FilesServlet extends HttpServlet {
                 java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
                 files.setCreateTime(currentDate);
                 filesService.addFiles(files);
-                req.getRequestDispatcher("/look.jsp").forward(req, resp);
+                resp.sendRedirect("/look.jsp");
             } catch (FileUploadException e) {
                 e.printStackTrace();
             }
@@ -161,6 +164,29 @@ public class FilesServlet extends HttpServlet {
             }
         } catch (FileNotFoundException e) {
             System.out.println("未找到指定路径的文件!");
+            e.printStackTrace();
+        }
+    }
+
+    public void searchFilePager(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
+        int page = 1;
+        int rows = 20;
+        try {
+            page = Integer.valueOf(req.getParameter("page"));
+            rows = Integer.valueOf(req.getParameter("rows"));
+        } catch (NumberFormatException e) {
+
+        }
+        Pager4EasyUI<Files> pager = new Pager4EasyUI<Files>();
+        pager.setPageNo(page);
+        pager.setPageSize(rows);
+        pager = filesService.pager(pager);
+        resp.setContentType("text/json;charset=utf-8");
+        try {
+            PrintWriter pw = resp.getWriter();
+            pw.write(JSON.toJSONString(pager));
+            pw.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
