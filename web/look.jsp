@@ -107,15 +107,13 @@
         var city = $("#city").combobox('getValue');
         if (length > 0) {
 
-            var flag = false;
+            var flag = true;
             for (var i = 0; i < length; i++) {
                 if (rows[0].createTime != rows[i].createTime) {
                     flag = false;
                 } else {
                     if (rows[0].fType != rows[i].fType) {
                         flag = false;
-                    } else {
-                        flag = true;
                     }
 
                 }
