@@ -106,18 +106,6 @@ public class FilesServlet extends HttpServlet {
         req.getRequestDispatcher("/look.jsp").forward(req, resp);
     }
 
-    private Workbook createWorkBook(InputStream is) throws IOException {
-
-        if (excelFileFileName.toLowerCase().endsWith("xls")) {
-            return new HSSFWorkbook(is);
-        }
-
-        if (excelFileFileName.toLowerCase().endsWith("xlsx")) {
-        }
-
-        return null;
-
-    }
 
 
     private void addFiles(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -155,8 +143,6 @@ public class FilesServlet extends HttpServlet {
                         }
                     } else { // 否则为文件字段
                         System.out.printf("fsfsdfjsjfsjsjfdjsdf");
-                        String newFileName = System.currentTimeMillis()+ ".xlsx";
-                        String fileName = fileItem.getName();// 获取文件的名称
                         String prefix = fileName.substring(fileName.lastIndexOf(".") + 1);
                         String newFileName = System.currentTimeMillis() + "." + prefix;
                         // 需要获取图片数据，把图片保存到本地服务器的某个目录里，并把路径保存到数据库
