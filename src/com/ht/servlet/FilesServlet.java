@@ -8,6 +8,7 @@ import com.ht.common.Methods;
 import com.ht.common.WebUtil;
 import com.ht.common.bean.Pager4EasyUI;
 import com.ht.common.util.ExcelReader;
+import com.ht.common.util.ExcelReader1;
 import com.ht.common.util.ExcelWorkSheet;
 import com.ht.dao.FilesDAO;
 import com.ht.dao.FilesDAOImpl;
@@ -125,7 +126,6 @@ public class FilesServlet extends HttpServlet {
 
                             filePath = Methods.getRootPath(req) + Methods.createNewFolder() + "\\" + newFileName;
                             FileUtils.copyInputStreamToFile(in, new File(filePath));
-                            System.out.printf(filePath + "cccccc");
                             // 3、把文件的路径保存到数据库
                             files.setName(fileName);
                             files.setfPath(filePath);
@@ -134,6 +134,8 @@ public class FilesServlet extends HttpServlet {
                         System.out.printf(String.valueOf(files.getDays()) + "aaaa");
                         if (files.getfType().equals("xc")) {
                             inputExcel(filePath, req, files.getDays());
+                        } else if (files.getfType().equals("dc")){
+                            inputExcel1(filePath, req);
                         }
 
                     }
@@ -147,6 +149,21 @@ public class FilesServlet extends HttpServlet {
                 e.printStackTrace();
             }
         } else {
+        }
+    }
+
+    public void inputExcel1(String url, HttpServletRequest req) {
+        try {
+            ExcelReader1 excelReader = new ExcelReader1();
+            // 对读取Excel表格标题测试
+            InputStream is = new FileInputStream(url);
+            List<Product> products = excelReader.readProducts1(is,req);
+            for (Product p : products) {
+                productService.addProduct(p);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("未找到指定路径的文件!");
+            e.printStackTrace();
         }
     }
 
