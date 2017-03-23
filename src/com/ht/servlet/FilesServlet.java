@@ -28,6 +28,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -221,6 +222,7 @@ public class FilesServlet extends HttpServlet {
 
 
     private void setCondition(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        HttpSession session = req.getSession();
         String daysStr = req.getParameter("days");
         String cityStr = req.getParameter("city");
         String idsStri = req.getParameter("ids");
@@ -233,6 +235,25 @@ public class FilesServlet extends HttpServlet {
                 ids = idsStri;
             } catch (NumberFormatException e) {
 
+            }
+            if (city.equals("all")) {
+                session.setAttribute("city", "全国");
+            } else if (city.equals("bj")) {
+                session.setAttribute("city", "北京");
+            } else if (city.equals("sh")) {
+                session.setAttribute("city", "上海");
+            } else if (city.equals("gz")) {
+                session.setAttribute("city", "广州");
+            }  else if (city.equals("cd")) {
+                session.setAttribute("city", "成都");
+            } else if (city.equals("wh")) {
+                session.setAttribute("city", "武汉");
+            } else if (city.equals("sy")) {
+                session.setAttribute("city", "沈阳");
+            } else if (city.equals("xa")) {
+                session.setAttribute("city", "西安");
+            } else if (city.equals("ga")) {
+                session.setAttribute("city", "固安");
             }
             resp.sendRedirect("/file_detail.jsp");
         } else {

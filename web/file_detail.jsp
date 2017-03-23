@@ -61,9 +61,9 @@
         <th data-options="field:'gaStock',width:60,align:'center'">固安库存</th>
         <th data-options="field:'gaSales',width:60,align:'center'">固安销量</th>
         <th data-options="field:'days',width:60,align:'center'">周期</th>
-        <th data-options="field:'turnoverDays',width:60,align:'center'">周转天数</th>
+        <th data-options="field:'turnoverDays',width:100,align:'center'">${sessionScope.city}销量周转天数</th>
         <th data-options="field:'growthRate',width:60,align:'center'">增长率</th>
-        <th data-options="field:'count',width:60,align:'center'">补货数</th>
+        <th data-options="field:'count',width:100,align:'center'">${sessionScope.city}销量补货数</th>
     </tr>
     </thead>
 </table>
