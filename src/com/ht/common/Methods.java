@@ -1,5 +1,6 @@
 package com.ht.common;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,6 +23,10 @@ public class Methods {
      */
     public static String createName(String fileName) {
         return String.valueOf(System.currentTimeMillis());
+    }
+
+    public static String getRootPath(HttpServletRequest request) {
+        return request.getServletContext().getRealPath("/");
     }
 
 }

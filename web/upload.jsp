@@ -36,9 +36,9 @@
                     <label>表格类型：</label>
 
                     <select class="combobox" name="ftype" onchange="checkType(this)">
-                        <option value="大表格">小表格</option>
-                        <option value="大表格1">大表格1</option>
-                        <option value="大表格2">大表格2</option>
+                        <option value="xc">小表格</option>
+                        <option value="dc">大表格1</option>
+                        <option value="dc1">大表格2</option>
                     </select>
                 </div>
                 <div>

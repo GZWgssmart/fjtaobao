@@ -44,7 +44,7 @@
                        data-options="toolbar:'#tb',
                         singleSelect:false,
                         collapsible:true,
-                        url:'file.json',
+                        url:'<%=path%>/files/queryFiles',
                         method:'get',
                         rownumbers:true,
                         autoRowHeight:true,

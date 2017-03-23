@@ -7,7 +7,7 @@ import com.ht.bean.Product;
  */
 public interface ProductDAO  {
 
-    public void addProduct(Product product, String url);
+    public void addProduct(Product product);
 
 }
 

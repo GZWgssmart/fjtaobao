@@ -19,15 +19,7 @@ public class WebUtil {
 		return uri.substring(uri.lastIndexOf("/") + 1);
 	}
 
-	public static String mkUpload(HttpServletRequest req, String fileName) {
-		SON_FILE = DEFAULT_UPLOAD + "/" + fileName;
-		String path = req.getServletContext().getRealPath("/");
-		File file = new File(path, SON_FILE);
-		if (!file.exists()) {
-			file.mkdirs();
-		}
-		return file.getAbsolutePath();
-	}
+
 
 
 	/**

@@ -9,7 +9,7 @@ import java.sql.SQLException;
  */
 public class ProductDAOImpl extends BaseDAO implements ProductDAO {
     @Override
-    public void addProduct(Product product, String url) {
+    public void addProduct(Product product) {
         getConn();
         String sql = "insert into t_product(productno, days, fileid, name,brand,status,price,totalsales,totalstock,bjsales" +
                 ",bjstock,shsales,shstock,gzsales,gzstock,cdsales,cdstock,whsales,whstock,sysales,systock,xasales,xastock,gasales,gastock) values(?,?" +

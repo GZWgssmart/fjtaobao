@@ -15,7 +15,7 @@ public class Files {
     private String pType; //商品类型
     private String pStatus; //商品状态
     private String fType; //文档类型
-    private String fStatus; //文档状态
+    private int fStatus; //文档状态
     private String fPath; //文件路径
     private Date createTime; //文件创建时间
 
@@ -75,11 +75,11 @@ public class Files {
         this.fType = fType;
     }
 
-    public String getfStatus() {
+    public int getfStatus() {
         return fStatus;
     }
 
-    public void setfStatus(String fStatus) {
+    public void setfStatus(int fStatus) {
         this.fStatus = fStatus;
     }
 
