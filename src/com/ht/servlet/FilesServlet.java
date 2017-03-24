@@ -10,6 +10,7 @@ import com.ht.common.WebUtil;
 import com.ht.common.bean.Pager4EasyUI;
 import com.ht.common.util.ExcelReader;
 import com.ht.common.util.ExcelReader1;
+import com.ht.common.util.ExcelReader2;
 import com.ht.common.util.ExcelWorkSheet;
 import com.ht.dao.FilesDAO;
 import com.ht.dao.FilesDAOImpl;
@@ -142,14 +143,13 @@ public class FilesServlet extends HttpServlet {
                             files.setName(fileName);
                             files.setfPath(filePath);
                         }
-                        System.out.printf("xc" + files.getfType());
-                        System.out.printf(String.valueOf(files.getDays()) + "aaaa");
+                        files.setFileNo(String.valueOf(System.currentTimeMillis()));
                         if (files.getfType().equals("xc")) {
                             inputExcel(filePath, req, files.getDays());
                         } else if (files.getfType().equals("dc")){
-                            inputExcel1(filePath, req, 1);
+                            System.out.printf(files.getFileNo() + "mmmmmmmm");
+                            inputExcel1(filePath, req, files.getFileNo());
                         }
-
                     }
                 }
                 files.setfStatus(1);
@@ -164,21 +164,14 @@ public class FilesServlet extends HttpServlet {
         }
     }
 
-    public void inputExcel1(String url, HttpServletRequest req, int days) {
-        try {
-            ExcelReader excelReader = new ExcelReader();
-            // 对读取Excel表格标题测试
-            InputStream is = new FileInputStream(url);
-            List<Product> products = excelReader.readProducts(is, req);
+    public void inputExcel1(String path, HttpServletRequest req, String fileNo) {
+            ExcelReader2 excelReader = new ExcelReader2();
+            Files files = filesService.queryByFilesId(fileNo);
+            System.out.printf(fileNo + "aaaaaaaaaaaa");
+            List<Product> products = excelReader.readProducts1(path, req);
             for (Product p : products) {
-                System.out.printf(days + "aaaaaa");
-                p.setDays(days);
                 productService.addProduct(p);
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("未找到指定路径的文件!");
-            e.printStackTrace();
-        }
     }
 
     public void inputExcel(String url, HttpServletRequest req, int days) {
@@ -190,6 +183,7 @@ public class FilesServlet extends HttpServlet {
             for (Product p : products) {
                 System.out.printf(days + "aaaaaa");
                 p.setDays(days);
+
                 productService.addProduct(p);
             }
         } catch (FileNotFoundException e) {

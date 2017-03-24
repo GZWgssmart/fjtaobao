@@ -33,6 +33,11 @@ public interface FilesDAO {
      */
     public Pager4EasyUI<Files> pager(Pager4EasyUI<Files> pager);
 
+    /**
+     * 根据path查找fileId
+     */
+    public Files queryByFilesId(String path);
+
 
 
 }

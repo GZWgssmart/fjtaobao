@@ -39,4 +39,9 @@ public class FilesServiceImpl implements FilesService {
         pager.setTotal(filesDAO.count());
         return pager;
     }
+
+    @Override
+    public Files queryByFilesId(String path) {
+        return filesDAO.queryByFilesId(path);
+    }
 }

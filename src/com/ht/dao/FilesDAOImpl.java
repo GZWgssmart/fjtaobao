@@ -16,6 +16,7 @@ public class FilesDAOImpl extends BaseDAO implements FilesDAO {
 
     private Files setFiles(Files files, ResultSet rs) throws SQLException {
         files.setId(rs.getInt("id"));
+        files.setFileNo(rs.getString("fileno"));
         files.setName(rs.getString("name"));
         files.setDays(rs.getInt("days"));
         files.setBrand(rs.getString("brand"));
@@ -31,19 +32,20 @@ public class FilesDAOImpl extends BaseDAO implements FilesDAO {
     @Override
     public void addFiles(Files files) {
         getConn();
-        String sql = "insert into t_file (name, days, brand, ptype, pstatus, ftype, fstatus, fpath, createtime) " +
-                "values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into t_file (fileno,name, days, brand, ptype, pstatus, ftype, fstatus, fpath, createtime) " +
+                "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, files.getName());
-            ps.setInt(2,files.getDays());
-            ps.setString(3,files.getBrand());
-            ps.setString(4, files.getpType());
-            ps.setString(5, files.getpStatus());
-            ps.setString(6, files.getfType());
-            ps.setInt(7, files.getfStatus());
-            ps.setString(8, files.getfPath());
-            ps.setDate(9,  files.getCreateTime());
+            ps.setString(1, files.getFileNo());
+            ps.setString(2, files.getName());
+            ps.setInt(3,files.getDays());
+            ps.setString(4,files.getBrand());
+            ps.setString(5, files.getpType());
+            ps.setString(6, files.getpStatus());
+            ps.setString(7, files.getfType());
+            ps.setInt(8, files.getfStatus());
+            ps.setString(9, files.getfPath());
+            ps.setDate(10,  files.getCreateTime());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -111,6 +113,31 @@ public class FilesDAOImpl extends BaseDAO implements FilesDAO {
         pager.setRows(filesList);
         close();
         return pager;
+    }
+
+    /**
+     * 根据path去查询filesId
+     * @return
+     */
+    @Override
+    public Files queryByFilesId(String path) {
+        getConn();
+        Files files = null;
+        String sql = "select * from t_file where fileno = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, path);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                files = new Files();
+                setFiles(files, rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return files;
     }
 
 

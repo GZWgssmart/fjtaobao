@@ -10,6 +10,7 @@ public class Files {
 
     private int id;//文档主键
     private String name; //文档名字
+    private String fileNo;
     private int days; //查询天数
     private String brand; //商品品牌
     private String pType; //商品类型
@@ -25,6 +26,14 @@ public class Files {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getFileNo() {
+        return fileNo;
+    }
+
+    public void setFileNo(String fileNo) {
+        this.fileNo = fileNo;
     }
 
     public String getName() {
