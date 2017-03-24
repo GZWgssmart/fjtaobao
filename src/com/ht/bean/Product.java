@@ -1,9 +1,11 @@
 package com.ht.bean;
 
+import java.io.*;
+
 /**
  * Created by ArrayBin on 2017/3/17.
  */
-public class Product {
+public class Product implements Serializable {
     private int id; //主键
     private String productNo; //商品编号
     private int days;
@@ -237,6 +239,31 @@ public class Product {
 
     public void setGaStock(int gaStock) {
         this.gaStock = gaStock;
+    }
+
+    /**
+     * deep clone this object
+     * 深度复制对象，把属性全部复到一个新对象中
+     * @return
+     * @throws CloneNotSupportedException
+     */
+    public Product copy() {
+        try {
+            ByteArrayOutputStream baos =new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(this);
+            ByteArrayInputStream bais =new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream oi=new ObjectInputStream(bais);
+            Product p = new Product();
+            p = (Product) oi.readObject();
+            return p;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 
     @Override

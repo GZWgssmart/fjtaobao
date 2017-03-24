@@ -5,8 +5,9 @@ import com.ht.common.Methods;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
@@ -20,19 +21,20 @@ import java.util.*;
 public class ExcelReader1 {
 
     private POIFSFileSystem fs;
-    private HSSFWorkbook wb;
-    private HSSFSheet sheet;
-    private HSSFRow row;
+    private Workbook wb;
+    private Sheet sheet;
+    private Row row;
 
     public List<Product> readProducts1(InputStream in, HttpServletRequest req) {
         try {
-            fs = new POIFSFileSystem(in);
-            wb = new HSSFWorkbook(fs);
+
+            wb = WorkbookFactory.create(in);
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InvalidFormatException e) {
             e.printStackTrace();
         }
         sheet = wb.getSheetAt(0);
-
         List<Product> products = new ArrayList<Product>();
         Properties properties = new Properties();
         System.out.printf(Methods.getRootPath(req) + "WEB-INF/config/da_column.properties");
@@ -113,7 +115,8 @@ public class ExcelReader1 {
         String gaSales = properties.getProperty("gaSales");
 
         int rowNum = sheet.getLastRowNum();
-        HSSFRow titleRow = sheet.getRow(0);
+        sheet.getLeftCol();
+        Row titleRow = sheet.getRow(0);
         int totalCol = titleRow.getLastCellNum();
         Map<String, Integer> colMap = new HashMap<String, Integer>();
         for (int i = 0; i < totalCol; i++) {
@@ -241,35 +244,36 @@ public class ExcelReader1 {
         for (int i = 1; i < rowNum; i++) {
             Product product = new Product();
             // 内容部分
-            HSSFRow row = sheet.getRow(i);
+            Row row = sheet.getRow(i);
             if (colMap.get(productNo) != null) {
-                row.getCell(colMap.get(productNo)).setCellType(Cell.CELL_TYPE_STRING);
+
                 product.setProductNo(String.valueOf(row.getCell(colMap.get(productNo)).getStringCellValue()));
             }
             if (colMap.get(name) != null) {
-                row.getCell(colMap.get(name)).setCellType(Cell.CELL_TYPE_STRING);
+
                 product.setName(String.valueOf(row.getCell(colMap.get(name)).getStringCellValue()));
             }
             if (colMap.get(brand) != null) {
-                row.getCell(colMap.get(brand)).setCellType(Cell.CELL_TYPE_STRING);
+
                 product.setBrand(String.valueOf(row.getCell(colMap.get(brand)).getStringCellValue()));
             }
             if (colMap.get(status) != null) {
-                row.getCell(colMap.get(status)).setCellType(Cell.CELL_TYPE_STRING);
+
                 product.setStatus(String.valueOf(row.getCell(colMap.get(status)).getStringCellValue()));
             }
             if (colMap.get(price) != null) {
                 try {
-                    row.getCell(colMap.get(price)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setPrice(Double.parseDouble(row.getCell(colMap.get(price)).getStringCellValue()));
+
+                    product.setPrice((int)(row.getCell(colMap.get(price)).getNumericCellValue()));
                 } catch (NumberFormatException e) {
                     product.setPrice(0);
                 }
             }
             if (colMap.get(totalSales7) != null) {
                 try {
-                    row.getCell(colMap.get(totalSales7)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setTotalSales(Integer.valueOf(row.getCell(colMap.get(totalSales7)).getStringCellValue()));
+
+                    product.setTotalSales((int)(row.getCell(colMap.get(totalSales7)).getNumericCellValue()));
+
                     product.setDays(7);
                 } catch (NumberFormatException e) {
                     product.setTotalSales(0);
@@ -277,8 +281,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(totalSales14) != null) {
                 try {
-                    row.getCell(colMap.get(totalSales14)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setTotalSales(Integer.valueOf(row.getCell(colMap.get(totalSales14)).getStringCellValue()));
+
+                    product.setTotalSales((int)(row.getCell(colMap.get(totalSales14)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(14);
                 } catch (NumberFormatException e) {
                     product.setTotalSales(0);
@@ -286,8 +291,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(totalSales15) != null) {
                 try {
-                    row.getCell(colMap.get(totalSales15)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setTotalSales(Integer.valueOf(row.getCell(colMap.get(totalSales15)).getStringCellValue()));
+
+                    product.setTotalSales((int)(row.getCell(colMap.get(totalSales15)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(15);
                 } catch (NumberFormatException e) {
                     product.setTotalSales(0);
@@ -295,8 +301,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(totalSales28) != null) {
                 try {
-                    row.getCell(colMap.get(totalSales28)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setTotalSales(Integer.valueOf(row.getCell(colMap.get(totalSales28)).getStringCellValue()));
+
+                    product.setTotalSales((int)(row.getCell(colMap.get(totalSales28)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(28);
                 } catch (NumberFormatException e) {
                     product.setTotalSales(0);
@@ -304,8 +311,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(totalSales90) != null) {
                 try {
-                    row.getCell(colMap.get(totalSales90)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setTotalSales(Integer.valueOf(row.getCell(colMap.get(totalSales90)).getStringCellValue()));
+
+                    product.setTotalSales((int)(row.getCell(colMap.get(totalSales90)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(90);
                 } catch (NumberFormatException e) {
                     product.setTotalSales(0);
@@ -313,8 +321,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(totalSales) != null) {
                 try {
-                    row.getCell(colMap.get(totalSales)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setTotalSales(Integer.valueOf(row.getCell(colMap.get(totalSales)).getStringCellValue()));
+
+                    product.setTotalSales((int)(row.getCell(colMap.get(totalSales)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(0);
                 } catch (NumberFormatException e) {
                     product.setTotalSales(0);
@@ -322,8 +331,10 @@ public class ExcelReader1 {
             }
             if (colMap.get(bjSales7) != null) {
                 try {
-                    row.getCell(colMap.get(bjSales7)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setBjSales(Integer.valueOf(row.getCell(colMap.get(bjSales7)).getStringCellValue()));
+
+                    product.setBjSales((int)(row.getCell(colMap.get(bjSales7)).getNumericCellValue()));
+
+                    product = new Product();
                     product.setDays(7);
                 } catch (NumberFormatException e) {
                     product.setBjSales(0);
@@ -331,8 +342,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(bjSales14) != null) {
                 try {
-                    row.getCell(colMap.get(bjSales14)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setBjSales(Integer.valueOf(row.getCell(colMap.get(bjSales14)).getStringCellValue()));
+
+                    product.setBjSales((int)(row.getCell(colMap.get(bjSales14)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(14);
                 } catch (NumberFormatException e) {
                     product.setBjSales(0);
@@ -340,8 +352,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(bjSales15) != null) {
                 try {
-                    row.getCell(colMap.get(bjSales15)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setBjSales(Integer.valueOf(row.getCell(colMap.get(bjSales15)).getStringCellValue()));
+
+                    product.setBjSales((int)(row.getCell(colMap.get(bjSales15)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(15);
                 } catch (NumberFormatException e) {
                     product.setBjSales(0);
@@ -349,8 +362,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(bjSales28) != null) {
                 try {
-                    row.getCell(colMap.get(bjSales28)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setBjSales(Integer.valueOf(row.getCell(colMap.get(bjSales28)).getStringCellValue()));
+
+                    product.setBjSales((int)(row.getCell(colMap.get(bjSales28)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(28);
                 } catch (NumberFormatException e) {
                     product.setBjSales(0);
@@ -358,8 +372,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(bjSales90) != null) {
                 try {
-                    row.getCell(colMap.get(bjSales90)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setBjSales(Integer.valueOf(row.getCell(colMap.get(bjSales90)).getStringCellValue()));
+
+                    product.setBjSales((int)(row.getCell(colMap.get(bjSales90)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(90);
                 } catch (NumberFormatException e) {
                     product.setBjSales(0);
@@ -367,8 +382,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(bjSales) != null) {
                 try {
-                    row.getCell(colMap.get(bjSales)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setBjSales(Integer.valueOf(row.getCell(colMap.get(bjSales)).getStringCellValue()));
+
+                    product.setBjSales((int)(row.getCell(colMap.get(bjSales)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(0);
                 } catch (NumberFormatException e) {
                     product.setBjSales(0);
@@ -376,8 +392,10 @@ public class ExcelReader1 {
             }
             if (colMap.get(shSales7) != null) {
                 try {
-                    row.getCell(colMap.get(shSales7)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setShSales(Integer.valueOf(row.getCell(colMap.get(shSales7)).getStringCellValue()));
+
+                    product.setShSales((int)(row.getCell(colMap.get(shSales7)).getNumericCellValue()));
+
+                    product = new Product();
                     product.setDays(7);
                 } catch (NumberFormatException e) {
                     product.setShSales(0);
@@ -385,8 +403,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(shSales14) != null) {
                 try {
-                    row.getCell(colMap.get(shSales14)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setShSales(Integer.valueOf(row.getCell(colMap.get(shSales14)).getStringCellValue()));
+
+                    product.setShSales((int)(row.getCell(colMap.get(shSales14)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(14);
                 } catch (NumberFormatException e) {
                     product.setShSales(0);
@@ -394,8 +413,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(shSales15) != null) {
                 try {
-                    row.getCell(colMap.get(shSales15)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setShSales(Integer.valueOf(row.getCell(colMap.get(shSales15)).getStringCellValue()));
+
+                    product.setShSales((int)(row.getCell(colMap.get(shSales15)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(15);
                 } catch (NumberFormatException e) {
                     product.setShSales(0);
@@ -404,8 +424,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(shSales28) != null) {
                 try {
-                    row.getCell(colMap.get(shSales28)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setShSales(Integer.valueOf(row.getCell(colMap.get(shSales28)).getStringCellValue()));
+
+                    product.setShSales((int)(row.getCell(colMap.get(shSales28)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(28);
                 } catch (NumberFormatException e) {
                     product.setShSales(0);
@@ -413,8 +434,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(shSales90) != null) {
                 try {
-                    row.getCell(colMap.get(shSales90)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setShSales(Integer.valueOf(row.getCell(colMap.get(shSales90)).getStringCellValue()));
+
+                    product.setShSales((int)(row.getCell(colMap.get(shSales90)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(90);
                 } catch (NumberFormatException e) {
                     product.setShSales(0);
@@ -423,8 +445,9 @@ public class ExcelReader1 {
 
             if (colMap.get(shSales) != null) {
                 try {
-                    row.getCell(colMap.get(shSales)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setShSales(Integer.valueOf(row.getCell(colMap.get(shSales)).getStringCellValue()));
+
+                    product.setShSales((int)(row.getCell(colMap.get(shSales)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(0);
                 } catch (NumberFormatException e) {
                     product.setShSales(0);
@@ -432,8 +455,10 @@ public class ExcelReader1 {
             }
             if (colMap.get(gzSales7) != null) {
                 try {
-                    row.getCell(colMap.get(gzSales7)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setGzSales(Integer.valueOf(row.getCell(colMap.get(gzSales7)).getStringCellValue()));
+
+                    product.setGzSales((int)(row.getCell(colMap.get(gzSales7)).getNumericCellValue()));
+
+                    product = new Product();
                     product.setDays(7);
                 } catch (NumberFormatException e) {
                     product.setGzSales(0);
@@ -441,8 +466,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(gzSales14) != null) {
                 try {
-                    row.getCell(colMap.get(gzSales14)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setGzSales(Integer.valueOf(row.getCell(colMap.get(gzSales14)).getStringCellValue()));
+
+                    product.setGzSales((int)(row.getCell(colMap.get(gzSales14)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(14);
                 } catch (NumberFormatException e) {
                     product.setGzSales(0);
@@ -450,8 +476,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(gzSales15) != null) {
                 try {
-                    row.getCell(colMap.get(gzSales15)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setGzSales(Integer.valueOf(row.getCell(colMap.get(gzSales15)).getStringCellValue()));
+
+                    product.setGzSales((int)(row.getCell(colMap.get(gzSales15)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(15);
                 } catch (NumberFormatException e) {
                     product.setGzSales(0);
@@ -459,8 +486,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(gzSales28) != null) {
                 try {
-                    row.getCell(colMap.get(gzSales28)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setGzSales(Integer.valueOf(row.getCell(colMap.get(gzSales28)).getStringCellValue()));
+
+                    product.setGzSales((int)(row.getCell(colMap.get(gzSales28)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(28);
                 } catch (NumberFormatException e) {
                     product.setGzSales(0);
@@ -468,8 +496,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(gzSales90) != null) {
                 try {
-                    row.getCell(colMap.get(gzSales90)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setGzSales(Integer.valueOf(row.getCell(colMap.get(gzSales90)).getStringCellValue()));
+
+                    product.setGzSales((int)(row.getCell(colMap.get(gzSales90)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(90);
                 } catch (NumberFormatException e) {
                     product.setGzSales(0);
@@ -477,8 +506,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(gzSales) != null) {
                 try {
-                    row.getCell(colMap.get(gzSales)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setGzSales(Integer.valueOf(row.getCell(colMap.get(gzSales)).getStringCellValue()));
+
+                    product.setGzSales((int)(row.getCell(colMap.get(gzSales)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(0);
                 } catch (NumberFormatException e) {
                     product.setGzSales(0);
@@ -486,8 +516,10 @@ public class ExcelReader1 {
             }
             if (colMap.get(cdSales7) != null) {
                 try {
-                    row.getCell(colMap.get(cdSales7)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setCdSales(Integer.valueOf(row.getCell(colMap.get(cdSales7)).getStringCellValue()));
+
+                    product.setCdSales((int)(row.getCell(colMap.get(cdSales7)).getNumericCellValue()));
+
+                    product = new Product();
                     product.setDays(7);
                 } catch (NumberFormatException e) {
                     product.setCdSales(0);
@@ -495,8 +527,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(cdSales14) != null) {
                 try {
-                    row.getCell(colMap.get(cdSales14)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setCdSales(Integer.valueOf(row.getCell(colMap.get(cdSales14)).getStringCellValue()));
+
+                    product.setCdSales((int)(row.getCell(colMap.get(cdSales14)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(14);
                 } catch (NumberFormatException e) {
                     product.setCdSales(0);
@@ -504,8 +537,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(cdSales15) != null) {
                 try {
-                    row.getCell(colMap.get(cdSales15)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setCdSales(Integer.valueOf(row.getCell(colMap.get(cdSales15)).getStringCellValue()));
+
+                    product.setCdSales((int)(row.getCell(colMap.get(cdSales15)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(15);
                 } catch (NumberFormatException e) {
                     product.setCdSales(0);
@@ -513,8 +547,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(cdSales28) != null) {
                 try {
-                    row.getCell(colMap.get(cdSales28)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setCdSales(Integer.valueOf(row.getCell(colMap.get(cdSales28)).getStringCellValue()));
+
+                    product.setCdSales((int)(row.getCell(colMap.get(cdSales28)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(28);
                 } catch (NumberFormatException e) {
                     product.setCdSales(0);
@@ -522,8 +557,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(cdSales90) != null) {
                 try {
-                    row.getCell(colMap.get(cdSales90)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setCdSales(Integer.valueOf(row.getCell(colMap.get(cdSales90)).getStringCellValue()));
+
+                    product.setCdSales((int)(row.getCell(colMap.get(cdSales90)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(90);
                 } catch (NumberFormatException e) {
                     product.setCdSales(0);
@@ -531,8 +567,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(cdSales) != null) {
                 try {
-                    row.getCell(colMap.get(cdSales)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setCdSales(Integer.valueOf(row.getCell(colMap.get(cdSales)).getStringCellValue()));
+
+                    product.setCdSales((int)(row.getCell(colMap.get(cdSales)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(0);
                 } catch (NumberFormatException e) {
                     product.setCdSales(0);
@@ -540,8 +577,10 @@ public class ExcelReader1 {
             }
             if (colMap.get(whSales7) != null) {
                 try {
-                    row.getCell(colMap.get(whSales7)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setWhSales(Integer.valueOf(row.getCell(colMap.get(whSales7)).getStringCellValue()));
+
+                    product.setWhSales((int)(row.getCell(colMap.get(whSales7)).getNumericCellValue()));
+
+                    product = new Product();
                     product.setDays(7);
                 } catch (NumberFormatException e) {
                     product.setWhSales(0);
@@ -549,8 +588,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(whSales14) != null) {
                 try {
-                    row.getCell(colMap.get(whSales14)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setWhSales(Integer.valueOf(row.getCell(colMap.get(whSales14)).getStringCellValue()));
+
+                    product.setWhSales((int)(row.getCell(colMap.get(whSales14)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(14);
                 } catch (NumberFormatException e) {
                     product.setWhSales(0);
@@ -558,8 +598,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(whSales15) != null) {
                 try {
-                    row.getCell(colMap.get(whSales15)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setWhSales(Integer.valueOf(row.getCell(colMap.get(whSales15)).getStringCellValue()));
+
+                    product.setWhSales((int)(row.getCell(colMap.get(whSales15)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(15);
                 } catch (NumberFormatException e) {
                     product.setWhSales(0);
@@ -567,8 +608,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(whSales28) != null) {
                 try {
-                    row.getCell(colMap.get(whSales28)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setWhSales(Integer.valueOf(row.getCell(colMap.get(whSales28)).getStringCellValue()));
+
+                    product.setWhSales((int)(row.getCell(colMap.get(whSales28)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(28);
                 } catch (NumberFormatException e) {
                     product.setWhSales(0);
@@ -576,8 +618,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(whSales90) != null) {
                 try {
-                    row.getCell(colMap.get(whSales90)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setWhSales(Integer.valueOf(row.getCell(colMap.get(whSales90)).getStringCellValue()));
+
+                    product.setWhSales((int)(row.getCell(colMap.get(whSales90)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(90);
                 } catch (NumberFormatException e) {
                     product.setWhSales(0);
@@ -585,8 +628,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(whSales) != null) {
                 try {
-                    row.getCell(colMap.get(whSales)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setWhSales(Integer.valueOf(row.getCell(colMap.get(whSales)).getStringCellValue()));
+
+                    product.setWhSales((int)(row.getCell(colMap.get(whSales)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(0);
                 } catch (NumberFormatException e) {
                     product.setWhSales(0);
@@ -594,8 +638,10 @@ public class ExcelReader1 {
             }
             if (colMap.get(sySales7) != null) {
                 try {
-                    row.getCell(colMap.get(sySales7)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setSySales(Integer.valueOf(row.getCell(colMap.get(sySales7)).getStringCellValue()));
+
+                    product.setSySales((int)(row.getCell(colMap.get(sySales7)).getNumericCellValue()));
+
+                    product = new Product();
                     product.setDays(7);
                 } catch (NumberFormatException e) {
                     product.setSySales(0);
@@ -603,8 +649,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(sySales14) != null) {
                 try {
-                    row.getCell(colMap.get(sySales14)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setSySales(Integer.valueOf(row.getCell(colMap.get(sySales14)).getStringCellValue()));
+
+                    product.setSySales((int)(row.getCell(colMap.get(sySales14)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(14);
                 } catch (NumberFormatException e) {
                     product.setSySales(0);
@@ -612,8 +659,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(sySales15) != null) {
                 try {
-                    row.getCell(colMap.get(sySales15)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setSySales(Integer.valueOf(row.getCell(colMap.get(sySales15)).getStringCellValue()));
+
+                    product.setSySales((int)(row.getCell(colMap.get(sySales15)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(15);
                 } catch (NumberFormatException e) {
                     product.setSySales(0);
@@ -621,8 +669,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(sySales28) != null) {
                 try {
-                    row.getCell(colMap.get(sySales28)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setSySales(Integer.valueOf(row.getCell(colMap.get(sySales28)).getStringCellValue()));
+
+                    product.setSySales((int)(row.getCell(colMap.get(sySales28)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(28);
                 } catch (NumberFormatException e) {
                     product.setSySales(0);
@@ -630,8 +679,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(sySales90) != null) {
                 try {
-                    row.getCell(colMap.get(sySales90)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setSySales(Integer.valueOf(row.getCell(colMap.get(sySales90)).getStringCellValue()));
+
+                    product.setSySales((int)(row.getCell(colMap.get(sySales90)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(90);
                 } catch (NumberFormatException e) {
                     product.setSySales(0);
@@ -639,8 +689,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(sySales) != null) {
                 try {
-                    row.getCell(colMap.get(sySales)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setSySales(Integer.valueOf(row.getCell(colMap.get(sySales)).getStringCellValue()));
+
+                    product.setSySales((int)(row.getCell(colMap.get(sySales)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(0);
                 } catch (NumberFormatException e) {
                     product.setSySales(0);
@@ -648,8 +699,10 @@ public class ExcelReader1 {
             }
             if (colMap.get(xaSales7) != null) {
                 try {
-                    row.getCell(colMap.get(xaSales7)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setXaSales(Integer.valueOf(row.getCell(colMap.get(xaSales7)).getStringCellValue()));
+
+                    product.setXaSales((int)(row.getCell(colMap.get(xaSales7)).getNumericCellValue()));
+
+                    product = new Product();
                     product.setDays(7);
                 } catch (NumberFormatException e) {
                     product.setXaSales(0);
@@ -657,8 +710,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(xaSales14) != null) {
                 try {
-                    row.getCell(colMap.get(xaSales14)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setXaSales(Integer.valueOf(row.getCell(colMap.get(xaSales14)).getStringCellValue()));
+
+                    product.setXaSales((int)(row.getCell(colMap.get(xaSales14)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(14);
                 } catch (NumberFormatException e) {
                     product.setXaSales(0);
@@ -666,8 +720,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(xaSales15) != null) {
                 try {
-                    row.getCell(colMap.get(xaSales15)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setXaSales(Integer.valueOf(row.getCell(colMap.get(xaSales15)).getStringCellValue()));
+
+                    product.setXaSales((int)(row.getCell(colMap.get(xaSales15)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(15);
                 } catch (NumberFormatException e) {
                     product.setXaSales(0);
@@ -675,8 +730,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(xaSales28) != null) {
                 try {
-                    row.getCell(colMap.get(xaSales28)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setXaSales(Integer.valueOf(row.getCell(colMap.get(xaSales28)).getStringCellValue()));
+
+                    product.setXaSales((int)(row.getCell(colMap.get(xaSales28)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(28);
                 } catch (NumberFormatException e) {
                     product.setXaSales(0);
@@ -684,8 +740,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(xaSales90) != null) {
                 try {
-                    row.getCell(colMap.get(xaSales90)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setXaSales(Integer.valueOf(row.getCell(colMap.get(xaSales90)).getStringCellValue()));
+
+                    product.setXaSales((int)(row.getCell(colMap.get(xaSales90)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(90);
                 } catch (NumberFormatException e) {
                     product.setXaSales(0);
@@ -693,8 +750,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(xaSales) != null) {
                 try {
-                    row.getCell(colMap.get(xaSales)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setXaSales(Integer.valueOf(row.getCell(colMap.get(xaSales)).getStringCellValue()));
+
+                    product.setXaSales((int)(row.getCell(colMap.get(xaSales)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(0);
                 } catch (NumberFormatException e) {
                     product.setXaSales(0);
@@ -702,8 +760,10 @@ public class ExcelReader1 {
             }
             if (colMap.get(gaSales7) != null) {
                 try {
-                    row.getCell(colMap.get(gaSales7)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setGaSales(Integer.valueOf(row.getCell(colMap.get(gaSales7)).getStringCellValue()));
+
+                    product.setGaSales((int)(row.getCell(colMap.get(gaSales7)).getNumericCellValue()));
+
+                    product = new Product();
                     product.setDays(7);
                 } catch (NumberFormatException e) {
                     product.setGaSales(0);
@@ -711,8 +771,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(gaSales14) != null) {
                 try {
-                    row.getCell(colMap.get(gaSales14)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setGaSales(Integer.valueOf(row.getCell(colMap.get(gaSales14)).getStringCellValue()));
+
+                    product.setGaSales((int)(row.getCell(colMap.get(gaSales14)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(14);
                 } catch (NumberFormatException e) {
                     product.setGaSales(0);
@@ -720,8 +781,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(gaSales15) != null) {
                 try {
-                    row.getCell(colMap.get(gaSales15)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setGaSales(Integer.valueOf(row.getCell(colMap.get(gaSales15)).getStringCellValue()));
+
+                    product.setGaSales((int)(row.getCell(colMap.get(gaSales15)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(15);
                 } catch (NumberFormatException e) {
                     product.setGaSales(0);
@@ -729,8 +791,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(gaSales28) != null) {
                 try {
-                    row.getCell(colMap.get(gaSales28)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setGaSales(Integer.valueOf(row.getCell(colMap.get(gaSales28)).getStringCellValue()));
+
+                    product.setGaSales((int)(row.getCell(colMap.get(gaSales28)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(28);
                 } catch (NumberFormatException e) {
                     product.setGaSales(0);
@@ -738,8 +801,9 @@ public class ExcelReader1 {
             }
             if (colMap.get(gaSales90) != null) {
                 try {
-                    row.getCell(colMap.get(gaSales90)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setGaSales(Integer.valueOf(row.getCell(colMap.get(gaSales90)).getStringCellValue()));
+
+                    product.setGaSales((int)(row.getCell(colMap.get(gaSales90)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(90);
                 } catch (NumberFormatException e) {
                     product.setGaSales(0);
@@ -747,16 +811,17 @@ public class ExcelReader1 {
             }
             if (colMap.get(gaSales) != null) {
                 try {
-                    row.getCell(colMap.get(gaSales)).setCellType(Cell.CELL_TYPE_STRING);
-                    product.setGaSales(Integer.valueOf(row.getCell(colMap.get(gaSales)).getStringCellValue()));
+
+                    product.setGaSales((int)(row.getCell(colMap.get(gaSales)).getNumericCellValue()));
+                    product = new Product();
                     product.setDays(0);
                 } catch (NumberFormatException e) {
                     product.setGaSales(0);
                 }
             }
             products.add(product);
-        }
 
+        }
         return products;
     }
 }

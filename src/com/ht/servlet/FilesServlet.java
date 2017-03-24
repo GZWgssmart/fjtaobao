@@ -147,7 +147,7 @@ public class FilesServlet extends HttpServlet {
                         if (files.getfType().equals("xc")) {
                             inputExcel(filePath, req, files.getDays());
                         } else if (files.getfType().equals("dc")){
-                            inputExcel1(filePath, req);
+                            inputExcel1(filePath, req, 1);
                         }
 
                     }
@@ -164,13 +164,15 @@ public class FilesServlet extends HttpServlet {
         }
     }
 
-    public void inputExcel1(String url, HttpServletRequest req) {
+    public void inputExcel1(String url, HttpServletRequest req, int days) {
         try {
-            ExcelReader1 excelReader = new ExcelReader1();
+            ExcelReader excelReader = new ExcelReader();
             // 对读取Excel表格标题测试
             InputStream is = new FileInputStream(url);
-            List<Product> products = excelReader.readProducts1(is,req);
+            List<Product> products = excelReader.readProducts(is, req);
             for (Product p : products) {
+                System.out.printf(days + "aaaaaa");
+                p.setDays(days);
                 productService.addProduct(p);
             }
         } catch (FileNotFoundException e) {
@@ -178,7 +180,6 @@ public class FilesServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 
     public void inputExcel(String url, HttpServletRequest req, int days) {
         try {
