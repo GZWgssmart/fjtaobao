@@ -8,7 +8,6 @@ public class ProductInfo extends Product {
     private int totalStockCount; // 全国总库存额
     private int totalSalesCount; // 全国总销售额
     private double turnoverDays; // 周转天数
-    private int growthRate; // 增长率
     private  int count; // 补货数
 
     public int getTotalStockCount() {
@@ -33,14 +32,6 @@ public class ProductInfo extends Product {
 
     public void setTurnoverDays(double turnoverDays) {
         this.turnoverDays = turnoverDays;
-    }
-
-    public int getGrowthRate() {
-        return growthRate;
-    }
-
-    public void setGrowthRate(int growthRate) {
-        this.growthRate = growthRate;
     }
 
     public int getCount() {

@@ -23,9 +23,9 @@
 <h3 style="text-align: center;">
     详情补货建议
 </h3>
-<table class="easyui-datagrid" title="商品详细列表" style="width:100%;height:500px;"
+<table class="easyui-datagrid" id="list" title="商品详细列表" style="width:100%;height:500px;"
        data-options="toolbar:'#tb',
-                        singleSelect:true,
+                        singleSelect:false,
                         collapsible:true,
                         url:'<%=path %>/files/pager1',
                         method:'get',
@@ -35,7 +35,7 @@
                         pageSize:20" style="height:100%;">
     <thead>
     <tr>
-        <th data-options="field:'id'">商品id</th>
+        <th data-options="field:'id', checkbox:'true'">商品id</th>
         <th data-options="field:'productNo',width:100,align:'center'">商品编号</th>
         <th data-options="field:'name',width:100,align:'center'">商品名称</th>
         <th data-options="field:'brand',width:60,align:'center'">商品品牌</th>
@@ -62,13 +62,76 @@
         <th data-options="field:'gaSales',width:60,align:'center'">固安销量</th>
         <th data-options="field:'days',width:60,align:'center'">周期</th>
         <th data-options="field:'turnoverDays',width:100,align:'center'">${sessionScope.city}销量周转天数</th>
-        <th data-options="field:'growthRate',width:60,align:'center'">增长率</th>
         <th data-options="field:'count',width:100,align:'center'">${sessionScope.city}销量补货数</th>
     </tr>
     </thead>
 </table>
+<div id="tb" style="padding:5px;height:auto">
+    <div style="margin-bottom:5px">
+        <a href="javascript:;" onclick="contrast()"
+           class="easyui-linkbutton" iconCls="icon-search">比对增长率</a>
+    </div>
+</div>
 
 
 <div style="text-align: right; margin-right: 50px;"><a href="<%=path %>/index.jsp">返回首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=path %>/look.jsp">查看文档</a></div>
+
+<script>
+
+    function contrast() {
+        var rows = $("#list").datagrid("getSelections"); // 获取所有选中的数据
+        var length = rows.length;
+        if (length == 2) {
+            var days1 = rows[0].days;
+            var days2 = rows[1].days;
+            var city = '${sessionScope.city}';
+            if (days1 != days2) {
+                var sales1;
+                var sales2;
+                if (city == "全国") {
+                    sales1 = parseInt(rows[0].totalSales);
+                    sales2 = parseInt(rows[1].totalSales);
+                } else if (city == "北京") {
+                    sales1 = parseInt(rows[0].bjSales);
+                    sales2 = parseInt(rows[1].bjSales);
+                } else if (city == "上海") {
+                    sales1 = parseInt(rows[0].shSales);
+                    sales2 = parseInt(rows[1].shSales);
+                } else if (city == "广州") {
+                    sales1 = parseInt(rows[0].gzSales);
+                    sales2 = parseInt(rows[1].gzSales);
+                } else if (city == "成都") {
+                    sales1 = parseInt(rows[0].cdSales);
+                    sales2 = parseInt(rows[1].cdSales);
+                } else if (city == "武汉") {
+                    sales1 = parseInt(rows[0].whSales);
+                    sales2 = parseInt(rows[1].whSales);
+                } else if (city == "沈阳") {
+                    sales1 = parseInt(rows[0].sySales);
+                    sales2 = parseInt(rows[1].sySales);
+                } else if (city == "西安") {
+                    sales1 = parseInt(rows[0].xaSales);
+                    sales2 = parseInt(rows[1].xaSales);
+                } else if (city == "固安") {
+                    sales1 = parseInt(rows[0].gaSales);
+                    sales2 = parseInt(rows[1].gaSales);
+                }
+                if (sales1 != 0 && sales2 != 0) {
+                    var result = sales1 / (sales2 - sales1);
+                    result = parseInt(result * 100);
+                    $.messager.alert("提示", city + "的" + days1 + "/" + days2 + "增长率为" + result + "%", "info");
+                } else {
+                    $.messager.alert("提示", city + "的" + days1 + "/" + days2 + "增长率为0", "info");
+                }
+
+            } else {
+                $.messager.alert("提示", "请选择不同周期的数据哦", "error");
+            }
+
+        } else {
+            $.messager.alert("提示", "只能选择两条数据", "error");
+        }
+    }
+</script>
 </body>
 </html>

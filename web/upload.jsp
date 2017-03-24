@@ -103,7 +103,7 @@
         var val = comboBox.value;
         var div = document.getElementById("days");
 
-        if (val == "min") {
+        if (val == "xc") {
             div.style = "display: black;";
         } else {
             div.style = "display: none;";
