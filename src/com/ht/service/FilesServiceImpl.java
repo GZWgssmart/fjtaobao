@@ -44,4 +44,9 @@ public class FilesServiceImpl implements FilesService {
     public Files queryByFilesId(String path) {
         return filesDAO.queryByFilesId(path);
     }
+
+    @Override
+    public void deleteFileByIds(String ids) {
+        filesDAO.deleteFileByIds(ids);
+    }
 }

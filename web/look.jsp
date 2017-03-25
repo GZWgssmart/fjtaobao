@@ -89,6 +89,8 @@
                         </select>
                         <a href="javascript:;" onclick="searchDetail()"
                            class="easyui-linkbutton" iconCls="icon-search">查看补货建议</a>
+                        <a href="javascript:;" onclick="deleteFile()"
+                           class="easyui-linkbutton" iconCls="icon-cancel">删除文档</a>
                     </div>
                 </div>
                 <div style="text-align: right; margin-right: 50px;"><a href="<%=path %>/index.jsp">返回首页</a></div>
@@ -184,13 +186,37 @@
         }
     }
 
+    function deleteFile() {
+        var rows = $("#list").datagrid("getSelections"); // 获取所有选中的数据
+        var length = rows.length;
+        var ids = "";
+        if (length > 0) {
+            for (var i = 0; i < length; i++) {
+                if (ids == "") {
+                    ids = rows[i].id;
+                } else {
+                    ids += "," + rows[i].id;
+                }
+                $.get("<%=path %>/files/delete?ids=" + ids,
+                    function(data) {
+                        if (data.result == "success") {
+                            $("#list").datagrid("reload"); // 重新加载网格数据
+                            $.messager.alert("提示", data.message, "info");
+                        } else if(data.result == "fail") {
+                            $.messager.alert("提示", data.message, "error");
+                        }
+                    },"json");
+            }
+        } else {
+            $.messager.alert("提示", "请选择你要删除的文档", "error");
+        }
+    }
+
     function fileType(value) {
         if (value == "xc") {
             return "小表格";
         } else if (value == "dc") {
             return "大表格";
-        } else if (value == "dc1") {
-            return "大表格1";
         } else {
             return "未知";
         }

@@ -7,6 +7,7 @@ import com.ht.bean.ProductInfo;
 import com.ht.common.Constants;
 import com.ht.common.Methods;
 import com.ht.common.WebUtil;
+import com.ht.common.bean.ControllerResult;
 import com.ht.common.bean.Pager4EasyUI;
 import com.ht.common.util.ExcelReader;
 import com.ht.common.util.ExcelReader1;
@@ -71,6 +72,8 @@ public class FilesServlet extends HttpServlet {
             setCondition(req, resp);
         } else if (method.equals("pager1")) {
             searchProductPager(req, resp);
+        } else if (method.equals("delete")) {
+            deleteFiles(req, resp);
         }
     }
 
@@ -393,6 +396,30 @@ public class FilesServlet extends HttpServlet {
         try {
             PrintWriter pw = resp.getWriter();
             pw.write(JSON.toJSONString(pager));
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteFiles(HttpServletRequest req, HttpServletResponse resp) {
+        String ids = req.getParameter("ids");
+        boolean flag = true;
+        if (ids != null && !"".equals(ids)) {
+            filesService.deleteFileByIds(ids);
+            flag = true;
+        } else {
+            flag = false;
+
+        }
+        resp.setContentType("text/json;charset=utf-8");
+        try {
+            PrintWriter pw = resp.getWriter();
+            if (flag) {
+                pw.write(JSON.toJSONString(ControllerResult.getSuccessResult("删除成功")));
+            } else {
+                pw.write(JSON.toJSONString(ControllerResult.getFailResult("删除文件失败，请选择你要删除的文件")));
+            }
             pw.close();
         } catch (IOException e) {
             e.printStackTrace();

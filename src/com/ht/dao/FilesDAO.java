@@ -38,6 +38,12 @@ public interface FilesDAO {
      */
     public Files queryByFilesId(String path);
 
+    /**
+     * 根据文件id删除文件
+     * @param ids
+     */
+    public void deleteFileByIds(String ids);
+
 
 
 }
