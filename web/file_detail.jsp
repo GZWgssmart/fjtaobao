@@ -121,7 +121,7 @@
                     result = parseInt(result * 100);
                     $.messager.alert("提示", city + "的" + days1 + "/" + days2 + "增长率为" + result + "%", "info");
                 } else {
-                    $.messager.alert("提示", city + "的" + days1 + "/" + days2 + "增长率为0", "info");
+                    $.messager.alert("提示", city + "的" + days1 + "/" + days2 + "增长率为0%", "info");
                 }
 
             } else {

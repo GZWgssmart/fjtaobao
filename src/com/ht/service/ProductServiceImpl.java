@@ -23,8 +23,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Pager4EasyUI<ProductInfo> pager(Pager4EasyUI<ProductInfo> pager, String fileId) {
-        pager = productDAO.pager(pager,  fileId);
+    public Pager4EasyUI<ProductInfo> pager(Pager4EasyUI<ProductInfo> pager, String fileId, String fType, String days1) {
+        pager = productDAO.pager(pager,  fileId, fType, days1);
         pager.setTotal(productDAO.count(fileId));
         return pager;
     }

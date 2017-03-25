@@ -109,12 +109,17 @@
         if (length > 0) {
 
             var flag = true;
+            var fType = true;
             for (var i = 0; i < length; i++) {
                 if (rows[0].createTime != rows[i].createTime) {
                     flag = false;
                 } else {
                     if (rows[0].fType != rows[i].fType) {
                         flag = false;
+                    } else {
+                        if (rows[0].fType != "xc") {
+                            fType = false;
+                        }
                     }
 
                 }
@@ -124,9 +129,50 @@
                     ids += "," + rows[i].id;
                 }
             }
+
             if (flag) {
                 if (!isNaN(days) && days > 0 && days < 32) {
-                    window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids;
+                    var type = "xc";
+                    if (fType) {
+                        window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids + "&fType=" + type;
+                    } else {
+                        type = "dc";
+                        $.messager.prompt('请输入周期', '请输入你要查询的周期,多个周期“，”号隔开', function(r){
+                            if (r) {
+                                window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids + "&fType=" + type + "&days1=" + r;
+                                /**
+                                var strs= new Array(); //定义一数组
+                                strs=r.split(","); //字符分割
+                                var flag1 = false;
+                                for (i=0;i<strs.length ;i++ )
+                                {
+                                    // document.write(strs[i]+"<br/>"); //分割后的字符输出
+                                    var r1 = strs[i];
+                                    if (!isNaN(r1)) {
+                                        if (r1 == 7 || r1 == 14 || r1 == 15 || r1 == 28 || r1 == 90) {
+                                            flag1 = true;
+                                        } else {
+                                            flag1 = false;
+                                        }
+                                    } else {
+                                        flag1 = false;
+                                    }
+                                }
+
+                                if (flag1) {
+                                    window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids + "&fType=" + type + "&days1=" + r;
+                                } else {
+                                    $.messager.alert("错误提示", "只能输入7,14,15,30,90", "error");
+                                }
+                                 **/
+
+                            } else {
+                                window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids + "&fType=" + type;
+                            }
+                        });
+                    }
+
+
                 } else {
                     $.messager.alert("提示", "天数只能输入1-31之间的数字", "error");
                 }

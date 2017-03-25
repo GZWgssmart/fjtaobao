@@ -49,6 +49,8 @@ public class FilesServlet extends HttpServlet {
     private int days;
     private String city;
     private String ids;
+    private String fType;
+    private String days1;
 
 
     public FilesServlet() {
@@ -220,14 +222,18 @@ public class FilesServlet extends HttpServlet {
         HttpSession session = req.getSession();
         String daysStr = req.getParameter("days");
         String cityStr = req.getParameter("city");
-        String idsStri = req.getParameter("ids");
+        String idsStr = req.getParameter("ids");
+        String fTypeStr = req.getParameter("fType");
+        String days1Str = req.getParameter("days1");
         days = 28;
         city = "all";
-        if (daysStr != null && !"".equals(daysStr) && cityStr != null && !"".equals(cityStr) && idsStri != null && !"".equals(idsStri)) {
+        if (daysStr != null && !"".equals(daysStr) && cityStr != null && !"".equals(cityStr) && idsStr != null && !"".equals(idsStr)) {
             try {
                 days = Integer.valueOf(daysStr);
                 city = cityStr;
-                ids = idsStri;
+                ids = idsStr;
+                fType = fTypeStr;
+                days1 = days1Str;
             } catch (NumberFormatException e) {
 
             }
@@ -268,7 +274,7 @@ public class FilesServlet extends HttpServlet {
         Pager4EasyUI<ProductInfo> pager = new Pager4EasyUI<ProductInfo>();
         pager.setPageNo(page);
         pager.setPageSize(rows);
-        pager = productService.pager(pager, ids);
+        pager = productService.pager(pager, ids, fType, days1);
         List<ProductInfo> pis = pager.getRows();
         for (ProductInfo pi : pis) {
             double totalStockCount = pi.getTotalStock() * pi.getPrice();
