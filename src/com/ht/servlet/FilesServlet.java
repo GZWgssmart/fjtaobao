@@ -9,10 +9,7 @@ import com.ht.common.Methods;
 import com.ht.common.WebUtil;
 import com.ht.common.bean.ControllerResult;
 import com.ht.common.bean.Pager4EasyUI;
-import com.ht.common.util.ExcelReader;
-import com.ht.common.util.ExcelReader1;
-import com.ht.common.util.ExcelReader2;
-import com.ht.common.util.ExcelWorkSheet;
+import com.ht.common.util.*;
 import com.ht.dao.FilesDAO;
 import com.ht.dao.FilesDAOImpl;
 import com.ht.service.FilesService;
@@ -141,7 +138,6 @@ public class FilesServlet extends HttpServlet {
                         // 2、把图片数据保存到服务器的某个目录下
                         // new File(upload  + "/" + fileItem.getName())   上传的文件目录 + / + 文件名
                         if (fileName != null && !fileName.equals("")) {
-
                             filePath = Methods.getRootPath(req) + Methods.createNewFolder() + "\\" + newFileName;
                             FileUtils.copyInputStreamToFile(in, new File(filePath));
                             // 3、把文件的路径保存到数据库
@@ -149,18 +145,21 @@ public class FilesServlet extends HttpServlet {
                             files.setfPath(filePath);
                         }
                         files.setFileNo(String.valueOf(System.currentTimeMillis()));
-                        if (files.getfType().equals("xc")) {
-                            inputExcel(filePath, req, files.getDays());
-                        } else if (files.getfType().equals("dc")){
-                            System.out.printf(files.getFileNo() + "mmmmmmmm");
-                            inputExcel1(filePath, req, files.getFileNo());
-                        }
+
                     }
                 }
                 files.setfStatus(1);
                 java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
                 files.setCreateTime(currentDate);
                 filesService.addFiles(files);
+                if (files.getfType().equals("xc")) {
+                    String prefix = files.getfPath().substring(files.getfPath().lastIndexOf(".") + 1);
+                    System.out.printf(prefix + "mmmmmmm");
+                    inputExcel(files.getfPath(), req, files.getDays(),files.getFileNo(), prefix);
+                } else if (files.getfType().equals("dc")){
+                    String prefix = files.getfPath().substring(files.getfPath().lastIndexOf(".") + 1);
+                    inputExcel1(files.getfPath(), req, files.getFileNo(), prefix);
+                }
                 resp.sendRedirect("/look.jsp");
             } catch (FileUploadException e) {
                 e.printStackTrace();
@@ -169,27 +168,58 @@ public class FilesServlet extends HttpServlet {
         }
     }
 
-    public void inputExcel1(String path, HttpServletRequest req, String fileNo) {
+    public void inputExcel1(String path, HttpServletRequest req, String fileNo, String prefix) {
             ExcelReader2 excelReader = new ExcelReader2();
-            Files files = filesService.queryByFilesId(fileNo);
-            System.out.printf(fileNo + "aaaaaaaaaaaa");
-            List<Product> products = excelReader.readProducts1(path, req);
-            for (Product p : products) {
-                productService.addProduct(p);
+             ExcelReader3 excelReader1 = new ExcelReader3();
+            if (prefix.equals("xlsx")) {
+                Files files = filesService.queryByFilesId(fileNo);
+                List<Product> products = excelReader.readProducts1(path, req);
+                for (Product p : products) {
+                    p.setFileId(files.getId());
+                    productService.addProduct(p);
+                }
+            } else if (prefix.equals("xls")) {
+                try {
+                    InputStream is = new FileInputStream(path);
+                    Files files = filesService.queryByFilesId(fileNo);
+                    List<Product> products = excelReader1.readProducts1(is, req);
+                    for (Product p : products) {
+                        p.setFileId(files.getId());
+                        productService.addProduct(p);
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
+
     }
 
-    public void inputExcel(String url, HttpServletRequest req, int days) {
+    public void inputExcel(String url, HttpServletRequest req, int days, String fileNo, String prefix) {
         try {
             ExcelReader excelReader = new ExcelReader();
-            // 对读取Excel表格标题测试
-            InputStream is = new FileInputStream(url);
-            List<Product> products = excelReader.readProducts(is, req);
-            for (Product p : products) {
-                System.out.printf(days + "aaaaaa");
-                p.setDays(days);
+            ExcelReader1 excelReader1 = new ExcelReader1();
+            System.out.printf(prefix + "xls" + "kkkk");
+            if (prefix.equals("xls")) {
+                // 对读取Excel表格标题测试
+                InputStream is = new FileInputStream(url);
+                List<Product> products = excelReader.readProducts(is, req);
+                Files files = filesService.queryByFilesId(fileNo);
+                for (Product p : products) {
+                    System.out.printf(p + "ggggggggggggggggggggggggg");
+                    p.setDays(days);
+                    p.setFileId(files.getId());
+                    productService.addProduct(p);
+                }
+            } else if (prefix.equals("xlsx")) {
+                List<Product> products = excelReader1.readProducts(url, req);
+                Files files = filesService.queryByFilesId(fileNo);
+                for (Product p : products) {
+                    p.setDays(days);
+                    p.setFileId(files.getId());
+                    productService.addProduct(p);
+                }
+            } else if (prefix.equals("csv")) {
 
-                productService.addProduct(p);
             }
         } catch (FileNotFoundException e) {
             System.out.println("未找到指定路径的文件!");
