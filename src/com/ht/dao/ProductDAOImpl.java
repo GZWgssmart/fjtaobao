@@ -137,7 +137,6 @@ public class ProductDAOImpl extends BaseDAO implements ProductDAO {
 
     @Override
     public void addProducts(List<Product> products) {
-        getConn();
-         conn = myBroker.getConnection();
+
     }
 }
