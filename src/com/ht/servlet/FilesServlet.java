@@ -198,14 +198,12 @@ public class FilesServlet extends HttpServlet {
         try {
             ExcelReader excelReader = new ExcelReader();
             ExcelReader1 excelReader1 = new ExcelReader1();
-            System.out.printf(prefix + "xls" + "kkkk");
             if (prefix.equals("xls")) {
                 // 对读取Excel表格标题测试
                 InputStream is = new FileInputStream(url);
                 List<Product> products = excelReader.readProducts(is, req);
                 Files files = filesService.queryByFilesId(fileNo);
                 for (Product p : products) {
-                    System.out.printf(p + "ggggggggggggggggggggggggg");
                     p.setDays(days);
                     p.setFileId(files.getId());
                     productService.addProduct(p);
