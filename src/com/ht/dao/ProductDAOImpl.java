@@ -100,7 +100,6 @@ public class ProductDAOImpl extends BaseDAO implements ProductDAO {
                 sql = "select * from t_product where fileid in (" + fileId + ") limit " + pager.getBeginIndex() + ", " + pager.getPageSize();
             }
         }
-        System.out.println(sql + "aaa");
         List<ProductInfo> productList = new ArrayList<ProductInfo>();
         try {
             PreparedStatement ps  =  conn.prepareStatement(sql);
