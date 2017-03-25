@@ -30,7 +30,6 @@
     <script type="text/javascript" src="<%=path %>/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
 
 
-
 </head>
 <body>
 <div class="container">
@@ -59,7 +58,9 @@
                         <th data-options="field:'pType',width:100,align:'center'">商品类型</th>
                         <th data-options="field:'pStatus',width:100,align:'center'">商品状态</th>
                         <th data-options="field:'fType',width:100,align:'center'" formatter="fileType">文件类型</th>
-                        <th data-options="field:'createTime',width:250,align:'center'" formatter="formatterDate">文档上传时间</th>
+                        <th data-options="field:'createTime',width:250,align:'center'" formatter="formatterDate">
+                            文档上传时间
+                        </th>
                     </tr>
                     </thead>
                 </table>
@@ -93,7 +94,7 @@
                            class="easyui-linkbutton" iconCls="icon-cancel">删除文档</a>
                     </div>
                 </div>
-                <div style="text-align: right; margin-right: 50px;"><a href="<%=path %>/index.jsp">返回首页</a></div>
+                <div style="text-align: right; margin-right: 50px;"><a href="<%=path %>/index.jsp">返回首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=path %>/upload.jsp">上传文档</a></div>
             </div>
         </div>
     </div>
@@ -139,29 +140,29 @@
                         window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids + "&fType=" + type;
                     } else {
                         type = "dc";
-                        $.messager.prompt('请输入周期', '请输入你要查询的周期,多个周期“，”号隔开', function(r){
+                        $.messager.prompt('请输入周期', '请输入你要查询的周期,多个周期“，”号隔开', function (r) {
                             if (r) {
                                 window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids + "&fType=" + type + "&days1=" + r;
                                 /**
-                                var strs= new Array(); //定义一数组
-                                strs=r.split(","); //字符分割
-                                var flag1 = false;
-                                for (i=0;i<strs.length ;i++ )
-                                {
-                                    // document.write(strs[i]+"<br/>"); //分割后的字符输出
-                                    var r1 = strs[i];
-                                    if (!isNaN(r1)) {
-                                        if (r1 == 7 || r1 == 14 || r1 == 15 || r1 == 28 || r1 == 90) {
-                                            flag1 = true;
-                                        } else {
-                                            flag1 = false;
-                                        }
-                                    } else {
-                                        flag1 = false;
-                                    }
-                                }
+                                 var strs= new Array(); //定义一数组
+                                 strs=r.split(","); //字符分割
+                                 var flag1 = false;
+                                 for (i=0;i<strs.length ;i++ )
+                                 {
+                                     // document.write(strs[i]+"<br/>"); //分割后的字符输出
+                                     var r1 = strs[i];
+                                     if (!isNaN(r1)) {
+                                         if (r1 == 7 || r1 == 14 || r1 == 15 || r1 == 28 || r1 == 90) {
+                                             flag1 = true;
+                                         } else {
+                                             flag1 = false;
+                                         }
+                                     } else {
+                                         flag1 = false;
+                                     }
+                                 }
 
-                                if (flag1) {
+                                 if (flag1) {
                                     window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids + "&fType=" + type + "&days1=" + r;
                                 } else {
                                     $.messager.alert("错误提示", "只能输入7,14,15,30,90", "error");
@@ -190,6 +191,7 @@
         var rows = $("#list").datagrid("getSelections"); // 获取所有选中的数据
         var length = rows.length;
         var ids = "";
+        var names = "";
         if (length > 0) {
             for (var i = 0; i < length; i++) {
                 if (ids == "") {
@@ -197,16 +199,28 @@
                 } else {
                     ids += "," + rows[i].id;
                 }
-                $.get("<%=path %>/files/delete?ids=" + ids,
-                    function(data) {
-                        if (data.result == "success") {
-                            $("#list").datagrid("reload"); // 重新加载网格数据
-                            $.messager.alert("提示", data.message, "info");
-                        } else if(data.result == "fail") {
-                            $.messager.alert("提示", data.message, "error");
-                        }
-                    },"json");
+                if (names == "") {
+                    names = rows[i].name;
+                } else {
+                    names += "," + rows[i].name;
+                }
             }
+            $.messager.confirm("操作提示", "您确定要删除'" + names + "'这" + length + "个文件吗？", function (data) {
+                if (data) {
+                    $.get("<%=path %>/files/delete?ids=" + ids,
+                            function (data) {
+                                if (data.result == "success") {
+                                    $("#list").datagrid("reload"); // 重新加载网格数据
+                                    $.messager.alert("提示", data.message, "info");
+                                } else if (data.result == "fail") {
+                                    $.messager.alert("提示", data.message, "error");
+                                }
+                            }, "json");
+                }
+                else {
+
+                }
+            });
         } else {
             $.messager.alert("提示", "请选择你要删除的文档", "error");
         }
