@@ -87,7 +87,6 @@ public class FilesServlet extends HttpServlet {
         int c = (a - 1) * b;
         rows = filesService.queryAll(c, b);
         for (Files files : rows) {
-            System.out.printf(files + "aadsassasssa");
         }
         total = filesService.count();
         req.getRequestDispatcher("/look.jsp").forward(req, resp);
@@ -127,7 +126,6 @@ public class FilesServlet extends HttpServlet {
                             files.setfType(fieldValue);
                         }
                     } else { // 否则为文件字段
-                        System.out.printf("aaaaaaaaaaaaa");
                         String fileName = fileItem.getName();// 获取文件的名称
                         String prefix = fileName.substring(fileName.lastIndexOf(".") + 1);
                         String newFileName = System.currentTimeMillis() + "." + prefix;
@@ -154,7 +152,6 @@ public class FilesServlet extends HttpServlet {
                 filesService.addFiles(files);
                 if (files.getfType().equals("xc")) {
                     String prefix = files.getfPath().substring(files.getfPath().lastIndexOf(".") + 1);
-                    System.out.printf(prefix + "mmmmmmm");
                     inputExcel(files.getfPath(), req, files.getDays(),files.getFileNo(), prefix);
                 } else if (files.getfType().equals("dc")){
                     String prefix = files.getfPath().substring(files.getfPath().lastIndexOf(".") + 1);
@@ -251,6 +248,7 @@ public class FilesServlet extends HttpServlet {
 
     private void setCondition(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
+        resp.setCharacterEncoding("utf-8");
         String daysStr = req.getParameter("days");
         String cityStr = req.getParameter("city");
         String idsStr = req.getParameter("ids");
@@ -269,23 +267,23 @@ public class FilesServlet extends HttpServlet {
 
             }
             if (city.equals("all")) {
-                session.setAttribute("city", "全国");
+                session.setAttribute("city", "all");
             } else if (city.equals("bj")) {
-                session.setAttribute("city", "北京");
+                session.setAttribute("city", "bj");
             } else if (city.equals("sh")) {
-                session.setAttribute("city", "上海");
+                session.setAttribute("city", "sh");
             } else if (city.equals("gz")) {
-                session.setAttribute("city", "广州");
+                session.setAttribute("city", "gz");
             }  else if (city.equals("cd")) {
-                session.setAttribute("city", "成都");
+                session.setAttribute("city", "cd");
             } else if (city.equals("wh")) {
-                session.setAttribute("city", "武汉");
+                session.setAttribute("city", "wh");
             } else if (city.equals("sy")) {
-                session.setAttribute("city", "沈阳");
+                session.setAttribute("city", "cy");
             } else if (city.equals("xa")) {
-                session.setAttribute("city", "西安");
+                session.setAttribute("city", "xa");
             } else if (city.equals("ga")) {
-                session.setAttribute("city", "固安");
+                session.setAttribute("city", "gz");
             }
             resp.sendRedirect("/file_detail.jsp");
         } else {

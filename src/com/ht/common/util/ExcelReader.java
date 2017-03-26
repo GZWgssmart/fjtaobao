@@ -37,7 +37,6 @@ public class ExcelReader {
 
         List<Product> products = new ArrayList<Product>();
         Properties properties = new Properties();
-        System.out.printf(Methods.getRootPath(req) + "WEB-INF/config/xiao_column.properties");
         try {
             properties.load(new FileInputStream(Methods.getRootPath(req) + "WEB-INF/config/xiao_column.properties"));
         } catch (IOException e) {

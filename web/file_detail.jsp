@@ -10,6 +10,7 @@
 <%
     String path = request.getContextPath();
 %>
+
 <html>
 <head>
     <title>商品详情</title>
@@ -42,35 +43,35 @@
         <th data-options="field:'brand',width:60,align:'center'">商品品牌</th>
         <th data-options="field:'status',width:60,align:'center'">商品状态</th>
         <c:choose>
-            <c:when test="${sessionScope.city == '北京'}">
+            <c:when test="${sessionScope.city == 'bj'}">
                 <th data-options="field:'bjStock',width:60,align:'center'">北京库存</th>
                 <th data-options="field:'bjSales',width:60,align:'center'">北京销量</th>
             </c:when>
-            <c:when test="${sessionScope.city == '上海'}">
+            <c:when test="${sessionScope.city == 'sh'}">
                 <th data-options="field:'shStock',width:60,align:'center'">上海库存</th>
                 <th data-options="field:'shSales',width:60,align:'center'">上海销量</th>
             </c:when>
-            <c:when test="${sessionScope.city == '广州'}">
+            <c:when test="${sessionScope.city == 'gz'}">
                 <th data-options="field:'gzStock',width:60,align:'center'">广州库存</th>
                 <th data-options="field:'gzSales',width:60,align:'center'">广州销量</th>
             </c:when>
-            <c:when test="${sessionScope.city == '成都'}">
+            <c:when test="${sessionScope.city == 'cd'}">
                 <th data-options="field:'cdStock',width:60,align:'center'">成都库存</th>
                 <th data-options="field:'cdSales',width:60,align:'center'">成都销量</th>
             </c:when>
-            <c:when test="${sessionScope.city == '武汉'}">
+            <c:when test="${sessionScope.city == 'wh'}">
                 <th data-options="field:'whStock',width:60,align:'center'">武汉库存</th>
                 <th data-options="field:'whSales',width:60,align:'center'">武汉销量</th>
             </c:when>
-            <c:when test="${sessionScope.city == '沈阳'}">
+            <c:when test="${sessionScope.city == 'cy'}">
                 <th data-options="field:'syStock',width:60,align:'center'">沈阳库存</th>
                 <th data-options="field:'sySales',width:60,align:'center'">沈阳销量</th>
             </c:when>
-            <c:when test="${sessionScope.city == '西安'}">
+            <c:when test="${sessionScope.city == 'xa'}">
                 <th data-options="field:'xaStock',width:60,align:'center'">西安库存</th>
                 <th data-options="field:'xaSales',width:60,align:'center'">西安销量</th>
             </c:when>
-            <c:when test="${sessionScope.city == '固安'}">
+            <c:when test="${sessionScope.city == 'ga'}">
                 <th data-options="field:'gaStock',width:60,align:'center'">固安库存</th>
                 <th data-options="field:'gaSales',width:60,align:'center'">固安销量</th>
             </c:when>
@@ -99,8 +100,73 @@
             </c:otherwise>
         </c:choose>
         <th data-options="field:'days',width:60,align:'center'">周期</th>
-        <th data-options="field:'turnoverDays',width:100,align:'center'">${sessionScope.city}销量周转天数</th>
-        <th data-options="field:'count',width:100,align:'center'">${sessionScope.city}销量补货数</th>
+
+        <th data-options="field:'turnoverDays',width:100,align:'center'">
+            <c:choose>
+                <c:when test="${sessionScope.city == 'bj'}">
+                    北京
+                </c:when>
+                <c:when test="${sessionScope.city == 'sh'}">
+                    上海
+                </c:when>
+                <c:when test="${sessionScope.city == 'gz'}">
+                    广州
+                </c:when>
+                <c:when test="${sessionScope.city == 'cd'}">
+                    成都
+                </c:when>
+                <c:when test="${sessionScope.city == 'wh'}">
+                    武汉
+                </c:when>
+                <c:when test="${sessionScope.city == 'cy'}">
+                    沈阳
+                </c:when>
+                <c:when test="${sessionScope.city == 'xa'}">
+                    西安
+                </c:when>
+                <c:when test="${sessionScope.city == 'ga'}">
+                    固安
+                </c:when>
+                <c:otherwise>
+                    全国
+
+                </c:otherwise>
+            </c:choose>
+            销量周转天数
+        </th>
+        <th data-options="field:'count',width:100,align:'center'">
+            <c:choose>
+                <c:when test="${sessionScope.city == 'bj'}">
+                    北京
+                </c:when>
+                <c:when test="${sessionScope.city == 'sh'}">
+                    上海
+                </c:when>
+                <c:when test="${sessionScope.city == 'gz'}">
+                    广州
+                </c:when>
+                <c:when test="${sessionScope.city == 'cd'}">
+                    成都
+                </c:when>
+                <c:when test="${sessionScope.city == 'wh'}">
+                    武汉
+                </c:when>
+                <c:when test="${sessionScope.city == 'cy'}">
+                    沈阳
+                </c:when>
+                <c:when test="${sessionScope.city == 'xa'}">
+                    西安
+                </c:when>
+                <c:when test="${sessionScope.city == 'ga'}">
+                    固安
+                </c:when>
+                <c:otherwise>
+                    全国
+
+                </c:otherwise>
+            </c:choose>
+            销量补货数
+        </th>
 
     </tr>
     </thead>
@@ -113,7 +179,8 @@
 </div>
 
 
-<div style="text-align: right; margin-right: 50px;"><a href="<%=path %>/index.jsp">返回首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=path %>/look.jsp">查看文档</a></div>
+<div style="text-align: right; margin-right: 50px;"><a href="<%=path %>/index.jsp">返回首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+        href="<%=path %>/look.jsp">查看文档</a></div>
 
 <script>
 
