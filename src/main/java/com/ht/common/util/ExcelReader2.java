@@ -323,10 +323,10 @@ public class ExcelReader2 {
                 Product p = null;
                 try {
                     p = product.copy();
-                    p.setTotalSales((int) row.getCell(colMap.get(totalSales)).getNumericCellValue());
+                    p.setTotalStock((int) row.getCell(colMap.get(totalSales)).getNumericCellValue());
                     p.setDays(0);
                 } catch (NumberFormatException e) {
-                    p.setTotalSales(0);
+                    p.setTotalStock(0);
                 }
                 products.add(p);
             }
@@ -389,10 +389,10 @@ public class ExcelReader2 {
                 Product p = null;
                 try {
                     p = product.copy();
-                    p.setBjSales((int) row.getCell(colMap.get(bjSales)).getNumericCellValue());
+                    p.setBjStock((int) row.getCell(colMap.get(bjSales)).getNumericCellValue());
                     p.setDays(0);
                 } catch (NumberFormatException e) {
-                    p.setBjSales(0);
+                    p.setBjStock(0);
                 }
                 products.add(p);
             }
@@ -456,10 +456,10 @@ public class ExcelReader2 {
                 Product p = null;
                 try {
                     p = product.copy();
-                    p.setShSales((int) row.getCell(colMap.get(shSales)).getNumericCellValue());
+                    p.setShStock((int) row.getCell(colMap.get(shSales)).getNumericCellValue());
                     p.setDays(0);
                 } catch (NumberFormatException e) {
-                    p.setShSales(0);
+                    p.setShStock(0);
                 }
                 products.add(p);
             }
@@ -523,10 +523,10 @@ public class ExcelReader2 {
                 try {
                     p = product.copy();
 
-                    p.setGzSales((int) row.getCell(colMap.get(gzSales)).getNumericCellValue());
+                    p.setGzStock((int) row.getCell(colMap.get(gzSales)).getNumericCellValue());
                     p.setDays(0);
                 } catch (NumberFormatException e) {
-                    p.setGzSales(0);
+                    p.setGzStock(0);
                 }
                 products.add(p);
             }
@@ -591,10 +591,10 @@ public class ExcelReader2 {
                 Product p = null;
                 try {
                     p = product.copy();
-                    p.setCdSales((int) row.getCell(colMap.get(cdSales)).getNumericCellValue());
+                    p.setCdStock((int) row.getCell(colMap.get(cdSales)).getNumericCellValue());
                     p.setDays(0);
                 } catch (NumberFormatException e) {
-                    p.setCdSales(0);
+                    p.setCdStock(0);
                 }
                 products.add(p);
             }
@@ -657,10 +657,10 @@ public class ExcelReader2 {
                 Product p = null;
                 try {
                     p = product.copy();
-                    p.setWhSales((int) row.getCell(colMap.get(whSales)).getNumericCellValue());
+                    p.setWhStock((int) row.getCell(colMap.get(whSales)).getNumericCellValue());
                     p.setDays(0);
                 } catch (NumberFormatException e) {
-                    p.setWhSales(0);
+                    p.setWhStock(0);
                 }
                 products.add(p);
             }
@@ -723,10 +723,10 @@ public class ExcelReader2 {
                 Product p = null;
                 try {
                     p = product.copy();
-                    p.setSySales((int) row.getCell(colMap.get(sySales)).getNumericCellValue());
+                    p.setSyStock((int) row.getCell(colMap.get(sySales)).getNumericCellValue());
                     p.setDays(0);
                 } catch (NumberFormatException e) {
-                    p.setSySales(0);
+                    p.setSyStock(0);
                 }
                 products.add(p);
             }
@@ -789,10 +789,10 @@ public class ExcelReader2 {
                 Product p = null;
                 try {
                     p = product.copy();
-                    p.setXaSales((int) row.getCell(colMap.get(xaSales)).getNumericCellValue());
+                    p.setXaStock((int) row.getCell(colMap.get(xaSales)).getNumericCellValue());
                     p.setDays(0);
                 } catch (NumberFormatException e) {
-                    p.setXaSales(0);
+                    p.setXaStock(0);
                 }
                 products.add(p);
             }
@@ -855,10 +855,10 @@ public class ExcelReader2 {
                 Product p = null;
                 try {
                     p = product.copy();
-                    p.setGaSales((int) row.getCell(colMap.get(gaSales)).getNumericCellValue());
+                    p.setGaStock((int) row.getCell(colMap.get(gaSales)).getNumericCellValue());
                     p.setDays(0);
                 } catch (NumberFormatException e) {
-                    p.setGaSales(0);
+                    p.setGaStock(0);
                 }
                 products.add(p);
             }
