@@ -6,6 +6,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Cell;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
@@ -243,8 +244,8 @@ public class ExcelReader3 {
             // 内容部分
             HSSFRow row = sheet.getRow(i);
             if (colMap.get(productNo) != null) {
-
-                product.setProductNo(String.valueOf(row.getCell(colMap.get(productNo)).getNumericCellValue()));
+                row.getCell(colMap.get(productNo)).setCellType(Cell.CELL_TYPE_STRING);
+                product.setProductNo(String.valueOf(row.getCell(colMap.get(productNo)).getStringCellValue()));
             }
             if (colMap.get(name) != null) {
 

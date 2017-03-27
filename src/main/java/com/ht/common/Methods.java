@@ -9,6 +9,11 @@ import java.util.Date;
  * Created by ArrayBin on 2017/3/20.
  */
 public class Methods {
+
+    public static final String DEFAULT_CODING = "utf-8";
+
+    public static final String PATH_UPLOAD = "/WEB-INF/upload";
+
     /**
      * 根据当前日期自动创建存放文件的文件夹
      * @return

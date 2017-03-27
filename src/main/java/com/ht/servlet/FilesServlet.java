@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.ht.bean.Files;
 import com.ht.bean.Product;
 import com.ht.bean.ProductInfo;
-import com.ht.common.Constants;
 import com.ht.common.Methods;
 import com.ht.common.WebUtil;
 import com.ht.common.bean.ControllerResult;
@@ -100,7 +99,7 @@ public class FilesServlet extends HttpServlet {
             // 表示由jsp页面post的数据包含有文件内容
             FileItemFactory fileItemFactory = new DiskFileItemFactory(); // fileItemFactory对象用于创建与表单中input对应的FileItem对象
             ServletFileUpload fileUpload = new ServletFileUpload(fileItemFactory);
-            fileUpload.setHeaderEncoding(Constants.DEFAULT_CODING);
+            fileUpload.setHeaderEncoding(Methods.DEFAULT_CODING);
             Files files = new Files();
             try {
                 List<FileItem> fileItems = fileUpload.parseRequest(req);// 去解析request请求，把每一个FileItem获取到
@@ -109,7 +108,7 @@ public class FilesServlet extends HttpServlet {
                     String fieldValue;
                     if (fileItem.isFormField()) { // 判断FileItem是否为普通的表单字段
                         fieldName = fileItem.getFieldName();// 获取普通表单字段的name值
-                        fieldValue = fileItem.getString(Constants.DEFAULT_CODING);// 获取普通表单字段的value值
+                        fieldValue = fileItem.getString(Methods.DEFAULT_CODING);// 获取普通表单字段的value值
                         if (fieldName.equals("days")) {
                             try {
                                 int days = Integer.valueOf(fieldValue);
@@ -146,7 +145,11 @@ public class FilesServlet extends HttpServlet {
 
                     }
                 }
-                files.setfStatus(1);
+                if (files.getfType().equals("xv")) {
+
+                } else if (files.getfType().equals("dc")) {
+                    files.setDays(0);
+                }
                 java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
                 files.setCreateTime(currentDate);
                 filesService.addFiles(files);

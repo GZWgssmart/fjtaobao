@@ -297,4 +297,6 @@ public class Product implements Serializable {
                 ", gaStock=" + gaStock +
                 '}';
     }
+
+
 }

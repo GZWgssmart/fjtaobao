@@ -7,6 +7,7 @@ package com.ht.common.util;
 import com.ht.bean.Product;
 import com.ht.common.Methods;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -119,8 +120,8 @@ public class ExcelReader1 {
             // 内容部分
             XSSFRow row = sheet.getRow(i);
             if (colMap.get(productNo) != null) {
-
-                product.setProductNo(String.valueOf(row.getCell(colMap.get(productNo)).getNumericCellValue()));
+                row.getCell(colMap.get(productNo)).setCellType(Cell.CELL_TYPE_STRING);
+                product.setProductNo(String.valueOf(row.getCell(colMap.get(productNo)).getStringCellValue()));
             }
             if (colMap.get(name) != null) {
 
