@@ -41,4 +41,14 @@ public class ProductInfo extends Product {
     public void setCount(int count) {
         this.count = count;
     }
+
+    @Override
+    public String toString() {
+        return "ProductInfo{" +
+                "totalStockCount=" + totalStockCount +
+                ", totalSalesCount=" + totalSalesCount +
+                ", turnoverDays=" + turnoverDays +
+                ", count=" + count +
+                '}';
+    }
 }

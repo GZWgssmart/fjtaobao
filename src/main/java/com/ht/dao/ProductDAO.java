@@ -25,7 +25,7 @@ public interface ProductDAO  {
      * @param days1
      * @return
      */
-    public Pager4EasyUI<ProductInfo> pager(Pager4EasyUI<ProductInfo> pager, String fileId, String fType, String days1);
+    public Pager4EasyUI<ProductInfo> pager(Pager4EasyUI<ProductInfo> pager, String fileId, String fType);
 
     /**
      * 计数

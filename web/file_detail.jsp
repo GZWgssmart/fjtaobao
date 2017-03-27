@@ -129,7 +129,6 @@
                 </c:when>
                 <c:otherwise>
                     全国
-
                 </c:otherwise>
             </c:choose>
             销量周转天数
@@ -162,7 +161,6 @@
                 </c:when>
                 <c:otherwise>
                     全国
-
                 </c:otherwise>
             </c:choose>
             销量补货数

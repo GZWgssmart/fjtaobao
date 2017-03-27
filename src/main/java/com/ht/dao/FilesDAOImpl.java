@@ -144,9 +144,12 @@ public class FilesDAOImpl extends BaseDAO implements FilesDAO {
     public void deleteFileByIds(String ids) {
         getConn();
         String sql = "delete from t_file where id in (" + ids + ")";
+        String sql1 = "delete from t_product where fileid in(" + ids + ")";
         try {
             PreparedStatement ps  =  conn.prepareStatement(sql);
             ps.execute();
+            PreparedStatement ps1 = conn.prepareStatement(sql1);
+            ps1.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }

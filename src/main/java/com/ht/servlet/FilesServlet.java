@@ -2,6 +2,7 @@ package com.ht.servlet;
 
 import com.alibaba.fastjson.JSON;
 import com.ht.bean.Files;
+import com.ht.bean.MaxTable;
 import com.ht.bean.Product;
 import com.ht.bean.ProductInfo;
 import com.ht.common.Methods;
@@ -30,6 +31,7 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +49,6 @@ public class FilesServlet extends HttpServlet {
     private String city;
     private String ids;
     private String fType;
-    private String days1;
 
 
     public FilesServlet() {
@@ -70,6 +71,8 @@ public class FilesServlet extends HttpServlet {
             searchProductPager(req, resp);
         } else if (method.equals("delete")) {
             deleteFiles(req, resp);
+        } else if (method.equals("maxTable")) {
+            maxTable(req, resp);
         }
     }
 
@@ -265,7 +268,6 @@ public class FilesServlet extends HttpServlet {
                 city = cityStr;
                 ids = idsStr;
                 fType = fTypeStr;
-                days1 = days1Str;
             } catch (NumberFormatException e) {
 
             }
@@ -288,7 +290,13 @@ public class FilesServlet extends HttpServlet {
             } else if (city.equals("ga")) {
                 session.setAttribute("city", "gz");
             }
-            resp.sendRedirect("/file_detail.jsp");
+            session.setAttribute("days", days);
+
+            if (fType.equals("xc")) {
+                resp.sendRedirect("/file_detail.jsp");
+            } else {
+                resp.sendRedirect("/file_detail1.jsp");
+            }
         } else {
             resp.sendRedirect("/look.jsp");
         }
@@ -306,7 +314,7 @@ public class FilesServlet extends HttpServlet {
         Pager4EasyUI<ProductInfo> pager = new Pager4EasyUI<ProductInfo>();
         pager.setPageNo(page);
         pager.setPageSize(rows);
-        pager = productService.pager(pager, ids, fType, days1);
+        pager = productService.pager(pager, ids, fType);
         List<ProductInfo> pis = pager.getRows();
         for (ProductInfo pi : pis) {
             double totalStockCount = pi.getTotalStock() * pi.getPrice();
@@ -449,6 +457,183 @@ public class FilesServlet extends HttpServlet {
             } else {
                 pw.write(JSON.toJSONString(ControllerResult.getFailResult("删除文件失败，请选择你要删除的文件")));
             }
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void maxTable(HttpServletRequest req, HttpServletResponse resp) {
+        int page = 1;
+        int rows = 20;
+        try {
+            page = Integer.valueOf(req.getParameter("page"));
+            rows = Integer.valueOf(req.getParameter("rows"));
+        } catch (NumberFormatException e) {
+
+        }
+        Pager4EasyUI<ProductInfo> pager = new Pager4EasyUI<ProductInfo>();
+        pager.setPageNo(page);
+        pager.setPageSize(rows);
+        pager = productService.pager(pager, ids, fType);
+        List<ProductInfo> pis = pager.getRows();
+        List<MaxTable> mts = new ArrayList<MaxTable>();
+        MaxTable mt = new MaxTable();
+        String lastProductNo = "";
+        for (ProductInfo pi : pis) {
+            System.out.println(pi.getTotalStock() + "," + pi.getTotalSales());
+            int bjSales = pi.getBjSales();
+            int bjStock = pi.getBjStock();
+            int shSales = pi.getBjSales();
+            int shStock = pi.getBjStock();
+            int gzSales = pi.getBjSales();
+            int gzStock = pi.getBjStock();
+            int cdSales = pi.getBjSales();
+            int cdStock = pi.getBjStock();
+            int whSales = pi.getBjSales();
+            int whStock = pi.getBjStock();
+            int sySales = pi.getBjSales();
+            int syStock = pi.getBjStock();
+            int xaSales = pi.getBjSales();
+            int xaStock = pi.getBjStock();
+            int gaSales = pi.getBjSales();
+            int gaStock = pi.getBjStock();
+
+            int cycle = pi.getDays();
+
+            if (lastProductNo.equals("")) {
+                lastProductNo = pi.getProductNo();
+            } else {
+                if (pi.getProductNo().equals(lastProductNo)) {
+                } else {
+                    mts.add(mt.copy());
+                    lastProductNo = pi.getProductNo();
+                }
+            }
+
+            mt.setId(pi.getId());
+            mt.setProductNo(pi.getProductNo());
+            mt.setName(pi.getName());
+            mt.setBrand(pi.getBrand());
+            mt.setStatus(pi.getStatus());
+            mt.setPrice(pi.getPrice());
+            if (pi.getTotalStock() != 0) {
+                mt.setTotalStock(pi.getTotalStock());
+            }
+
+            if (bjStock != 0) {
+                mt.setBjStock(bjStock);
+            }
+            if (shStock != 0) {
+                mt.setShStock(shStock);
+            }
+            if (gzStock != 0) {
+                mt.setGzStock(gzStock);
+            }
+            if (cdStock != 0) {
+                mt.setCdStock(cdStock);
+            }
+            if (whStock != 0) {
+                mt.setWhStock(whStock);
+            }
+            if (syStock != 0) {
+                mt.setSyStock(syStock);
+            }
+            if (xaStock != 0) {
+                mt.setXaStock(xaStock);
+            }
+            if (gaStock != 0) {
+                mt.setGaStock(gaStock);
+            }
+
+            if (cycle == 7) {
+                if (bjSales != 0) {
+                    mt.setBjSales7(bjSales);
+                }
+                if (shSales != 0) {
+                    mt.setShSales7(shSales);
+                }
+                if (gzSales != 0) {
+                    mt.setGzSales7(gzSales);
+                }
+                if (cdSales != 0) {
+                    mt.setCdSales7(cdSales);
+                }
+                if (whSales != 0) {
+                    mt.setWhSales7(whSales);
+                }
+                if (sySales != 0) {
+                    mt.setSySales7(sySales);
+                }
+                if (xaSales != 0) {
+                    mt.setXaSales7(xaSales);
+                }
+                if (gaSales != 0) {
+                    mt.setGaSales7(gaSales);
+                }
+
+            } else if (cycle == 15) {
+                if (bjSales != 0) {
+                    mt.setBjSales15(bjSales);
+                }
+                if (shSales != 0) {
+                    mt.setShSales15(shSales);
+                }
+                if (gzSales != 0) {
+                    mt.setGzSales15(gzSales);
+                }
+                if (cdSales != 0) {
+                    mt.setCdSales15(cdSales);
+                }
+                if (whSales != 0) {
+                    mt.setWhSales15(whSales);
+                }
+                if (sySales != 0) {
+                    mt.setSySales15(sySales);
+                }
+                if (xaSales != 0) {
+                    mt.setXaSales15(xaSales);
+                }
+                if (gaSales != 0) {
+                    mt.setGaSales15(gaSales);
+                }
+
+            } else if (cycle == 30) {
+                if (bjSales != 0) {
+                    mt.setBjSales30(bjSales);
+                }
+                if (shSales != 0) {
+                    mt.setShSales30(shSales);
+                }
+                if (gzSales != 0) {
+                    mt.setGzSales30(gzSales);
+                }
+                if (cdSales != 0) {
+                    mt.setCdSales30(cdSales);
+                }
+                if (whSales != 0) {
+                    mt.setWhSales30(whSales);
+                }
+                if (sySales != 0) {
+                    mt.setSySales30(sySales);
+                }
+                if (xaSales != 0) {
+                    mt.setXaSales30(xaSales);
+                }
+                if (gaSales != 0) {
+                    mt.setGaSales30(gaSales);
+                }
+            }
+
+        }
+        mts.add(mt);
+        resp.setContentType("text/json;charset=utf-8");
+        Pager4EasyUI<MaxTable> pager1 = new Pager4EasyUI<MaxTable>();
+        pager1.setTotal(mts.size());
+        pager1.setRows(mts);
+        try {
+            PrintWriter pw = resp.getWriter();
+            pw.write(JSON.toJSONString(pager1));
             pw.close();
         } catch (IOException e) {
             e.printStackTrace();

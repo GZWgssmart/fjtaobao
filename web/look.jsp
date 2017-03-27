@@ -135,46 +135,11 @@
 
             if (flag) {
                 if (!isNaN(days) && days > 0 && days < 32) {
-                    var type = "xc";
                     if (fType) {
-                        window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids + "&fType=" + type;
+                        window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids + "&fType=xc";
                     } else {
-                        type = "dc";
-                        $.messager.prompt('请输入周期', '请输入你要查询的周期,多个周期“，”号隔开', function (r) {
-                            if (r) {
-                                window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids + "&fType=" + type + "&days1=" + r;
-                                /**
-                                 var strs= new Array(); //定义一数组
-                                 strs=r.split(","); //字符分割
-                                 var flag1 = false;
-                                 for (i=0;i<strs.length ;i++ )
-                                 {
-                                     // document.write(strs[i]+"<br/>"); //分割后的字符输出
-                                     var r1 = strs[i];
-                                     if (!isNaN(r1)) {
-                                         if (r1 == 7 || r1 == 14 || r1 == 15 || r1 == 28 || r1 == 90) {
-                                             flag1 = true;
-                                         } else {
-                                             flag1 = false;
-                                         }
-                                     } else {
-                                         flag1 = false;
-                                     }
-                                 }
-
-                                 if (flag1) {
-                                    window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids + "&fType=" + type + "&days1=" + r;
-                                } else {
-                                    $.messager.alert("错误提示", "只能输入7,14,15,30,90", "error");
-                                }
-                                 **/
-
-                            } else {
-                                window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids + "&fType=" + type;
-                            }
-                        });
+                        window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids + "&fType=dc";
                     }
-
 
                 } else {
                     $.messager.alert("提示", "天数只能输入1-31之间的数字", "error");

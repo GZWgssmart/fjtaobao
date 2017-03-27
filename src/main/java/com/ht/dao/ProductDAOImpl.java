@@ -88,17 +88,13 @@ public class ProductDAOImpl extends BaseDAO implements ProductDAO {
     }
 
     @Override
-    public Pager4EasyUI<ProductInfo> pager(Pager4EasyUI<ProductInfo> pager, String fileId, String fType, String days1) {
+    public Pager4EasyUI<ProductInfo> pager(Pager4EasyUI<ProductInfo> pager, String fileId, String fType) {
         getConn();
         String sql = "";
         if (fType.equals("xc")) {
             sql = "select * from t_product where fileid in ("+ fileId +") order by days limit " + pager.getBeginIndex() + ", " + pager.getPageSize();
         } else {
-            if (days1 != null && !"".equals(days1)) {
-                sql = "select * from t_product where fileid in (" + fileId + ") and days in (" + days1 + ") limit " + pager.getBeginIndex() + ", " + pager.getPageSize();
-            } else {
-                sql = "select * from t_product where fileid in (" + fileId + ") limit " + pager.getBeginIndex() + ", " + pager.getPageSize();
-            }
+            sql = "select * from t_product where fileid in (" + fileId + ")";
         }
         List<ProductInfo> productList = new ArrayList<ProductInfo>();
         try {

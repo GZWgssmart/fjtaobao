@@ -11,7 +11,7 @@ public interface ProductService {
 
     public void addProduct(Product product);
 
-    public Pager4EasyUI<ProductInfo> pager(Pager4EasyUI<ProductInfo> pager, String fileId, String fType, String days1);
+    public Pager4EasyUI<ProductInfo> pager(Pager4EasyUI<ProductInfo> pager, String fileId, String fType);
 
 
 }
