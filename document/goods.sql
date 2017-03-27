@@ -8,6 +8,7 @@ use d_goods;
 DROP TABLE IF EXISTS `t_file`;
 CREATE TABLE `t_file` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '文档主键id',
+  `fileno` varchar(255) DEFAULT NULL COMMENT '文档标识',
   `name` varchar(255) DEFAULT NULL COMMENT '文档名字',
   `days` int(11) DEFAULT NULL COMMENT '查询天数',
   `brand` varchar(255) DEFAULT NULL COMMENT '商品品牌',
