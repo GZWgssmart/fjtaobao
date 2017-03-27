@@ -38,9 +38,9 @@ public class ExcelReader3 {
         try {
             properties.load(new FileInputStream(Methods.getRootPath(req) + "WEB-INF/config/da_column.properties"));
         } catch (IOException e) {
-
             e.printStackTrace();
         }
+
         String productNo = properties.getProperty("productNo");
         String name = properties.getProperty("name");
         String brand = properties.getProperty("brand");

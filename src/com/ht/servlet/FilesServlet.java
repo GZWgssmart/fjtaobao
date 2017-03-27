@@ -9,9 +9,10 @@ import com.ht.common.Methods;
 import com.ht.common.WebUtil;
 import com.ht.common.bean.ControllerResult;
 import com.ht.common.bean.Pager4EasyUI;
-import com.ht.common.util.*;
-import com.ht.dao.FilesDAO;
-import com.ht.dao.FilesDAOImpl;
+import com.ht.common.util.ExcelReader;
+import com.ht.common.util.ExcelReader1;
+import com.ht.common.util.ExcelReader2;
+import com.ht.common.util.ExcelReader3;
 import com.ht.service.FilesService;
 import com.ht.service.FilesServiceImpl;
 import com.ht.service.ProductService;
@@ -30,9 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by ArrayBin on 2017/3/17.
