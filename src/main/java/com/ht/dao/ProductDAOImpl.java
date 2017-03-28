@@ -92,9 +92,9 @@ public class ProductDAOImpl extends BaseDAO implements ProductDAO {
         getConn();
         String sql = "";
         if (fType.equals("xc")) {
-            sql = "select * from t_product where fileid in ("+ fileId +") order by days limit " + pager.getBeginIndex() + ", " + pager.getPageSize();
+            sql = "select * from t_product where fileid in ("+ fileId +") order by productno limit " + pager.getBeginIndex() + ", " + pager.getPageSize();
         } else {
-            sql = "select * from t_product where fileid in (" + fileId + ")";
+            sql = "select * from t_product where fileid in (" + fileId + ") order by productno";
         }
         List<ProductInfo> productList = new ArrayList<ProductInfo>();
         try {

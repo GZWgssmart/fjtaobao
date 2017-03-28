@@ -111,7 +111,7 @@
                 <th data-options="field:'whGrowthRate15to30',width:100,align:'center'" formatter="whGrowthRate15to30">武汉15/30天增长率</th>
 
             </c:when>
-            <c:when test="${sessionScope.city == 'cy'}">
+            <c:when test="${sessionScope.city == 'sy'}">
                 <th data-options="field:'syStock',width:100,align:'center'">沈阳库存</th>
                 <th data-options="field:'sySales7',width:100,align:'center'">沈阳7天销量</th>
                 <th data-options="field:'syTurnoverDays7',width:100,align:'center'" formatter="syTurnoverDays7">沈阳7天周转天数</th>

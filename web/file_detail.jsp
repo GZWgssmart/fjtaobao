@@ -42,38 +42,55 @@
         <th data-options="field:'name',width:100,align:'center'">商品名称</th>
         <th data-options="field:'brand',width:60,align:'center'">商品品牌</th>
         <th data-options="field:'status',width:60,align:'center'">商品状态</th>
+        <th data-options="field:'days',width:60,align:'center'">周期</th>
         <c:choose>
             <c:when test="${sessionScope.city == 'bj'}">
                 <th data-options="field:'bjStock',width:60,align:'center'">北京库存</th>
                 <th data-options="field:'bjSales',width:60,align:'center'">北京销量</th>
+                <th data-options="field:'bjSalesTurnoverDays',width:150,align:'center'" formatter="bjTurnover">北京销量周转天数</th>
+                <th data-options="field:'bjSalesCount',width:160,align:'center'" formatter="bjCount">北京销量补货数【补${sessionScope.days}天】</th>
             </c:when>
             <c:when test="${sessionScope.city == 'sh'}">
                 <th data-options="field:'shStock',width:60,align:'center'">上海库存</th>
                 <th data-options="field:'shSales',width:60,align:'center'">上海销量</th>
+                <th data-options="field:'shSalesTurnoverDays',width:150,align:'center'" formatter="shTurnover">上海销量周转天数</th>
+                <th data-options="field:'shSalesCount',width:160,align:'center'" formatter="shCount">上海销量补货数【补${sessionScope.days}天】</th>
             </c:when>
             <c:when test="${sessionScope.city == 'gz'}">
                 <th data-options="field:'gzStock',width:60,align:'center'">广州库存</th>
                 <th data-options="field:'gzSales',width:60,align:'center'">广州销量</th>
+                <th data-options="field:'gzSalesTurnoverDays',width:150,align:'center'" formatter="gzTurnover">广州销量周转天数</th>
+                <th data-options="field:'gzSalesCount',width:160,align:'center'" formatter="gzCount">广州销量补货数【补${sessionScope.days}天】</th>
             </c:when>
             <c:when test="${sessionScope.city == 'cd'}">
                 <th data-options="field:'cdStock',width:60,align:'center'">成都库存</th>
                 <th data-options="field:'cdSales',width:60,align:'center'">成都销量</th>
+                <th data-options="field:'cdSalesTurnoverDays',width:150,align:'center'" formatter="cdTurnover">成都销量周转天数</th>
+                <th data-options="field:'cdSalesCount',width:160,align:'center'" formatter="cdCount">成都销量补货数【补${sessionScope.days}天】</th>
             </c:when>
             <c:when test="${sessionScope.city == 'wh'}">
                 <th data-options="field:'whStock',width:60,align:'center'">武汉库存</th>
                 <th data-options="field:'whSales',width:60,align:'center'">武汉销量</th>
+                <th data-options="field:'whSalesTurnoverDays',width:150,align:'center'" formatter="whTurnover">武汉销量周转天数</th>
+                <th data-options="field:'whSalesCount',width:160,align:'center'" formatter="whCount">武汉销量补货数【补${sessionScope.days}天】</th>
             </c:when>
-            <c:when test="${sessionScope.city == 'cy'}">
+            <c:when test="${sessionScope.city == 'sy'}">
                 <th data-options="field:'syStock',width:60,align:'center'">沈阳库存</th>
                 <th data-options="field:'sySales',width:60,align:'center'">沈阳销量</th>
+                <th data-options="field:'sySalesTurnoverDays',width:150,align:'center'" formatter="syTurnover">沈阳销量周转天数</th>
+                <th data-options="field:'sySalesCount',width:160,align:'center'" formatter="syCount">沈阳销量补货数【补${sessionScope.days}天】</th>
             </c:when>
             <c:when test="${sessionScope.city == 'xa'}">
                 <th data-options="field:'xaStock',width:60,align:'center'">西安库存</th>
                 <th data-options="field:'xaSales',width:60,align:'center'">西安销量</th>
+                <th data-options="field:'xaSalesTurnoverDays',width:150,align:'center'" formatter="xaTurnover">西安销量周转天数</th>
+                <th data-options="field:'xaSalesCount',width:160,align:'center'" formatter="xaCount">西安销量补货数【补${sessionScope.days}天】</th>
             </c:when>
             <c:when test="${sessionScope.city == 'ga'}">
                 <th data-options="field:'gaStock',width:60,align:'center'">固安库存</th>
                 <th data-options="field:'gaSales',width:60,align:'center'">固安销量</th>
+                <th data-options="field:'gaSalesTurnoverDays',width:150,align:'center'" formatter="gaTurnover">固安销量周转天数</th>
+                <th data-options="field:'gaSalesCount',width:160,align:'center'" formatter="gaCount">固安销量补货数【补${sessionScope.days}天】</th>
             </c:when>
             <c:otherwise>
                 <th data-options="field:'totalStock',width:70,align:'center'">全国总库存</th>
@@ -82,89 +99,40 @@
                 <th data-options="field:'totalSalesCount',width:90,align:'center'">全国总销量额</th>
                 <th data-options="field:'bjStock',width:60,align:'center'">北京库存</th>
                 <th data-options="field:'bjSales',width:60,align:'center'">北京销量</th>
+                <th data-options="field:'bjSalesTurnoverDays',width:150,align:'center'" formatter="bjTurnover">北京销量周转天数</th>
+                <th data-options="field:'bjSalesCount',width:160,align:'center'" formatter="bjCount">北京销量补货数【补${sessionScope.days}天】</th>
                 <th data-options="field:'shStock',width:60,align:'center'">上海库存</th>
                 <th data-options="field:'shSales',width:60,align:'center'">上海销量</th>
+                <th data-options="field:'shSalesTurnoverDays',width:150,align:'center'" formatter="shTurnover">上海销量周转天数</th>
+                <th data-options="field:'shSalesCount',width:160,align:'center'" formatter="shCount">上海销量补货数【补${sessionScope.days}天】</th>
                 <th data-options="field:'gzStock',width:60,align:'center'">广州库存</th>
                 <th data-options="field:'gzSales',width:60,align:'center'">广州销量</th>
+                <th data-options="field:'gzSalesTurnoverDays',width:150,align:'center'" formatter="gzTurnover">广州销量周转天数</th>
+                <th data-options="field:'gzSalesCount',width:160,align:'center'" formatter="gzCount">广州销量补货数【补${sessionScope.days}天】</th>
                 <th data-options="field:'cdStock',width:60,align:'center'">成都库存</th>
                 <th data-options="field:'cdSales',width:60,align:'center'">成都销量</th>
+                <th data-options="field:'cdSalesTurnoverDays',width:150,align:'center'" formatter="cdTurnover">成都销量周转天数</th>
+                <th data-options="field:'cdSalesCount',width:160,align:'center'" formatter="cdCount">成都销量补货数【补${sessionScope.days}天】</th>
                 <th data-options="field:'whStock',width:60,align:'center'">武汉库存</th>
                 <th data-options="field:'whSales',width:60,align:'center'">武汉销量</th>
+                <th data-options="field:'whSalesTurnoverDays',width:150,align:'center'" formatter="whTurnover">武汉销量周转天数</th>
+                <th data-options="field:'whSalesCount',width:160,align:'center'" formatter="whCount">武汉销量补货数【补${sessionScope.days}天】</th>
                 <th data-options="field:'syStock',width:60,align:'center'">沈阳库存</th>
                 <th data-options="field:'sySales',width:60,align:'center'">沈阳销量</th>
+                <th data-options="field:'sySalesTurnoverDays',width:150,align:'center'" formatter="syTurnover">沈阳销量周转天数</th>
+                <th data-options="field:'sySalesCount',width:160,align:'center'" formatter="syCount">沈阳销量补货数【补${sessionScope.days}天】</th>
                 <th data-options="field:'xaStock',width:60,align:'center'">西安库存</th>
                 <th data-options="field:'xaSales',width:60,align:'center'">西安销量</th>
+                <th data-options="field:'xaSalesTurnoverDays',width:150,align:'center'" formatter="xaTurnover">西安销量周转天数</th>
+                <th data-options="field:'xaSalesCount',width:160,align:'center'" formatter="xaCount">西安销量补货数【补${sessionScope.days}天】</th>
                 <th data-options="field:'gaStock',width:60,align:'center'">固安库存</th>
                 <th data-options="field:'gaSales',width:60,align:'center'">固安销量</th>
+                <th data-options="field:'gaSalesTurnoverDays',width:150,align:'center'" formatter="gaTurnover">固安销量周转天数</th>
+                <th data-options="field:'gaSalesCount',width:160,align:'center'" formatter="gaCount">固安销量补货数【补${sessionScope.days}天】</th>
 
             </c:otherwise>
         </c:choose>
-        <th data-options="field:'days',width:60,align:'center'">周期</th>
 
-        <th data-options="field:'turnoverDays',width:100,align:'center'">
-            <c:choose>
-                <c:when test="${sessionScope.city == 'bj'}">
-                    北京
-                </c:when>
-                <c:when test="${sessionScope.city == 'sh'}">
-                    上海
-                </c:when>
-                <c:when test="${sessionScope.city == 'gz'}">
-                    广州
-                </c:when>
-                <c:when test="${sessionScope.city == 'cd'}">
-                    成都
-                </c:when>
-                <c:when test="${sessionScope.city == 'wh'}">
-                    武汉
-                </c:when>
-                <c:when test="${sessionScope.city == 'cy'}">
-                    沈阳
-                </c:when>
-                <c:when test="${sessionScope.city == 'xa'}">
-                    西安
-                </c:when>
-                <c:when test="${sessionScope.city == 'ga'}">
-                    固安
-                </c:when>
-                <c:otherwise>
-                    全国
-                </c:otherwise>
-            </c:choose>
-            销量周转天数
-        </th>
-        <th data-options="field:'count',width:100,align:'center'">
-            <c:choose>
-                <c:when test="${sessionScope.city == 'bj'}">
-                    北京
-                </c:when>
-                <c:when test="${sessionScope.city == 'sh'}">
-                    上海
-                </c:when>
-                <c:when test="${sessionScope.city == 'gz'}">
-                    广州
-                </c:when>
-                <c:when test="${sessionScope.city == 'cd'}">
-                    成都
-                </c:when>
-                <c:when test="${sessionScope.city == 'wh'}">
-                    武汉
-                </c:when>
-                <c:when test="${sessionScope.city == 'cy'}">
-                    沈阳
-                </c:when>
-                <c:when test="${sessionScope.city == 'xa'}">
-                    西安
-                </c:when>
-                <c:when test="${sessionScope.city == 'ga'}">
-                    固安
-                </c:when>
-                <c:otherwise>
-                    全国
-                </c:otherwise>
-            </c:choose>
-            销量补货数
-        </th>
 
     </tr>
     </thead>
@@ -188,44 +156,103 @@
         if (length == 2) {
             var days1 = rows[0].days;
             var days2 = rows[1].days;
+            if (days1 > days2) {
+                var temp = days1;
+                days1 = days2;
+                days2 = temp;
+            }
             var city = '${sessionScope.city}';
             if (days1 != days2) {
                 var sales1;
                 var sales2;
-                if (city == "全国") {
-                    sales1 = parseInt(rows[0].totalSales);
-                    sales2 = parseInt(rows[1].totalSales);
-                } else if (city == "北京") {
-                    sales1 = parseInt(rows[0].bjSales);
-                    sales2 = parseInt(rows[1].bjSales);
-                } else if (city == "上海") {
-                    sales1 = parseInt(rows[0].shSales);
-                    sales2 = parseInt(rows[1].shSales);
-                } else if (city == "广州") {
-                    sales1 = parseInt(rows[0].gzSales);
-                    sales2 = parseInt(rows[1].gzSales);
-                } else if (city == "成都") {
-                    sales1 = parseInt(rows[0].cdSales);
-                    sales2 = parseInt(rows[1].cdSales);
-                } else if (city == "武汉") {
-                    sales1 = parseInt(rows[0].whSales);
-                    sales2 = parseInt(rows[1].whSales);
-                } else if (city == "沈阳") {
-                    sales1 = parseInt(rows[0].sySales);
-                    sales2 = parseInt(rows[1].sySales);
-                } else if (city == "西安") {
-                    sales1 = parseInt(rows[0].xaSales);
-                    sales2 = parseInt(rows[1].xaSales);
-                } else if (city == "固安") {
-                    sales1 = parseInt(rows[0].gaSales);
-                    sales2 = parseInt(rows[1].gaSales);
+                if (city == "all") {
+                    if (days1 > days2) {
+                        sales1 = parseInt(rows[1].totalSales);
+                        sales2 = parseInt(rows[0].totalSales);
+                    } else {
+                        sales1 = parseInt(rows[0].totalSales);
+                        sales2 = parseInt(rows[1].totalSales);
+                    }
+                    city = "全国";
+                } else if (city == "bj") {
+                    if (days1 > days2) {
+                        sales1 = parseInt(rows[1].bjSales);
+                        sales2 = parseInt(rows[0].bjSales);
+                    } else {
+                        sales1 = parseInt(rows[0].bjSales);
+                        sales2 = parseInt(rows[1].bjSales);
+                    }
+                    city = "北京";
+                } else if (city == "sh") {
+                    if (days1 > days2) {
+                        sales1 = parseInt(rows[1].shSales);
+                        sales2 = parseInt(rows[0].shSales);
+                    } else {
+                        sales1 = parseInt(rows[0].shSales);
+                        sales2 = parseInt(rows[1].shSales);
+                    }
+                    city = "上海";
+                } else if (city == "gz") {
+                    if (days1 > days2) {
+                        sales1 = parseInt(rows[1].gzSales);
+                        sales2 = parseInt(rows[0].gzSales);
+                    } else {
+                        sales1 = parseInt(rows[0].gzSales);
+                        sales2 = parseInt(rows[1].gzSales);
+                    }
+                    city = "广州";
+                } else if (city == "cd") {
+                    if (days1 > days2) {
+                        sales1 = parseInt(rows[1].cdSales);
+                        sales2 = parseInt(rows[0].cdSales);
+                    } else {
+                        sales1 = parseInt(rows[0].cdSales);
+                        sales2 = parseInt(rows[1].cdSales);
+                    }
+                    city = "成都";
+                } else if (city == "wh") {
+                    if (days1 > days2) {
+                        sales1 = parseInt(rows[1].whSales);
+                        sales2 = parseInt(rows[0].whSales);
+                    } else {
+                        sales1 = parseInt(rows[0].whSales);
+                        sales2 = parseInt(rows[1].whSales);
+                    }
+                    city = "武汉";
+                } else if (city == "sy") {
+                    if (days1 > days2) {
+                        sales1 = parseInt(rows[1].sySales);
+                        sales2 = parseInt(rows[0].sySales);
+                    } else {
+                        sales1 = parseInt(rows[0].sySales);
+                        sales2 = parseInt(rows[1].sySales);
+                    }
+                    city = "沈阳";
+                } else if (city == "xa") {
+                    if (days1 > days2) {
+                        sales1 = parseInt(rows[1].xaSales);
+                        sales2 = parseInt(rows[0].xaSales);
+                    } else {
+                        sales1 = parseInt(rows[0].xaSales);
+                        sales2 = parseInt(rows[1].xaSales);
+                    }
+                    city = "西安";
+                } else if (city == "ga") {
+                    if (days1 > days2) {
+                        sales1 = parseInt(rows[1].gaSales);
+                        sales2 = parseInt(rows[0].gaSales);
+                    } else {
+                        sales1 = parseInt(rows[0].gaSales);
+                        sales2 = parseInt(rows[1].gaSales);
+                    }
+                    city = "固安";
                 }
-                if (sales1 != 0 && sales2 != 0) {
+                if (sales1 != 0 && sales2 != 0 && sales1 != sales2) {
                     var result = sales1 / (sales2 - sales1);
                     result = parseInt(result * 100);
-                    $.messager.alert("提示", city + "的" + days1 + "/" + days2 + "增长率为" + result + "%", "info");
+                    $.messager.alert("提示", city + "销量的" + days1 + "/" + days2 + "增长率为" + result + "%", "info");
                 } else {
-                    $.messager.alert("提示", city + "的" + days1 + "/" + days2 + "增长率为0%", "info");
+                    $.messager.alert("提示", city + "销量的" + days1 + "/" + days2 + "增长率为0%", "info");
                 }
 
             } else {
@@ -235,6 +262,77 @@
         } else {
             $.messager.alert("提示", "只能选择两条数据", "error");
         }
+    }
+
+    // 计算销量的周转天数
+    function calcTurnoverDays(stock, sales) {
+        var temp = 0
+        if (sales != 0) {
+            temp = (parseInt(stock) / parseInt(sales)).toFixed(2);
+        }
+        return temp > 0 ? temp : 0;
+    }
+    // 计算销量的补货数
+    function calcCount(sales, stock, day) {
+        var temp = (parseInt(sales) / parseInt(day) * '${sessionScope.days}' - parseInt(stock)).toFixed(2);
+        return temp > 0 ? temp : 0;
+    }
+
+    // 北京
+    function bjTurnover(value, row, index) {
+        return calcTurnoverDays(row.bjStock, row.bjSales);
+    }
+    function bjCount(value, row, index) {
+        return calcCount(row.bjSales, row.bjStock, row.days);
+    }
+    // 上海
+    function shTurnover(value, row, index) {
+        return calcTurnoverDays(row.shStock, row.shSales);
+    }
+    function shCount(value, row, index) {
+        return calcCount(row.shSales, row.shStock, row.days);
+    }
+    // 广州
+    function gzTurnover(value, row, index) {
+        return calcTurnoverDays(row.gzStock, row.gzSales);
+    }
+    function gzCount(value, row, index) {
+        return calcCount(row.gzSales, row.gzStock, row.days);
+    }
+    // 成都
+    function cdTurnover(value, row, index) {
+        return calcTurnoverDays(row.cdStock, row.cdSales);
+    }
+    function cdCount(value, row, index) {
+        return calcCount(row.cdSales, row.cdStock, row.days);
+    }
+    // 武汉
+    function whTurnover(value, row, index) {
+        return calcTurnoverDays(row.whStock, row.whSales);
+    }
+    function whCount(value, row, index) {
+        return calcCount(row.whSales, row.whStock, row.days);
+    }
+    // 沈阳
+    function syTurnover(value, row, index) {
+        return calcTurnoverDays(row.syStock, row.sySales);
+    }
+    function syCount(value, row, index) {
+        return calcCount(row.sySales, row.syStock, row.days);
+    }
+    // 西安
+    function xaTurnover(value, row, index) {
+        return calcTurnoverDays(row.xaStock, row.xaSales);
+    }
+    function xaCount(value, row, index) {
+        return calcCount(row.xaSales, row.xaStock, row.days);
+    }
+    // 固安
+    function gaTurnover(value, row, index) {
+        return calcTurnoverDays(row.gaStock, row.gaSales);
+    }
+    function gaCount(value, row, index) {
+        return calcCount(row.gaSales, row.gaStock, row.days);
     }
 </script>
 </body>

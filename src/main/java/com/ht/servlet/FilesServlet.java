@@ -284,11 +284,11 @@ public class FilesServlet extends HttpServlet {
             } else if (city.equals("wh")) {
                 session.setAttribute("city", "wh");
             } else if (city.equals("sy")) {
-                session.setAttribute("city", "cy");
+                session.setAttribute("city", "sy");
             } else if (city.equals("xa")) {
                 session.setAttribute("city", "xa");
             } else if (city.equals("ga")) {
-                session.setAttribute("city", "gz");
+                session.setAttribute("city", "ga");
             }
             session.setAttribute("days", days);
 
@@ -481,7 +481,6 @@ public class FilesServlet extends HttpServlet {
         MaxTable mt = new MaxTable();
         String lastProductNo = "";
         for (ProductInfo pi : pis) {
-            System.out.println(pi.getTotalStock() + "," + pi.getTotalSales());
             int bjSales = pi.getBjSales();
             int bjStock = pi.getBjStock();
             int shSales = pi.getBjSales();

@@ -85,7 +85,7 @@
                             <option value="cd">成都</option>
                             <option value="wh">武汉</option>
                             <option value="sy">沈阳</option>
-                            <option value="ca">西安</option>
+                            <option value="xa">西安</option>
                             <option value="ga">固安</option>
                         </select>
                         <a href="javascript:;" onclick="searchDetail()"
