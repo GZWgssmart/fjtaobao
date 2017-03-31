@@ -90,12 +90,8 @@ public class ProductDAOImpl extends BaseDAO implements ProductDAO {
     @Override
     public Pager4EasyUI<ProductInfo> pager(Pager4EasyUI<ProductInfo> pager, String fileId, String fType) {
         getConn();
-        String sql = "";
-        if (fType.equals("xc")) {
-            sql = "select * from t_product where fileid in ("+ fileId +") order by productno limit " + pager.getBeginIndex() + ", " + pager.getPageSize();
-        } else {
-            sql = "select * from t_product where fileid in (" + fileId + ") order by productno";
-        }
+        String sql = "select * from t_product where fileid in (" + fileId + ") order by productno";
+        
         List<ProductInfo> productList = new ArrayList<ProductInfo>();
         try {
             PreparedStatement ps  =  conn.prepareStatement(sql);
