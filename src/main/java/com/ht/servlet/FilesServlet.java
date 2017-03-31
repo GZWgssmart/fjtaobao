@@ -291,9 +291,7 @@ public class FilesServlet extends HttpServlet {
             }
             session.setAttribute("days", days);
 
-            if (fType.equals("xc")) {
-                resp.sendRedirect("/file_detail.jsp");
-            } else {
+
                 int page = 1;
                 int rows = 20;
                 try {
@@ -1379,7 +1377,6 @@ public class FilesServlet extends HttpServlet {
                 }
                 session.setAttribute("salesList", salesList);
                 resp.sendRedirect("/file_detail1.jsp");
-            }
         } else {
             resp.sendRedirect("/look.jsp");
         }
