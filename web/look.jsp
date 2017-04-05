@@ -70,11 +70,12 @@
                         <label>选择补货天数：</label>
                         <select class="easyui-combobox" id="days" style="width:100px;">
                             <option>28</option>
-                            <option>30</option>
-                            <option>25</option>
-                            <option>20</option>
+                            <option>7</option>
                             <option>15</option>
-                            <option>10</option>
+                            <option>30</option>
+                            <option>50</option>
+                            <option>60</option>
+                            <option>90</option>
                         </select>
                         <label>选择城市：</label>
                         <select class="easyui-combobox" data-options="editable:false" id="city" style="width:100px;">
@@ -134,7 +135,7 @@
             }
 
             if (flag) {
-                if (!isNaN(days) && days > 0 && days < 32) {
+                if (!isNaN(days) && days > 0 && days < 32 || days == 50 || days == 60 || days == 90) {
                     if (fType) {
                         window.location.href = "/files/search?days=" + days + "&city=" + city + "&ids=" + ids + "&fType=xc";
                     } else {

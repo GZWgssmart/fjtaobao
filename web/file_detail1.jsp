@@ -20,6 +20,8 @@
     <script type="text/javascript" src="<%=path %>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=path %>/jquery-easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="<%=path %>/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+
+    <script type="text/javascript" src="<%=path %>/js/main.js"></script>
 </head>
 <body>
 <h3 style="text-align: center;">
@@ -42,7 +44,7 @@
         <th data-options="field:'name',width:100,align:'center'">商品名称</th>
         <th data-options="field:'brand',width:100,align:'center'">商品品牌</th>
         <th data-options="field:'status',width:100,align:'center'">商品状态</th>
-        <th data-options="field:'price',width:100,align:'center'">商品价格</th>
+        <th data-options="field:'price',width:100,align:'center'" formatter="price">商品价格</th>
         <th data-options="field:'totalStock',width:100,align:'center'">全国总库存</th>
         <th data-options="field:'totalStockCount',width:100,align:'center'" formatter="totalStockCount">全国总库存额</th>
         <c:choose>
@@ -4617,6 +4619,10 @@
         href="<%=path %>/look.jsp">查看文档</a></div>
 
 <script>
+    $(function() {
+        setPagination("list");
+    });
+
     function contrast() {
         var rows = $("#list").datagrid("getSelections"); // 获取所有选中的数据
         var length = rows.length;
@@ -8253,6 +8259,9 @@
     }
     function gaCount31(value, row, index) {
         return calcCount(row.gaSales31, row.gaStock, 31);
+    }
+    function price(value, row, index) {
+        return value.toFixed(2);
     }
 </script>
 

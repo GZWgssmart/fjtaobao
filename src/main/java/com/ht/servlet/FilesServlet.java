@@ -1560,6 +1560,16 @@ public class FilesServlet extends HttpServlet {
         List<MaxTable> mts = new ArrayList<MaxTable>();
         MaxTable mt = new MaxTable();
         String lastProductNo = "";
+
+        int lastBjStock = 0;
+        int lastShStock = 0;
+        int lastGzStock = 0;
+        int lastCdStock = 0;
+        int lastWhStock = 0;
+        int lastSyStock = 0;
+        int lastXaStock = 0;
+        int lastGaStock = 0;
+        int lastTotalStock = 0;
         for (ProductInfo pi : pis) {
             int bjSales = pi.getBjSales();
             int bjStock = pi.getBjStock();
@@ -1596,33 +1606,42 @@ public class FilesServlet extends HttpServlet {
             mt.setBrand(pi.getBrand());
             mt.setStatus(pi.getStatus());
             mt.setPrice(pi.getPrice());
-            if (pi.getTotalStock() != 0) {
+            if (pi.getTotalStock() != 0 && pi.getTotalStock() != lastTotalStock) {
                 mt.setTotalStock(pi.getTotalStock());
+                lastTotalStock = pi.getTotalStock();
             }
 
-            if (bjStock != 0) {
+            if (bjStock != 0 && bjStock != lastBjStock) {
                 mt.setBjStock(bjStock);
+                lastBjStock = bjStock;
             }
-            if (shStock != 0) {
+            if (shStock != 0 && shStock != lastShStock) {
                 mt.setShStock(shStock);
+                lastShStock = shStock;
             }
-            if (gzStock != 0) {
+            if (gzStock != 0 && gzStock != lastGzStock) {
                 mt.setGzStock(gzStock);
+                lastBjStock = gzStock;
             }
-            if (cdStock != 0) {
+            if (cdStock != 0 && cdStock != lastCdStock) {
                 mt.setCdStock(cdStock);
+                lastCdStock = cdStock;
             }
-            if (whStock != 0) {
+            if (whStock != 0 && whStock != lastWhStock) {
                 mt.setWhStock(whStock);
+                lastWhStock = whStock;
             }
-            if (syStock != 0) {
+            if (syStock != 0 && syStock != lastSyStock) {
                 mt.setSyStock(syStock);
+                lastSyStock = syStock;
             }
-            if (xaStock != 0) {
+            if (xaStock != 0 && xaStock != lastXaStock) {
                 mt.setXaStock(xaStock);
+                lastXaStock = xaStock;
             }
-            if (gaStock != 0) {
+            if (gaStock != 0 && gaStock != lastGaStock) {
                 mt.setGaStock(gaStock);
+                lastGaStock = gaStock;
             }
 
             if (cycle == 1) {
