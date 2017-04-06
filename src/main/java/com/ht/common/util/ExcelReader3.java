@@ -267,76 +267,13 @@ public class ExcelReader3 {
                     product.setPrice(0);
                 }
             }
-            int  t7 = 0;
-            int  t14 = 0;
-            int  t15 = 0;
-            int  t28 = 0;
-            int  t90 = 0;
-            int  t = 0;
 
-            int  bj7 = 0;
-            int  bj14 = 0;
-            int  bj15 = 0;
-            int  bj28 = 0;
-            int  bj90 = 0;
-            int  bj = 0;
-
-            int  sh7 = 0;
-            int  sh14 = 0;
-            int  sh15 = 0;
-            int  sh28 = 0;
-            int  sh90 = 0;
-            int  sh = 0;
-
-
-            int  gz7 = 0;
-            int  gz14 = 0;
-            int  gz15 = 0;
-            int  gz28 = 0;
-            int  gz90 = 0;
-            int  gz = 0;
-
-            int  cd7 = 0;
-            int  cd14 = 0;
-            int  cd15 = 0;
-            int  cd28 = 0;
-            int  cd90 = 0;
-            int  cd = 0;
-
-            int  wh7 = 0;
-            int  wh14 = 0;
-            int  wh15 = 0;
-            int  wh28 = 0;
-            int  wh90 = 0;
-            int  wh = 0;
-
-            int  sy7 = 0;
-            int  sy14 = 0;
-            int  sy15 = 0;
-            int  sy28 = 0;
-            int  sy90 = 0;
-            int  sy = 0;
-
-            int  xa7 = 0;
-            int  xa14 = 0;
-            int  xa15 = 0;
-            int  xa28 = 0;
-            int  xa90 = 0;
-            int  xa = 0;
-
-            int  ga7 = 0;
-            int  ga14 = 0;
-            int  ga15 = 0;
-            int  ga28 =0;
-            int  ga90 =0;
-            int  ga = 0;
 
             if (colMap.get(totalSales7) != null) {
                 Product p = null;
                 try {
                     p = product.copy();
                     p.setTotalSales((int) row.getCell(colMap.get(totalSales7)).getNumericCellValue());
-					t7 = (int) row.getCell(colMap.get(totalSales7)).getNumericCellValue();
                     p.setDays(7);
                 } catch (NumberFormatException e) {
                     p.setTotalSales(0);
@@ -348,8 +285,6 @@ public class ExcelReader3 {
                 try {
                     p = product.copy();
                     p.setTotalSales((int) row.getCell(colMap.get(totalSales14)).getNumericCellValue());
-					t14 = (int) row.getCell(colMap.get(totalSales14)).getNumericCellValue();
-					p.setTotalSales(t7);
                     p.setDays(14);
                 } catch (NumberFormatException e) {
                     p.setTotalSales(0);
@@ -361,9 +296,6 @@ public class ExcelReader3 {
                 try {
                     p = product.copy();
 					p.setTotalSales((int) row.getCell(colMap.get(totalSales15)).getNumericCellValue());
-					t15 = (int) row.getCell(colMap.get(totalSales15)).getNumericCellValue();
-					p.setTotalSales(t7);
-					p.setTotalSales(t14);
                     p.setDays(15);
                 } catch (NumberFormatException e) {
                     p.setTotalSales(0);
@@ -375,10 +307,6 @@ public class ExcelReader3 {
                 try {
                     p = product.copy();
                     p.setTotalSales((int) row.getCell(colMap.get(totalSales28)).getNumericCellValue());
-					t28 = (int) row.getCell(colMap.get(totalSales28)).getNumericCellValue();
-					p.setTotalSales(t7);
-					p.setTotalSales(t14);
-					p.setTotalSales(t15);
                     p.setDays(28);
                 } catch (NumberFormatException e) {
                     p.setTotalSales(0);
@@ -390,11 +318,6 @@ public class ExcelReader3 {
                 try {
                     p = product.copy();
                     p.setTotalSales((int) row.getCell(colMap.get(totalSales90)).getNumericCellValue());
-					t90 = (int) row.getCell(colMap.get(totalSales90)).getNumericCellValue();
-					p.setTotalSales(t7);
-					p.setTotalSales(t14);
-					p.setTotalSales(t15);
-					p.setTotalSales(t28);
                     p.setDays(90);
                 } catch (NumberFormatException e) {
                     p.setTotalSales(0);
