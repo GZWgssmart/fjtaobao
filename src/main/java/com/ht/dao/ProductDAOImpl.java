@@ -90,7 +90,7 @@ public class ProductDAOImpl extends BaseDAO implements ProductDAO {
     @Override
     public Pager4EasyUI<ProductInfo> pager(Pager4EasyUI<ProductInfo> pager, String fileId, String fType) {
         getConn();
-        String sql = "select * from t_product where fileid in (" + fileId + ") order by name asc";
+        String sql = "select * from t_product where fileid in (" + fileId + ") order by convert(name USING gbk) asc";
         
         List<ProductInfo> productList = new ArrayList<ProductInfo>();
         try {

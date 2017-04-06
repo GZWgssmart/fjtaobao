@@ -6,5 +6,4 @@ public class Constants {
 
 	public static final String PATH_UPLOAD = "/WEB-INF/upload";
 
-	
 }
