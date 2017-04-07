@@ -1558,19 +1558,15 @@ public class FilesServlet extends HttpServlet {
         pager = productService.pager(pager, ids, fType);
         List<ProductInfo> pis = pager.getRows();
         List<MaxTable> mts = new ArrayList<MaxTable>();
-        MaxTable mt = new MaxTable();
-        String lastProductNo = "";
 
-        int lastBjStock = 0;
-        int lastShStock = 0;
-        int lastGzStock = 0;
-        int lastCdStock = 0;
-        int lastWhStock = 0;
-        int lastSyStock = 0;
-        int lastXaStock = 0;
-        int lastGaStock = 0;
-        int lastTotalStock = 0;
         for (ProductInfo pi : pis) {
+            MaxTable mt = new MaxTable();
+            mt.setProductNo(pi.getProductNo());
+            int idx = mts.indexOf(mt);
+            if (idx > 0) {
+                mt = mts.get(idx);
+            }
+
             int bjSales = pi.getBjSales();
             int bjStock = pi.getBjStock();
             int shSales = pi.getShSales();
@@ -1590,840 +1586,48 @@ public class FilesServlet extends HttpServlet {
 
             int cycle = pi.getDays();
 
-            if (lastProductNo.equals("")) {
-                lastProductNo = pi.getProductNo();
-            } else {
-                if (pi.getProductNo().equals(lastProductNo)) {
-                } else {
-                    mts.add(mt.copy());
-                    lastProductNo = pi.getProductNo();
-                }
-            }
-
             mt.setId(pi.getId());
             mt.setProductNo(pi.getProductNo());
             mt.setName(pi.getName());
             mt.setBrand(pi.getBrand());
             mt.setStatus(pi.getStatus());
             mt.setPrice(pi.getPrice());
-            if (pi.getTotalStock() != 0 && pi.getTotalStock() != lastTotalStock) {
+            if (pi.getTotalStock() > mt.getTotalStock()) {
                 mt.setTotalStock(pi.getTotalStock());
-                lastTotalStock = pi.getTotalStock();
             }
 
-            if (bjStock != 0 && bjStock != lastBjStock) {
+            if (bjStock > mt.getBjStock()) {
                 mt.setBjStock(bjStock);
-                lastBjStock = bjStock;
             }
-            if (shStock != 0 && shStock != lastShStock) {
+            if (shStock > mt.getShStock()) {
                 mt.setShStock(shStock);
-                lastShStock = shStock;
             }
-            if (gzStock != 0 && gzStock != lastGzStock) {
+            if (gzStock > mt.getGzStock()) {
                 mt.setGzStock(gzStock);
-                lastBjStock = gzStock;
             }
-            if (cdStock != 0 && cdStock != lastCdStock) {
+            if (cdStock > mt.getCdStock()) {
                 mt.setCdStock(cdStock);
-                lastCdStock = cdStock;
             }
-            if (whStock != 0 && whStock != lastWhStock) {
+            if (whStock > mt.getWhStock()) {
                 mt.setWhStock(whStock);
-                lastWhStock = whStock;
             }
-            if (syStock != 0 && syStock != lastSyStock) {
+            if (syStock > mt.getSyStock()) {
                 mt.setSyStock(syStock);
-                lastSyStock = syStock;
             }
-            if (xaStock != 0 && xaStock != lastXaStock) {
+            if (xaStock > mt.getXaStock()) {
                 mt.setXaStock(xaStock);
-                lastXaStock = xaStock;
             }
-            if (gaStock != 0 && gaStock != lastGaStock) {
+            if (gaStock > mt.getGaStock()) {
                 mt.setGaStock(gaStock);
-                lastGaStock = gaStock;
             }
 
-            if (cycle == 1) {
-                if (bjSales != 0) {
-                    mt.setBjSales1(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales1(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales1(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales1(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales1(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales1(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales1(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales1(gaSales);
-                }
-            } else if (cycle == 2) {
-                if (bjSales != 0) {
-                    mt.setBjSales2(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales2(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales2(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales2(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales2(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales2(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales2(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales2(gaSales);
-                }
-            } else if (cycle == 3) {
-                if (bjSales != 0) {
-                    mt.setBjSales3(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales3(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales3(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales3(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales3(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales3(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales3(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales3(gaSales);
-                }
-            } else if (cycle == 4) {
-                if (bjSales != 0) {
-                    mt.setBjSales4(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales4(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales4(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales4(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales4(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales4(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales4(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales4(gaSales);
-                }
-            } else if (cycle == 5) {
-                if (bjSales != 0) {
-                    mt.setBjSales5(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales5(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales5(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales5(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales5(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales5(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales5(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales5(gaSales);
-                }
-            } else if (cycle == 6) {
-                if (bjSales != 0) {
-                    mt.setBjSales6(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales6(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales6(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales6(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales6(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales6(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales6(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales6(gaSales);
-                }
-            } else if (cycle == 7) {
-                if (bjSales != 0) {
-                    mt.setBjSales7(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales7(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales7(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales7(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales7(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales7(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales7(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales7(gaSales);
-                }
-            } else if (cycle == 8) {
-                if (bjSales != 0) {
-                    mt.setBjSales8(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales8(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales8(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales8(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales8(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales8(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales8(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales8(gaSales);
-                }
-            } else if (cycle == 9) {
-                if (bjSales != 0) {
-                    mt.setBjSales9(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales9(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales9(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales9(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales9(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales9(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales9(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales9(gaSales);
-                }
-            } else if (cycle == 10) {
-                if (bjSales != 0) {
-                    mt.setBjSales10(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales10(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales10(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales10(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales10(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales10(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales10(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales10(gaSales);
-                }
-            } else if (cycle == 11) {
-                if (bjSales != 0) {
-                    mt.setBjSales11(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales11(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales11(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales11(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales11(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales11(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales11(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales11(gaSales);
-                }
-            } else if (cycle == 12) {
-                if (bjSales != 0) {
-                    mt.setBjSales12(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales12(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales12(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales12(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales12(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales12(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales12(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales12(gaSales);
-                }
-            } else if (cycle == 13) {
-                if (bjSales != 0) {
-                    mt.setBjSales13(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales13(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales13(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales13(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales13(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales13(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales13(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales13(gaSales);
-                }
-            } else if (cycle == 14) {
-                if (bjSales != 0) {
-                    mt.setBjSales14(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales14(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales14(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales14(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales14(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales14(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales14(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales14(gaSales);
-                }
-            } else if (cycle == 15) {
-                if (bjSales != 0) {
-                    mt.setBjSales15(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales15(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales15(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales15(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales15(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales15(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales15(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales15(gaSales);
-                }
-            } else if (cycle == 16) {
-                if (bjSales != 0) {
-                    mt.setBjSales16(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales16(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales16(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales16(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales16(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales16(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales16(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales16(gaSales);
-                }
-            } else if (cycle == 17) {
-                if (bjSales != 0) {
-                    mt.setBjSales17(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales17(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales17(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales17(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales17(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales17(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales17(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales17(gaSales);
-                }
-            } else if (cycle == 18) {
-                if (bjSales != 0) {
-                    mt.setBjSales18(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales18(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales18(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales18(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales18(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales18(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales18(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales18(gaSales);
-                }
-            } else if (cycle == 19) {
-                if (bjSales != 0) {
-                    mt.setBjSales19(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales19(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales19(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales19(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales19(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales19(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales19(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales19(gaSales);
-                }
-            } else if (cycle == 20) {
-                if (bjSales != 0) {
-                    mt.setBjSales20(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales20(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales20(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales20(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales20(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales20(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales20(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales20(gaSales);
-                }
-            } else if (cycle == 21) {
-                if (bjSales != 0) {
-                    mt.setBjSales21(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales21(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales21(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales21(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales21(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales21(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales21(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales21(gaSales);
-                }
-            } else if (cycle == 22) {
-                if (bjSales != 0) {
-                    mt.setBjSales22(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales22(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales22(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales22(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales22(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales22(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales22(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales22(gaSales);
-                }
-            } else if (cycle == 23) {
-                if (bjSales != 0) {
-                    mt.setBjSales23(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales23(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales23(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales23(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales23(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales23(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales23(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales23(gaSales);
-                }
-            } else if (cycle == 24) {
-                if (bjSales != 0) {
-                    mt.setBjSales24(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales24(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales24(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales24(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales24(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales24(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales24(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales24(gaSales);
-                }
-            } else if (cycle == 25) {
-                if (bjSales != 0) {
-                    mt.setBjSales25(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales25(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales25(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales25(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales25(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales25(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales25(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales25(gaSales);
-                }
-            } else if (cycle == 26) {
-                if (bjSales != 0) {
-                    mt.setBjSales26(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales26(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales26(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales26(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales26(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales26(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales26(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales26(gaSales);
-                }
-            } else if (cycle == 27) {
-                if (bjSales != 0) {
-                    mt.setBjSales27(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales27(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales27(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales27(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales27(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales27(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales27(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales27(gaSales);
-                }
-            } else if (cycle == 28) {
-                if (bjSales != 0) {
-                    mt.setBjSales28(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales28(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales28(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales28(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales28(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales28(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales28(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales28(gaSales);
-                }
-            } else if (cycle == 29) {
-                if (bjSales != 0) {
-                    mt.setBjSales29(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales29(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales29(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales29(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales29(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales29(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales29(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales29(gaSales);
-                }
-            } else if (cycle == 30) {
-                if (bjSales != 0) {
-                    mt.setBjSales30(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales30(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales30(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales30(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales30(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales30(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales30(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales30(gaSales);
-                }
-            } else if (cycle == 31) {
-                if (bjSales != 0) {
-                    mt.setBjSales31(bjSales);
-                }
-                if (shSales != 0) {
-                    mt.setShSales31(shSales);
-                }
-                if (gzSales != 0) {
-                    mt.setGzSales31(gzSales);
-                }
-                if (cdSales != 0) {
-                    mt.setCdSales31(cdSales);
-                }
-                if (whSales != 0) {
-                    mt.setWhSales31(whSales);
-                }
-                if (sySales != 0) {
-                    mt.setSySales31(sySales);
-                }
-                if (xaSales != 0) {
-                    mt.setXaSales31(xaSales);
-                }
-                if (gaSales != 0) {
-                    mt.setGaSales31(gaSales);
-                }
-            }
+            setSales(mt, cycle, bjSales,shSales, gzSales, cdSales, whSales, sySales, xaSales, gaSales);
 
+            if (idx < 0) {
+                mts.add(mt);
+            }
 
         }
-        mts.add(mt);
         Pager4EasyUI<MaxTable> pager1 = new Pager4EasyUI<MaxTable>();
         pager1.setTotal(mts.size());
         pager1.setRows(mts);
@@ -2434,6 +1638,785 @@ public class FilesServlet extends HttpServlet {
             pw.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void setSales(MaxTable mt, int cycle, int bjSales, int shSales, int gzSales, int cdSales, int whSales, int sySales, int xaSales, int gaSales) {
+        if (cycle == 1) {
+            if (bjSales != 0) {
+                mt.setBjSales1(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales1(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales1(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales1(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales1(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales1(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales1(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales1(gaSales);
+            }
+        } else if (cycle == 2) {
+            if (bjSales != 0) {
+                mt.setBjSales2(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales2(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales2(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales2(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales2(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales2(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales2(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales2(gaSales);
+            }
+        } else if (cycle == 3) {
+            if (bjSales != 0) {
+                mt.setBjSales3(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales3(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales3(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales3(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales3(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales3(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales3(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales3(gaSales);
+            }
+        } else if (cycle == 4) {
+            if (bjSales != 0) {
+                mt.setBjSales4(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales4(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales4(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales4(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales4(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales4(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales4(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales4(gaSales);
+            }
+        } else if (cycle == 5) {
+            if (bjSales != 0) {
+                mt.setBjSales5(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales5(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales5(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales5(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales5(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales5(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales5(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales5(gaSales);
+            }
+        } else if (cycle == 6) {
+            if (bjSales != 0) {
+                mt.setBjSales6(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales6(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales6(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales6(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales6(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales6(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales6(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales6(gaSales);
+            }
+        } else if (cycle == 7) {
+            if (bjSales != 0) {
+                mt.setBjSales7(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales7(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales7(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales7(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales7(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales7(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales7(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales7(gaSales);
+            }
+        } else if (cycle == 8) {
+            if (bjSales != 0) {
+                mt.setBjSales8(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales8(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales8(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales8(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales8(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales8(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales8(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales8(gaSales);
+            }
+        } else if (cycle == 9) {
+            if (bjSales != 0) {
+                mt.setBjSales9(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales9(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales9(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales9(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales9(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales9(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales9(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales9(gaSales);
+            }
+        } else if (cycle == 10) {
+            if (bjSales != 0) {
+                mt.setBjSales10(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales10(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales10(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales10(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales10(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales10(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales10(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales10(gaSales);
+            }
+        } else if (cycle == 11) {
+            if (bjSales != 0) {
+                mt.setBjSales11(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales11(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales11(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales11(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales11(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales11(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales11(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales11(gaSales);
+            }
+        } else if (cycle == 12) {
+            if (bjSales != 0) {
+                mt.setBjSales12(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales12(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales12(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales12(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales12(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales12(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales12(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales12(gaSales);
+            }
+        } else if (cycle == 13) {
+            if (bjSales != 0) {
+                mt.setBjSales13(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales13(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales13(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales13(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales13(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales13(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales13(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales13(gaSales);
+            }
+        } else if (cycle == 14) {
+            if (bjSales != 0) {
+                mt.setBjSales14(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales14(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales14(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales14(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales14(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales14(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales14(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales14(gaSales);
+            }
+        } else if (cycle == 15) {
+            if (bjSales != 0) {
+                mt.setBjSales15(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales15(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales15(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales15(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales15(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales15(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales15(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales15(gaSales);
+            }
+        } else if (cycle == 16) {
+            if (bjSales != 0) {
+                mt.setBjSales16(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales16(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales16(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales16(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales16(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales16(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales16(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales16(gaSales);
+            }
+        } else if (cycle == 17) {
+            if (bjSales != 0) {
+                mt.setBjSales17(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales17(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales17(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales17(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales17(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales17(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales17(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales17(gaSales);
+            }
+        } else if (cycle == 18) {
+            if (bjSales != 0) {
+                mt.setBjSales18(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales18(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales18(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales18(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales18(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales18(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales18(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales18(gaSales);
+            }
+        } else if (cycle == 19) {
+            if (bjSales != 0) {
+                mt.setBjSales19(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales19(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales19(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales19(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales19(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales19(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales19(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales19(gaSales);
+            }
+        } else if (cycle == 20) {
+            if (bjSales != 0) {
+                mt.setBjSales20(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales20(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales20(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales20(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales20(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales20(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales20(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales20(gaSales);
+            }
+        } else if (cycle == 21) {
+            if (bjSales != 0) {
+                mt.setBjSales21(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales21(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales21(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales21(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales21(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales21(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales21(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales21(gaSales);
+            }
+        } else if (cycle == 22) {
+            if (bjSales != 0) {
+                mt.setBjSales22(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales22(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales22(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales22(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales22(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales22(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales22(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales22(gaSales);
+            }
+        } else if (cycle == 23) {
+            if (bjSales != 0) {
+                mt.setBjSales23(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales23(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales23(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales23(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales23(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales23(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales23(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales23(gaSales);
+            }
+        } else if (cycle == 24) {
+            if (bjSales != 0) {
+                mt.setBjSales24(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales24(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales24(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales24(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales24(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales24(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales24(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales24(gaSales);
+            }
+        } else if (cycle == 25) {
+            if (bjSales != 0) {
+                mt.setBjSales25(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales25(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales25(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales25(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales25(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales25(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales25(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales25(gaSales);
+            }
+        } else if (cycle == 26) {
+            if (bjSales != 0) {
+                mt.setBjSales26(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales26(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales26(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales26(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales26(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales26(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales26(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales26(gaSales);
+            }
+        } else if (cycle == 27) {
+            if (bjSales != 0) {
+                mt.setBjSales27(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales27(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales27(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales27(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales27(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales27(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales27(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales27(gaSales);
+            }
+        } else if (cycle == 28) {
+            if (bjSales != 0) {
+                mt.setBjSales28(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales28(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales28(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales28(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales28(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales28(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales28(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales28(gaSales);
+            }
+        } else if (cycle == 29) {
+            if (bjSales != 0) {
+                mt.setBjSales29(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales29(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales29(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales29(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales29(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales29(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales29(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales29(gaSales);
+            }
+        } else if (cycle == 30) {
+            if (bjSales != 0) {
+                mt.setBjSales30(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales30(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales30(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales30(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales30(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales30(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales30(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales30(gaSales);
+            }
+        } else if (cycle == 31) {
+            if (bjSales != 0) {
+                mt.setBjSales31(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales31(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales31(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales31(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales31(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales31(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales31(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales31(gaSales);
+            }
         }
     }
 

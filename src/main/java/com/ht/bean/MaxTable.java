@@ -2433,4 +2433,20 @@ public class MaxTable implements Serializable {
     public void setGaSales31(int gaSales31) {
         this.gaSales31 = gaSales31;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MaxTable that = (MaxTable) o;
+
+        return productNo.equals(that.productNo);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return productNo.hashCode();
+    }
 }
