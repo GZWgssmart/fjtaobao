@@ -1563,8 +1563,10 @@ public class FilesServlet extends HttpServlet {
             MaxTable mt = new MaxTable();
             mt.setProductNo(pi.getProductNo());
             int idx = mts.indexOf(mt);
-            if (idx > 0) {
+            if (idx >= 0) {
                 mt = mts.get(idx);
+            } else {
+                mts.add(mt);
             }
 
             int bjSales = pi.getBjSales();
@@ -1587,7 +1589,6 @@ public class FilesServlet extends HttpServlet {
             int cycle = pi.getDays();
 
             mt.setId(pi.getId());
-            mt.setProductNo(pi.getProductNo());
             mt.setName(pi.getName());
             mt.setBrand(pi.getBrand());
             mt.setStatus(pi.getStatus());
@@ -1622,10 +1623,6 @@ public class FilesServlet extends HttpServlet {
             }
 
             setSales(mt, cycle, bjSales,shSales, gzSales, cdSales, whSales, sySales, xaSales, gaSales);
-
-            if (idx < 0) {
-                mts.add(mt);
-            }
 
         }
         Pager4EasyUI<MaxTable> pager1 = new Pager4EasyUI<MaxTable>();
@@ -2416,6 +2413,31 @@ public class FilesServlet extends HttpServlet {
             }
             if (gaSales != 0) {
                 mt.setGaSales31(gaSales);
+            }
+        } else if (cycle == 90) {
+            if (bjSales != 0) {
+                mt.setBjSales90(bjSales);
+            }
+            if (shSales != 0) {
+                mt.setShSales90(shSales);
+            }
+            if (gzSales != 0) {
+                mt.setGzSales90(gzSales);
+            }
+            if (cdSales != 0) {
+                mt.setCdSales90(cdSales);
+            }
+            if (whSales != 0) {
+                mt.setWhSales90(whSales);
+            }
+            if (sySales != 0) {
+                mt.setSySales90(sySales);
+            }
+            if (xaSales != 0) {
+                mt.setXaSales90(xaSales);
+            }
+            if (gaSales != 0) {
+                mt.setGaSales90(gaSales);
             }
         }
     }

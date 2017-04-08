@@ -281,6 +281,14 @@ public class MaxTable implements Serializable {
     private int sySales31;
     private int xaSales31;
     private int gaSales31;
+    private int bjSales90;
+    private int shSales90;
+    private int gzSales90;
+    private int cdSales90;
+    private int whSales90;
+    private int sySales90;
+    private int xaSales90;
+    private int gaSales90;
 
 
     /**
@@ -2432,6 +2440,70 @@ public class MaxTable implements Serializable {
 
     public void setGaSales31(int gaSales31) {
         this.gaSales31 = gaSales31;
+    }
+
+    public int getBjSales90() {
+        return bjSales90;
+    }
+
+    public void setBjSales90(int bjSales90) {
+        this.bjSales90 = bjSales90;
+    }
+
+    public int getShSales90() {
+        return shSales90;
+    }
+
+    public void setShSales90(int shSales90) {
+        this.shSales90 = shSales90;
+    }
+
+    public int getGzSales90() {
+        return gzSales90;
+    }
+
+    public void setGzSales90(int gzSales90) {
+        this.gzSales90 = gzSales90;
+    }
+
+    public int getCdSales90() {
+        return cdSales90;
+    }
+
+    public void setCdSales90(int cdSales90) {
+        this.cdSales90 = cdSales90;
+    }
+
+    public int getWhSales90() {
+        return whSales90;
+    }
+
+    public void setWhSales90(int whSales90) {
+        this.whSales90 = whSales90;
+    }
+
+    public int getSySales90() {
+        return sySales90;
+    }
+
+    public void setSySales90(int sySales90) {
+        this.sySales90 = sySales90;
+    }
+
+    public int getXaSales90() {
+        return xaSales90;
+    }
+
+    public void setXaSales90(int xaSales90) {
+        this.xaSales90 = xaSales90;
+    }
+
+    public int getGaSales90() {
+        return gaSales90;
+    }
+
+    public void setGaSales90(int gaSales90) {
+        this.gaSales90 = gaSales90;
     }
 
     @Override

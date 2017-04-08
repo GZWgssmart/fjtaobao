@@ -27,7 +27,7 @@
 <h3 style="text-align: center;">
     商品详情补货建议
 </h3>
-<table class="easyui-datagrid" id="list" title="商品详细列表" style="width:100%;height:500px;"
+<table class="easyui-datagrid" id="list" title="商品详细列表" style="width:100%;height:600px;"
        data-options="toolbar:'#tb',
                         singleSelect:true,
                         collapsible:true,
@@ -330,6 +330,15 @@
                             北京31天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
+                    <c:if test="${mt == 90}">
+                        <th data-options="field:'bjSales90',width:100,align:'center'">北京90天销量</th>
+                        <th data-options="field:'bjTurnoverDays90',width:100,align:'center'"
+                            formatter="bjTurnoverDays90">北京90天周转天数
+                        </th>
+                        <th data-options="field:'bjCount90',width:200,align:'center'" formatter="bjCount90">
+                            北京90天补货数【补${sessionScope.days}天】
+                        </th>
+                    </c:if>
                 </c:forEach>
             </c:when>
             <c:when test="${sessionScope.city == 'sh'}">
@@ -614,6 +623,15 @@
                             上海31天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
+                    <c:if test="${mt == 90}">
+                        <th data-options="field:'shSales90',width:100,align:'center'">上海90天销量</th>
+                        <th data-options="field:'shTurnoverDays90',width:100,align:'center'"
+                            formatter="shTurnoverDays90">上海90天周转天数
+                        </th>
+                        <th data-options="field:'shCount90',width:200,align:'center'" formatter="shCount90">
+                            上海90天补货数【补${sessionScope.days}天】
+                        </th>
+                    </c:if>
                 </c:forEach>
             </c:when>
             <c:when test="${sessionScope.city == 'gz'}">
@@ -896,6 +914,15 @@
                         </th>
                         <th data-options="field:'gzCount31',width:200,align:'center'" formatter="gzCount31">
                             广州31天补货数【补${sessionScope.days}天】
+                        </th>
+                    </c:if>
+                    <c:if test="${mt == 90}">
+                        <th data-options="field:'gzSales90',width:100,align:'center'">广州90天销量</th>
+                        <th data-options="field:'gzTurnoverDays90',width:100,align:'center'"
+                            formatter="gzTurnoverDays90">广州90天周转天数
+                        </th>
+                        <th data-options="field:'gzCount90',width:200,align:'center'" formatter="gzCount90">
+                            广州90天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
                 </c:forEach>
@@ -1183,6 +1210,15 @@
                             成都31天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
+                    <c:if test="${mt == 90}">
+                        <th data-options="field:'cdSales90',width:100,align:'center'">成都90天销量</th>
+                        <th data-options="field:'cdTurnoverDays90',width:100,align:'center'"
+                            formatter="cdTurnoverDays90">成都90天周转天数
+                        </th>
+                        <th data-options="field:'cdCount90',width:200,align:'center'" formatter="cdCount90">
+                            成都90天补货数【补${sessionScope.days}天】
+                        </th>
+                    </c:if>
                 </c:forEach>
             </c:when>
             <c:when test="${sessionScope.city == 'wh'}">
@@ -1465,6 +1501,15 @@
                         </th>
                         <th data-options="field:'whCount31',width:200,align:'center'" formatter="whCount31">
                             武汉31天补货数【补${sessionScope.days}天】
+                        </th>
+                    </c:if>
+                    <c:if test="${mt == 90}">
+                        <th data-options="field:'whSales90',width:100,align:'center'">武汉90天销量</th>
+                        <th data-options="field:'whTurnoverDays90',width:100,align:'center'"
+                            formatter="whTurnoverDays90">武汉90天周转天数
+                        </th>
+                        <th data-options="field:'whCount90',width:200,align:'center'" formatter="whCount90">
+                            武汉90天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
                 </c:forEach>
@@ -1751,6 +1796,15 @@
                             沈阳31天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
+                    <c:if test="${mt == 90}">
+                        <th data-options="field:'sySales90',width:100,align:'center'">沈阳90天销量</th>
+                        <th data-options="field:'syTurnoverDays90',width:100,align:'center'"
+                            formatter="syTurnoverDays90">沈阳90天周转天数
+                        </th>
+                        <th data-options="field:'syCount90',width:200,align:'center'" formatter="syCount90">
+                            沈阳90天补货数【补${sessionScope.days}天】
+                        </th>
+                    </c:if>
                 </c:forEach>
             </c:when>
             <c:when test="${sessionScope.city == 'xa'}">
@@ -2033,6 +2087,15 @@
                         </th>
                         <th data-options="field:'xaCount31',width:200,align:'center'" formatter="xaCount31">
                             西安31天补货数【补${sessionScope.days}天】
+                        </th>
+                    </c:if>
+                    <c:if test="${mt == 90}">
+                        <th data-options="field:'xaSales90',width:100,align:'center'">西安90天销量</th>
+                        <th data-options="field:'xaTurnoverDays90',width:100,align:'center'"
+                            formatter="xaTurnoverDays90">西安90天周转天数
+                        </th>
+                        <th data-options="field:'xaCount90',width:200,align:'center'" formatter="xaCount90">
+                            西安90天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
                 </c:forEach>
@@ -2319,6 +2382,15 @@
                             固安31天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
+                    <c:if test="${mt == 90}">
+                        <th data-options="field:'gaSales90',width:100,align:'center'">固安90天销量</th>
+                        <th data-options="field:'gaTurnoverDays90',width:100,align:'center'"
+                            formatter="gaTurnoverDays90">固安90天周转天数
+                        </th>
+                        <th data-options="field:'gaCount90',width:200,align:'center'" formatter="gaCount90">
+                            固安90天补货数【补${sessionScope.days}天】
+                        </th>
+                    </c:if>
                 </c:forEach>
             </c:when>
             <c:otherwise>
@@ -2601,6 +2673,15 @@
                         </th>
                         <th data-options="field:'bjCount31',width:200,align:'center'" formatter="bjCount31">
                             北京31天补货数【补${sessionScope.days}天】
+                        </th>
+                    </c:if>
+                    <c:if test="${mt == 90}">
+                        <th data-options="field:'bjSales90',width:100,align:'center'">北京90天销量</th>
+                        <th data-options="field:'bjTurnoverDays90',width:100,align:'center'"
+                            formatter="bjTurnoverDays90">北京90天周转天数
+                        </th>
+                        <th data-options="field:'bjCount90',width:200,align:'center'" formatter="bjCount90">
+                            北京90天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
                 </c:forEach>
@@ -2886,6 +2967,15 @@
                             上海31天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
+                    <c:if test="${mt == 90}">
+                        <th data-options="field:'shSales90',width:100,align:'center'">上海90天销量</th>
+                        <th data-options="field:'shTurnoverDays90',width:100,align:'center'"
+                            formatter="shTurnoverDays90">上海90天周转天数
+                        </th>
+                        <th data-options="field:'shCount90',width:200,align:'center'" formatter="shCount90">
+                            上海90天补货数【补${sessionScope.days}天】
+                        </th>
+                    </c:if>
                 </c:forEach>
 
                 <th data-options="field:'gzStock',width:100,align:'center'">广州库存</th>
@@ -3167,6 +3257,15 @@
                         </th>
                         <th data-options="field:'gzCount31',width:200,align:'center'" formatter="gzCount31">
                             广州31天补货数【补${sessionScope.days}天】
+                        </th>
+                    </c:if>
+                    <c:if test="${mt == 90}">
+                        <th data-options="field:'gzSales90',width:100,align:'center'">广州90天销量</th>
+                        <th data-options="field:'gzTurnoverDays90',width:100,align:'center'"
+                            formatter="gzTurnoverDays90">广州90天周转天数
+                        </th>
+                        <th data-options="field:'gzCount90',width:200,align:'center'" formatter="gzCount90">
+                            广州90天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
                 </c:forEach>
@@ -3452,6 +3551,15 @@
                             成都31天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
+                    <c:if test="${mt == 31}">
+                        <th data-options="field:'cdSales31',width:100,align:'center'">成都31天销量</th>
+                        <th data-options="field:'cdTurnoverDays31',width:100,align:'center'"
+                            formatter="cdTurnoverDays31">成都31天周转天数
+                        </th>
+                        <th data-options="field:'cdCount31',width:200,align:'center'" formatter="cdCount31">
+                            成都31天补货数【补${sessionScope.days}天】
+                        </th>
+                    </c:if>
                 </c:forEach>
 
                 <th data-options="field:'whStock',width:100,align:'center'">武汉库存</th>
@@ -3726,13 +3834,13 @@
                             武汉30天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
-                    <c:if test="${mt == 31}">
-                        <th data-options="field:'whSales31',width:100,align:'center'">武汉31天销量</th>
-                        <th data-options="field:'whTurnoverDays31',width:100,align:'center'"
-                            formatter="whTurnoverDays31">武汉31天周转天数
+                    <c:if test="${mt == 90}">
+                        <th data-options="field:'whSales90',width:100,align:'center'">武汉90天销量</th>
+                        <th data-options="field:'whTurnoverDays90',width:100,align:'center'"
+                            formatter="whTurnoverDays90">武汉90天周转天数
                         </th>
-                        <th data-options="field:'whCount31',width:200,align:'center'" formatter="whCount31">
-                            武汉31天补货数【补${sessionScope.days}天】
+                        <th data-options="field:'whCount90',width:200,align:'center'" formatter="whCount90">
+                            武汉90天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
                 </c:forEach>
@@ -4018,6 +4126,15 @@
                             沈阳31天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
+                    <c:if test="${mt == 90}">
+                        <th data-options="field:'sySales90',width:100,align:'center'">沈阳90天销量</th>
+                        <th data-options="field:'syTurnoverDays90',width:100,align:'center'"
+                            formatter="syTurnoverDays90">沈阳90天周转天数
+                        </th>
+                        <th data-options="field:'syCount90',width:200,align:'center'" formatter="syCount90">
+                            沈阳90天补货数【补${sessionScope.days}天】
+                        </th>
+                    </c:if>
                 </c:forEach>
 
                 <th data-options="field:'xaStock',width:100,align:'center'">西安库存</th>
@@ -4301,6 +4418,15 @@
                             西安31天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
+                    <c:if test="${mt == 90}">
+                        <th data-options="field:'xaSales90',width:100,align:'center'">西安90天销量</th>
+                        <th data-options="field:'xaTurnoverDays90',width:100,align:'center'"
+                            formatter="xaTurnoverDays90">西安90天周转天数
+                        </th>
+                        <th data-options="field:'xaCount90',width:200,align:'center'" formatter="xaCount90">
+                            西安90天补货数【补${sessionScope.days}天】
+                        </th>
+                    </c:if>
                 </c:forEach>
 
                 <th data-options="field:'gaStock',width:100,align:'center'">固安库存</th>
@@ -4582,6 +4708,15 @@
                         </th>
                         <th data-options="field:'gaCount31',width:200,align:'center'" formatter="gaCount31">
                             固安31天补货数【补${sessionScope.days}天】
+                        </th>
+                    </c:if>
+                    <c:if test="${mt == 90}">
+                        <th data-options="field:'gaSales90',width:100,align:'center'">固安90天销量</th>
+                        <th data-options="field:'gaTurnoverDays90',width:100,align:'center'"
+                            formatter="gaTurnoverDays90">固安90天周转天数
+                        </th>
+                        <th data-options="field:'gaCount90',width:200,align:'center'" formatter="gaCount90">
+                            固安90天补货数【补${sessionScope.days}天】
                         </th>
                     </c:if>
                 </c:forEach>
@@ -6739,7 +6874,7 @@
     }
     // 计算7天和15的补货数
     function calcCount(sales, stock, day) {
-        var temp = (parseInt(sales) / day * '${sessionScope.days}' - parseInt(stock)).toFixed(2);
+        var temp = (parseInt(sales) / day * '${sessionScope.days}' - parseInt(stock)).toFixed(0);
         return temp > 0 ? temp : 0;
     }
     // 计算7到15或15到30的增长率
@@ -6756,192 +6891,230 @@
     function totalStockCount(value, row, index) {
         return parseInt(row.price) * parseInt(row.totalStock);
     }
-    // 北京
+    // 北京calcCount(row.bjSales1, row.bjStock, 1)
     function bjTurnoverDays1(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales1, 1);
     }
     function bjCount1(value, row, index) {
-        return calcCount(row.bjSales1, row.bjStock, 1);
+        var count = calcCount(row.bjSales1, row.bjStock, 1);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays2(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales2, 2);
     }
     function bjCount2(value, row, index) {
-        return calcCount(row.bjSales2, row.bjStock, 2);
+        var count = calcCount(row.bjSales2, row.bjStock, 2);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays3(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales3, 3);
     }
     function bjCount3(value, row, index) {
-        return calcCount(row.bjSales3, row.bjStock, 3);
+        var count = calcCount(row.bjSales3, row.bjStock, 3);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays4(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales4, 4);
     }
     function bjCount4(value, row, index) {
-        return calcCount(row.bjSales4, row.bjStock, 4);
+        var count = calcCount(row.bjSales4, row.bjStock, 4);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays5(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales5, 5);
     }
     function bjCount5(value, row, index) {
-        return calcCount(row.bjSales5, row.bjStock, 5);
+        var count = calcCount(row.bjSales5, row.bjStock, 5);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays6(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales6, 6);
     }
     function bjCount6(value, row, index) {
-        return calcCount(row.bjSales6, row.bjStock, 6);
+        var count = calcCount(row.bjSales6, row.bjStock, 6);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays7(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales7, 7);
     }
     function bjCount7(value, row, index) {
-        return calcCount(row.bjSales7, row.bjStock, 7);
+        var count = calcCount(row.bjSales7, row.bjStock, 7);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays8(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales8, 8);
     }
     function bjCount8(value, row, index) {
-        return calcCount(row.bjSales8, row.bjStock, 8);
+        var count = calcCount(row.bjSales8, row.bjStock, 8);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays9(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales9, 9);
     }
     function bjCount9(value, row, index) {
-        return calcCount(row.bjSales9, row.bjStock, 9);
+        var count = calcCount(row.bjSales9, row.bjStock, 9);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays10(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales10,10);
     }
     function bjCount10(value, row, index) {
-        return calcCount(row.bjSales10, row.bjStock, 10);
+        var count = calcCount(row.bjSales10, row.bjStock, 10);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays11(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales11,11);
     }
     function bjCount11(value, row, index) {
-        return calcCount(row.bjSales11, row.bjStock, 11);
+        var count = calcCount(row.bjSales11, row.bjStock, 11);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays12(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales12,12);
     }
     function bjCount12(value, row, index) {
-        return calcCount(row.bjSales12, row.bjStock, 12);
+        var count = calcCount(row.bjSales12, row.bjStock, 12);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays13(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales13,13);
     }
     function bjCount13(value, row, index) {
-        return calcCount(row.bjSales13, row.bjStock, 13);
+        var count = calcCount(row.bjSales13, row.bjStock, 13);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays14(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales14,14);
     }
     function bjCount14(value, row, index) {
-        return calcCount(row.bjSales14, row.bjStock, 14);
+        var count = calcCount(row.bjSales14, row.bjStock, 14);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays15(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales15,15);
     }
     function bjCount15(value, row, index) {
-        return calcCount(row.bjSales15, row.bjStock, 15);
+        var count = calcCount(row.bjSales15, row.bjStock, 15);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays16(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales16,16);
     }
     function bjCount16(value, row, index) {
-        return calcCount(row.bjSales16, row.bjStock, 16);
+        var count = calcCount(row.bjSales16, row.bjStock, 16);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays17(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales17,17);
     }
     function bjCount17(value, row, index) {
-        return calcCount(row.bjSales17, row.bjStock, 17);
+        var count = calcCount(row.bjSales17, row.bjStock, 17);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays18(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales18,18);
     }
     function bjCount18(value, row, index) {
-        return calcCount(row.bjSales18, row.bjStock, 18);
+        var count = calcCount(row.bjSales18, row.bjStock, 18);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays19(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales19,19);
     }
     function bjCount19(value, row, index) {
-        return calcCount(row.bjSales19, row.bjStock, 19);
+        var count = calcCount(row.bjSales19, row.bjStock, 19);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays20(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales20,20);
     }
     function bjCount20(value, row, index) {
-        return calcCount(row.bjSales20, row.bjStock, 20);
+        var coun = calcCount(row.bjSales20, row.bjStock, 20);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays21(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales21,21);
     }
     function bjCount21(value, row, index) {
-        return calcCount(row.bjSales21, row.bjStock, 21);
+        var count = calcCount(row.bjSales21, row.bjStock, 21);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays22(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales22,22);
     }
     function bjCount22(value, row, index) {
-        return calcCount(row.bjSales22, row.bjStock, 22);
+        var count = calcCount(row.bjSales22, row.bjStock, 22);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays23(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales23,23);
     }
     function bjCount23(value, row, index) {
-        return calcCount(row.bjSales23, row.bjStock, 23);
+        var count = calcCount(row.bjSales23, row.bjStock, 23);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays24(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales24,24);
     }
     function bjCount24(value, row, index) {
-        return calcCount(row.bjSales24, row.bjStock, 24);
+        var count = calcCount(row.bjSales24, row.bjStock, 24);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays25(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales25,25);
     }
     function bjCount25(value, row, index) {
-        return calcCount(row.bjSales25, row.bjStock, 25);
+        var count = calcCount(row.bjSales25, row.bjStock, 25);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays26(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales26,26);
     }
     function bjCount26(value, row, index) {
-        return calcCount(row.bjSales26, row.bjStock, 26);
+        var count = calcCount(row.bjSales26, row.bjStock, 26);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays27(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales27,27);
     }
     function bjCount27(value, row, index) {
-        return calcCount(row.bjSales27, row.bjStock, 27);
+        var count = calcCount(row.bjSales27, row.bjStock, 27);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays28(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales28,28);
     }
     function bjCount28(value, row, index) {
-        return calcCount(row.bjSales28, row.bjStock, 28);
+        var count = calcCount(row.bjSales28, row.bjStock, 28);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays29(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales29,29);
     }
     function bjCount29(value, row, index) {
-        return calcCount(row.bjSales29, row.bjStock, 29);
+        var count = calcCount(row.bjSales29, row.bjStock, 29);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays30(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales30,30);
     }
     function bjCount30(value, row, index) {
-        return calcCount(row.bjSales30, row.bjStock, 30);
+        var count = calcCount(row.bjSales30, row.bjStock, 30);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function bjTurnoverDays31(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales31,31);
     }
     function bjCount31(value, row, index) {
-        return calcCount(row.bjSales31, row.bjStock, 31);
+        var count = calcCount(row.bjSales31, row.bjStock, 31);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
+    }
+    function bjTurnoverDays90(value, row, index) {
+        return calcTurnoverDays(row.bjStock, row.bjSales90,90);
+    }
+    function bjCount90(value, row, index) {
+        var count = calcCount(row.bjSales90, row.bjStock, 90);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
 
     // 上海
@@ -6949,187 +7122,225 @@
         return calcTurnoverDays(row.shStock, row.shSales1, 1);
     }
     function shCount1(value, row, index) {
-        return calcCount(row.shSales1, row.shStock, 1);
+        var count = calcCount(row.shSales1, row.shStock, 1);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays2(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales2, 2);
     }
     function shCount2(value, row, index) {
-        return calcCount(row.shSales2, row.shStock, 2);
+        var count = calcCount(row.shSales2, row.shStock, 2);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays3(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales3, 3);
     }
     function shCount3(value, row, index) {
-        return calcCount(row.shSales3, row.shStock, 3);
+        var count = calcCount(row.shSales3, row.shStock, 3);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays4(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales4, 4);
     }
     function shCount4(value, row, index) {
-        return calcCount(row.shSales4, row.shStock, 4);
+        var count = calcCount(row.shSales4, row.shStock, 4);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays5(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales5, 5);
     }
     function shCount5(value, row, index) {
-        return calcCount(row.shSales5, row.shStock, 5);
+        var count = calcCount(row.shSales5, row.shStock, 5);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays6(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales6, 6);
     }
     function shCount6(value, row, index) {
-        return calcCount(row.shSales6, row.shStock, 6);
+        var count = calcCount(row.shSales6, row.shStock, 6);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays7(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales7, 7);
     }
     function shCount7(value, row, index) {
-        return calcCount(row.shSales7, row.shStock, 7);
+        var count = calcCount(row.shSales7, row.shStock, 7);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays8(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales8, 8);
     }
     function shCount8(value, row, index) {
-        return calcCount(row.shSales8, row.shStock, 8);
+        var count = calcCount(row.shSales8, row.shStock, 8);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays9(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales9, 9);
     }
     function shCount9(value, row, index) {
-        return calcCount(row.shSales9, row.shStock, 9);
+        var count = calcCount(row.shSales9, row.shStock, 9);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays10(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales10,10);
     }
     function shCount10(value, row, index) {
-        return calcCount(row.shSales10, row.shStock, 10);
+        var count = calcCount(row.shSales10, row.shStock, 10);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays11(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales11,11);
     }
     function shCount11(value, row, index) {
-        return calcCount(row.shSales11, row.shStock, 11);
+        var count = calcCount(row.shSales11, row.shStock, 11);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays12(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales12,12);
     }
     function shCount12(value, row, index) {
-        return calcCount(row.shSales12, row.shStock, 12);
+        var count = calcCount(row.shSales12, row.shStock, 12);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays13(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales13,13);
     }
     function shCount13(value, row, index) {
-        return calcCount(row.shSales13, row.shStock, 13);
+        var count = calcCount(row.shSales13, row.shStock, 13);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays14(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales14,14);
     }
     function shCount14(value, row, index) {
-        return calcCount(row.shSales14, row.shStock, 14);
+        var count = calcCount(row.shSales14, row.shStock, 14);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays15(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales15,15);
     }
     function shCount15(value, row, index) {
-        return calcCount(row.shSales15, row.shStock, 15);
+        var count = calcCount(row.shSales15, row.shStock, 15);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays16(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales16,16);
     }
     function shCount16(value, row, index) {
-        return calcCount(row.shSales16, row.shStock, 16);
+        var count = calcCount(row.shSales16, row.shStock, 16);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays17(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales17,17);
     }
     function shCount17(value, row, index) {
-        return calcCount(row.shSales17, row.shStock, 17);
+        var count = calcCount(row.shSales17, row.shStock, 17);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays18(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales18,18);
     }
     function shCount18(value, row, index) {
-        return calcCount(row.shSales18, row.shStock, 18);
+        var count = calcCount(row.shSales18, row.shStock, 18);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays19(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales19,19);
     }
     function shCount19(value, row, index) {
-        return calcCount(row.shSales19, row.shStock, 19);
+        var count = calcCount(row.shSales19, row.shStock, 19);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays20(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales20,20);
     }
     function shCount20(value, row, index) {
-        return calcCount(row.shSales20, row.shStock, 20);
+        var count = calcCount(row.shSales20, row.shStock, 20);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays21(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales21,21);
     }
     function shCount21(value, row, index) {
-        return calcCount(row.shSales21, row.shStock, 21);
+        var count = calcCount(row.shSales21, row.shStock, 21);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays22(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales22,22);
     }
     function shCount22(value, row, index) {
-        return calcCount(row.shSales22, row.shStock, 22);
+        var count = calcCount(row.shSales22, row.shStock, 22);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays23(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales23,23);
     }
     function shCount23(value, row, index) {
-        return calcCount(row.shSales23, row.shStock, 23);
+        var count = calcCount(row.shSales23, row.shStock, 23);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays24(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales24,24);
     }
     function shCount24(value, row, index) {
-        return calcCount(row.shSales24, row.shStock, 24);
+        var count = calcCount(row.shSales24, row.shStock, 24);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays25(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales25,25);
     }
     function shCount25(value, row, index) {
-        return calcCount(row.shSales25, row.shStock, 25);
+        var count = calcCount(row.shSales25, row.shStock, 25);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays26(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales26,26);
     }
     function shCount26(value, row, index) {
-        return calcCount(row.shSales26, row.shStock, 26);
+        var count = calcCount(row.shSales26, row.shStock, 26);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays27(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales27,27);
     }
     function shCount27(value, row, index) {
-        return calcCount(row.shSales27, row.shStock, 27);
+        var count = calcCount(row.shSales27, row.shStock, 27);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays28(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales28,28);
     }
     function shCount28(value, row, index) {
-        return calcCount(row.shSales28, row.shStock, 28);
+        var count = calcCount(row.shSales28, row.shStock, 28);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays29(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales29,29);
     }
     function shCount29(value, row, index) {
-        return calcCount(row.shSales29, row.shStock, 29);
+        var count = calcCount(row.shSales29, row.shStock, 29);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays30(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales30,30);
     }
     function shCount30(value, row, index) {
-        return calcCount(row.shSales30, row.shStock, 30);
+        var count = calcCount(row.shSales30, row.shStock, 30);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function shTurnoverDays31(value, row, index) {
         return calcTurnoverDays(row.shStock, row.shSales31,31);
     }
     function shCount31(value, row, index) {
-        return calcCount(row.shSales31, row.shStock, 31);
+        var count = calcCount(row.shSales31, row.shStock, 31);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
+    }
+    function shTurnoverDays90(value, row, index) {
+        return calcTurnoverDays(row.shStock, row.shSales90,90);
+    }
+    function shCount90(value, row, index) {
+        var count = calcCount(row.shSales90, row.shStock, 90);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
 
     // 广州
@@ -7137,374 +7348,452 @@
         return calcTurnoverDays(row.gzStock, row.gzSales1 ,1);
     }
     function gzCount1(value, row, index) {
-        return calcCount(row.gzSales1, row.gzStock, 1);
-    }    function gzTurnoverDays2(value, row, index) {
+        var count = calcCount(row.gzSales1, row.gzStock, 1);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
+    }
+    function gzTurnoverDays2(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales2, 2);
     }
     function gzCount2(value, row, index) {
-        return calcCount(row.gzSales2, row.gzStock, 2);
+        var count = calcCount(row.gzSales2, row.gzStock, 2);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays3(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales3, 3);
     }
     function gzCount3(value, row, index) {
-        return calcCount(row.gzSales3, row.gzStock, 3);
+        var count = calcCount(row.gzSales3, row.gzStock, 3);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays4(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales4, 4);
     }
     function gzCount4(value, row, index) {
-        return calcCount(row.gzSales4, row.gzStock, 4);
+        var count = calcCount(row.gzSales4, row.gzStock, 4);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays5(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales5, 5);
     }
     function gzCount5(value, row, index) {
-        return calcCount(row.gzSales5, row.gzStock, 5);
+        var count = calcCount(row.gzSales5, row.gzStock, 5);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays6(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales6, 6);
     }
     function gzCount6(value, row, index) {
-        return calcCount(row.gzSales6, row.gzStock, 6);
+        var count = calcCount(row.gzSales6, row.gzStock, 6);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays7(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales7, 7);
     }
     function gzCount7(value, row, index) {
-        return calcCount(row.gzSales7, row.gzStock, 7);
+        var count = calcCount(row.gzSales7, row.gzStock, 7);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays8(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales8, 8);
     }
     function gzCount8(value, row, index) {
-        return calcCount(row.gzSales8, row.gzStock, 8);
+        var count = calcCount(row.gzSales8, row.gzStock, 8);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays9(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales9, 9);
     }
     function gzCount9(value, row, index) {
-        return calcCount(row.gzSales9, row.gzStock, 9);
+        var count = calcCount(row.gzSales9, row.gzStock, 9);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays10(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales10,10);
     }
     function gzCount10(value, row, index) {
-        return calcCount(row.gzSales10, row.gzStock, 10);
+        var count = calcCount(row.gzSales10, row.gzStock, 10);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays11(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales11,11);
     }
     function gzCount11(value, row, index) {
-        return calcCount(row.gzSales11, row.gzStock, 11);
+        var count = calcCount(row.gzSales11, row.gzStock, 11);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays12(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales12,12);
     }
     function gzCount12(value, row, index) {
-        return calcCount(row.gzSales12, row.gzStock, 12);
+        var count = calcCount(row.gzSales12, row.gzStock, 12);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays13(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales13,13);
     }
     function gzCount13(value, row, index) {
-        return calcCount(row.gzSales13, row.gzStock, 13);
+        var count = calcCount(row.gzSales13, row.gzStock, 13);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays14(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales14,14);
     }
     function gzCount14(value, row, index) {
-        return calcCount(row.gzSales14, row.gzStock, 14);
+        var count = calcCount(row.gzSales14, row.gzStock, 14);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays15(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales15,15);
     }
     function gzCount15(value, row, index) {
-        return calcCount(row.gzSales15, row.gzStock, 15);
+        var count = calcCount(row.gzSales15, row.gzStock, 15);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays16(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales16,16);
     }
     function gzCount16(value, row, index) {
-        return calcCount(row.gzSales16, row.gzStock, 16);
+        var count = calcCount(row.gzSales16, row.gzStock, 16);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays17(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales17,17);
     }
     function gzCount17(value, row, index) {
-        return calcCount(row.gzSales17, row.gzStock, 17);
+        var count = calcCount(row.gzSales17, row.gzStock, 17);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays18(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales18,18);
     }
     function gzCount18(value, row, index) {
-        return calcCount(row.gzSales18, row.gzStock, 18);
+        var count = calcCount(row.gzSales18, row.gzStock, 18);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays19(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales19,19);
     }
     function gzCount19(value, row, index) {
-        return calcCount(row.gzSales19, row.gzStock, 19);
+        var count = calcCount(row.gzSales19, row.gzStock, 19);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays20(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales20,20);
     }
     function gzCount20(value, row, index) {
-        return calcCount(row.gzSales20, row.gzStock, 20);
+        var count = calcCount(row.gzSales20, row.gzStock, 20);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays21(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales21,21);
     }
     function gzCount21(value, row, index) {
-        return calcCount(row.gzSales21, row.gzStock, 21);
+        var count = calcCount(row.gzSales21, row.gzStock, 21);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays22(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales22,22);
     }
     function gzCount22(value, row, index) {
-        return calcCount(row.gzSales22, row.gzStock, 22);
+        var count = calcCount(row.gzSales22, row.gzStock, 22);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays23(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales23,23);
     }
     function gzCount23(value, row, index) {
-        return calcCount(row.gzSales23, row.gzStock, 23);
+        var count = calcCount(row.gzSales23, row.gzStock, 23);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays24(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales24,24);
     }
     function gzCount24(value, row, index) {
-        return calcCount(row.gzSales24, row.gzStock, 24);
+        var count = calcCount(row.gzSales24, row.gzStock, 24);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays25(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales25,25);
     }
     function gzCount25(value, row, index) {
-        return calcCount(row.gzSales25, row.gzStock, 25);
+        var count = calcCount(row.gzSales25, row.gzStock, 25);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays26(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales26,26);
     }
     function gzCount26(value, row, index) {
-        return calcCount(row.gzSales26, row.gzStock, 26);
+        var count = calcCount(row.gzSales26, row.gzStock, 26);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays27(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales27,27);
     }
     function gzCount27(value, row, index) {
-        return calcCount(row.gzSales27, row.gzStock, 27);
+        var count = calcCount(row.gzSales27, row.gzStock, 27);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays28(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales28,28);
     }
     function gzCount28(value, row, index) {
-        return calcCount(row.gzSales28, row.gzStock, 28);
+        var count = calcCount(row.gzSales28, row.gzStock, 28);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays29(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales29,29);
     }
     function gzCount29(value, row, index) {
-        return calcCount(row.gzSales29, row.gzStock, 29);
+        var count = calcCount(row.gzSales29, row.gzStock, 29);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays30(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales30,30);
     }
     function gzCount30(value, row, index) {
-        return calcCount(row.gzSales30, row.gzStock, 30);
+        var count = calcCount(row.gzSales30, row.gzStock, 30);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gzTurnoverDays31(value, row, index) {
         return calcTurnoverDays(row.gzStock, row.gzSales31,31);
     }
     function gzCount31(value, row, index) {
-        return calcCount(row.gzSales31, row.gzStock, 31);
+        var count = calcCount(row.gzSales31, row.gzStock, 31);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
+    function gzTurnoverDays90(value, row, index) {
+        return calcTurnoverDays(row.gzStock, row.gzSales90,90);
+    }
+    function gzCount90(value, row, index) {
+        var count = calcCount(row.gzSales90, row.gzStock, 90);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
+    }
+
 
     // 成都
     function cdTurnoverDays1(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales1, 1);
     }
     function cdCount1(value, row, index) {
-        return calcCount(row.cdSales1, row.cdStock, 1);
+        var count = calcCount(row.cdSales1, row.cdStock, 1);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays2(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales2, 2);
     }
     function cdCount2(value, row, index) {
-        return calcCount(row.cdSales2, row.cdStock, 2);
+        var count = calcCount(row.cdSales2, row.cdStock, 2);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays3(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales3, 3);
     }
     function cdCount3(value, row, index) {
-        return calcCount(row.cdSales3, row.cdStock, 3);
+        var count = calcCount(row.cdSales3, row.cdStock, 3);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays4(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales4, 4);
     }
     function cdCount4(value, row, index) {
-        return calcCount(row.cdSales4, row.cdStock, 4);
+        var count = calcCount(row.cdSales4, row.cdStock, 4);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays5(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales5, 5);
     }
     function cdCount5(value, row, index) {
-        return calcCount(row.cdSales5, row.cdStock, 5);
+        var count = calcCount(row.cdSales5, row.cdStock, 5);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays6(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales6, 6);
     }
     function cdCount6(value, row, index) {
-        return calcCount(row.cdSales6, row.cdStock, 6);
+        var count = calcCount(row.cdSales6, row.cdStock, 6);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays7(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales7, 7);
     }
     function cdCount7(value, row, index) {
-        return calcCount(row.cdSales7, row.cdStock, 7);
+        var count = calcCount(row.cdSales7, row.cdStock, 7);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays8(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales8, 8);
     }
     function cdCount8(value, row, index) {
-        return calcCount(row.cdSales8, row.cdStock, 8);
+        var count = calcCount(row.cdSales8, row.cdStock, 8);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays9(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales9, 9);
     }
     function cdCount9(value, row, index) {
-        return calcCount(row.cdSales9, row.cdStock, 9);
+        var count = calcCount(row.cdSales9, row.cdStock, 9);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays10(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales10,10);
     }
     function cdCount10(value, row, index) {
-        return calcCount(row.cdSales10, row.cdStock, 10);
+        var count = calcCount(row.cdSales10, row.cdStock, 10);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays11(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales11,11);
     }
     function cdCount11(value, row, index) {
-        return calcCount(row.cdSales11, row.cdStock, 11);
+        var count = calcCount(row.cdSales11, row.cdStock, 11);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays12(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales12,12);
     }
     function cdCount12(value, row, index) {
-        return calcCount(row.cdSales12, row.cdStock, 12);
+        var count = calcCount(row.cdSales12, row.cdStock, 12);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays13(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales13,13);
     }
     function cdCount13(value, row, index) {
-        return calcCount(row.cdSales13, row.cdStock, 13);
+        var count = calcCount(row.cdSales13, row.cdStock, 13);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays14(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales14,14);
     }
     function cdCount14(value, row, index) {
-        return calcCount(row.cdSales14, row.cdStock, 14);
+        var count = calcCount(row.cdSales14, row.cdStock, 14);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays15(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales15,15);
     }
     function cdCount15(value, row, index) {
-        return calcCount(row.cdSales15, row.cdStock, 15);
+        var count = calcCount(row.cdSales15, row.cdStock, 15);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays16(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales16,16);
     }
     function cdCount16(value, row, index) {
-        return calcCount(row.cdSales16, row.cdStock, 16);
+        var count = calcCount(row.cdSales16, row.cdStock, 16);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays17(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales17,17);
     }
     function cdCount17(value, row, index) {
-        return calcCount(row.cdSales17, row.cdStock, 17);
+        var count = calcCount(row.cdSales17, row.cdStock, 17);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays18(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales18,18);
     }
     function cdCount18(value, row, index) {
-        return calcCount(row.cdSales18, row.cdStock, 18);
+        var count = calcCount(row.cdSales18, row.cdStock, 18);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays19(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales19,19);
     }
     function cdCount19(value, row, index) {
-        return calcCount(row.cdSales19, row.cdStock, 19);
+        var count = calcCount(row.cdSales19, row.cdStock, 19);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays20(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales20,20);
     }
     function cdCount20(value, row, index) {
-        return calcCount(row.cdSales20, row.cdStock, 20);
+        var count = calcCount(row.cdSales20, row.cdStock, 20);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays21(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales21,21);
     }
     function cdCount21(value, row, index) {
-        return calcCount(row.cdSales21, row.cdStock, 21);
+        var count = calcCount(row.cdSales21, row.cdStock, 21);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays22(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales22,22);
     }
     function cdCount22(value, row, index) {
-        return calcCount(row.cdSales22, row.cdStock, 22);
+        var count = calcCount(row.cdSales22, row.cdStock, 22);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays23(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales23,23);
     }
     function cdCount23(value, row, index) {
-        return calcCount(row.cdSales23, row.cdStock, 23);
+        var count = calcCount(row.cdSales23, row.cdStock, 23);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays24(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales24,24);
     }
     function cdCount24(value, row, index) {
-        return calcCount(row.cdSales24, row.cdStock, 24);
+        var count = calcCount(row.cdSales24, row.cdStock, 24);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays25(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales25,25);
     }
     function cdCount25(value, row, index) {
-        return calcCount(row.cdSales25, row.cdStock, 25);
+        var count = calcCount(row.cdSales25, row.cdStock, 25);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays26(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales26,26);
     }
     function cdCount26(value, row, index) {
-        return calcCount(row.cdSales26, row.cdStock, 26);
+        var count = calcCount(row.cdSales26, row.cdStock, 26);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays27(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales27,27);
     }
     function cdCount27(value, row, index) {
-        return calcCount(row.cdSales27, row.cdStock, 27);
+        var count = calcCount(row.cdSales27, row.cdStock, 27);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays28(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales28,28);
     }
     function cdCount28(value, row, index) {
-        return calcCount(row.cdSales28, row.cdStock, 28);
+        var count = calcCount(row.cdSales28, row.cdStock, 28);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays29(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales29,29);
     }
     function cdCount29(value, row, index) {
-        return calcCount(row.cdSales29, row.cdStock, 29);
+        var count = calcCount(row.cdSales29, row.cdStock, 29);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays30(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales30,30);
     }
     function cdCount30(value, row, index) {
-        return calcCount(row.cdSales30, row.cdStock, 30);
+        var count = calcCount(row.cdSales30, row.cdStock, 30);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function cdTurnoverDays31(value, row, index) {
         return calcTurnoverDays(row.cdStock, row.cdSales31,31);
     }
     function cdCount31(value, row, index) {
-        return calcCount(row.cdSales31, row.cdStock, 31);
+        var count = calcCount(row.cdSales31, row.cdStock, 31);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
+    }
+    function cdTurnoverDays90(value, row, index) {
+        return calcTurnoverDays(row.cdStock, row.cdSales90,90);
+    }
+    function cdCount90(value, row, index) {
+        var count = calcCount(row.cdSales90, row.cdStock, 90);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
 
     // 武汉
@@ -7512,187 +7801,226 @@
         return calcTurnoverDays(row.whStock, row.whSales1, 1);
     }
     function whCount1(value, row, index) {
-        return calcCount(row.whSales1, row.whStock, 1);
+        var count = calcCount(row.whSales1, row.whStock, 1);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays2(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales2, 2);
     }
     function whCount2(value, row, index) {
-        return calcCount(row.whSales2, row.whStock, 2);
+        var count = calcCount(row.whSales2, row.whStock, 2);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays3(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales3, 3);
     }
     function whCount3(value, row, index) {
-        return calcCount(row.whSales3, row.whStock, 3);
+        var count = calcCount(row.whSales3, row.whStock, 3);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays4(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales4, 4);
     }
     function whCount4(value, row, index) {
-        return calcCount(row.whSales4, row.whStock, 4);
+        var count = calcCount(row.whSales4, row.whStock, 4);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays5(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales5, 5);
     }
     function whCount5(value, row, index) {
-        return calcCount(row.whSales5, row.whStock, 5);
+        var count = calcCount(row.whSales5, row.whStock, 5);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays6(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales6, 6);
     }
     function whCount6(value, row, index) {
-        return calcCount(row.whSales6, row.whStock, 6);
+        var count = calcCount(row.whSales6, row.whStock, 6);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays7(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales7, 7);
     }
     function whCount7(value, row, index) {
-        return calcCount(row.whSales7, row.whStock, 7);
+        var count = calcCount(row.whSales7, row.whStock, 7);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays8(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales8, 8);
     }
     function whCount8(value, row, index) {
-        return calcCount(row.whSales8, row.whStock, 8);
+        var count = calcCount(row.whSales8, row.whStock, 8);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays9(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales9, 9);
     }
     function whCount9(value, row, index) {
-        return calcCount(row.whSales9, row.whStock, 9);
+        var count = calcCount(row.whSales9, row.whStock, 9);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays10(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales10,10);
     }
     function whCount10(value, row, index) {
-        return calcCount(row.whSales10, row.whStock, 10);
+        var count = calcCount(row.whSales10, row.whStock, 10);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays11(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales11,11);
     }
     function whCount11(value, row, index) {
-        return calcCount(row.whSales11, row.whStock, 11);
+        var count = calcCount(row.whSales11, row.whStock, 11);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays12(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales12,12);
     }
     function whCount12(value, row, index) {
-        return calcCount(row.whSales12, row.whStock, 12);
+        var count = calcCount(row.whSales12, row.whStock, 12);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
+        return count > 0 ? "<span>count</span>" : 0;
     }
     function whTurnoverDays13(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales13,13);
     }
     function whCount13(value, row, index) {
-        return calcCount(row.whSales13, row.whStock, 13);
+        var count = calcCount(row.whSales13, row.whStock, 13);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays14(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales14,14);
     }
     function whCount14(value, row, index) {
-        return calcCount(row.whSales14, row.whStock, 14);
+        var count = calcCount(row.whSales14, row.whStock, 14);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays15(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales15,15);
     }
     function whCount15(value, row, index) {
-        return calcCount(row.whSales15, row.whStock, 15);
+        var count = calcCount(row.whSales15, row.whStock, 15);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays16(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales16,16);
     }
     function whCount16(value, row, index) {
-        return calcCount(row.whSales16, row.whStock, 16);
+        var count = calcCount(row.whSales16, row.whStock, 16);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays17(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales17,17);
     }
     function whCount17(value, row, index) {
-        return calcCount(row.whSales17, row.whStock, 17);
+        var count = calcCount(row.whSales17, row.whStock, 17);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays18(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales18,18);
     }
     function whCount18(value, row, index) {
-        return calcCount(row.whSales18, row.whStock, 18);
+        var count = calcCount(row.whSales18, row.whStock, 18);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays19(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales19,19);
     }
     function whCount19(value, row, index) {
-        return calcCount(row.whSales19, row.whStock, 19);
+        var count = calcCount(row.whSales19, row.whStock, 19);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays20(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales20,20);
     }
     function whCount20(value, row, index) {
-        return calcCount(row.whSales20, row.whStock, 20);
+        var count = calcCount(row.whSales20, row.whStock, 20);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays21(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales21,21);
     }
     function whCount21(value, row, index) {
-        return calcCount(row.whSales21, row.whStock, 21);
+        var count = calcCount(row.whSales21, row.whStock, 21);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays22(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales22,22);
     }
     function whCount22(value, row, index) {
-        return calcCount(row.whSales22, row.whStock, 22);
+        var count = calcCount(row.whSales22, row.whStock, 22);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays23(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales23,23);
     }
     function whCount23(value, row, index) {
-        return calcCount(row.whSales23, row.whStock, 23);
+        var count = calcCount(row.whSales23, row.whStock, 23);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays24(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales24,24);
     }
     function whCount24(value, row, index) {
-        return calcCount(row.whSales24, row.whStock, 24);
+        var count = calcCount(row.whSales24, row.whStock, 24);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays25(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales25,25);
     }
     function whCount25(value, row, index) {
-        return calcCount(row.whSales25, row.whStock, 25);
+        var count = calcCount(row.whSales25, row.whStock, 25);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays26(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales26,26);
     }
     function whCount26(value, row, index) {
-        return calcCount(row.whSales26, row.whStock, 26);
+        var count = calcCount(row.whSales26, row.whStock, 26);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays27(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales27,27);
     }
     function whCount27(value, row, index) {
-        return calcCount(row.whSales27, row.whStock, 27);
+        var count = calcCount(row.whSales27, row.whStock, 27);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays28(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales28,28);
     }
     function whCount28(value, row, index) {
-        return calcCount(row.whSales28, row.whStock, 28);
+        var count = calcCount(row.whSales28, row.whStock, 28);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays29(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales29,29);
     }
     function whCount29(value, row, index) {
-        return calcCount(row.whSales29, row.whStock, 29);
+        var count = calcCount(row.whSales29, row.whStock, 29);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays30(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales30,30);
     }
     function whCount30(value, row, index) {
-        return calcCount(row.whSales30, row.whStock, 30);
+        var count = calcCount(row.whSales30, row.whStock, 30);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function whTurnoverDays31(value, row, index) {
         return calcTurnoverDays(row.whStock, row.whSales31,31);
     }
     function whCount31(value, row, index) {
-        return calcCount(row.whSales31, row.whStock, 31);
+        var count = calcCount(row.whSales31, row.whStock, 31);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
+    }
+    function whTurnoverDays90(value, row, index) {
+        return calcTurnoverDays(row.whStock, row.whSales90,90);
+    }
+    function whCount90(value, row, index) {
+        var count = calcCount(row.whSales90, row.whStock, 90);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
 
     // 沈阳
@@ -7700,187 +8028,226 @@
         return calcTurnoverDays(row.syStock, row.sySales1, 1);
     }
     function syCount1(value, row, index) {
-        return calcCount(row.sySales1, row.syStock, 1);
+        var count = calcCount(row.sySales1, row.syStock, 1);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays2(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales2,2);
     }
     function syCount2(value, row, index) {
-        return calcCount(row.sySales2, row.syStock, 2);
+        var count = calcCount(row.sySales2, row.syStock, 2);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays3(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales3,3);
     }
     function syCount3(value, row, index) {
-        return calcCount(row.sySales3, row.syStock, 3);
+        var count = calcCount(row.sySales3, row.syStock, 3);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays4(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales4,4);
     }
     function syCount4(value, row, index) {
-        return calcCount(row.sySales4, row.syStock, 4);
+        var count = calcCount(row.sySales4, row.syStock, 4);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays5(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales5,5);
     }
     function syCount5(value, row, index) {
-        return calcCount(row.sySales5, row.syStock, 5);
+        var count = calcCount(row.sySales5, row.syStock, 5);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays6(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales6,6);
     }
     function syCount6(value, row, index) {
-        return calcCount(row.sySales6, row.syStock, 6);
+        var count = calcCount(row.sySales6, row.syStock, 6);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays7(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales7,7);
     }
     function syCount7(value, row, index) {
-        return calcCount(row.sySales7, row.syStock, 7);
+        var count = calcCount(row.sySales7, row.syStock, 7);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays8(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales8,8);
     }
     function syCount8(value, row, index) {
-        return calcCount(row.sySales8, row.syStock, 8);
+        var count = calcCount(row.sySales8, row.syStock, 8);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays9(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales9,9);
     }
     function syCount9(value, row, index) {
-        return calcCount(row.sySales9, row.syStock, 9);
+        var count = calcCount(row.sySales9, row.syStock, 9);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays10(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales10,10);
     }
     function syCount10(value, row, index) {
-        return calcCount(row.sySales10, row.syStock, 10);
+        var count = calcCount(row.sySales10, row.syStock, 10);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays11(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales11,11);
     }
     function syCount11(value, row, index) {
-        return calcCount(row.sySales11, row.syStock, 11);
+        var count = calcCount(row.sySales11, row.syStock, 11);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays12(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales12,12);
     }
     function syCount12(value, row, index) {
-        return calcCount(row.sySales12, row.syStock, 12);
+        var count = calcCount(row.sySales12, row.syStock, 12);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays13(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales13,13);
     }
     function syCount13(value, row, index) {
-        return calcCount(row.sySales13, row.syStock, 13);
+        var count = calcCount(row.sySales13, row.syStock, 13);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays14(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales14,14);
     }
     function syCount14(value, row, index) {
-        return calcCount(row.sySales14, row.syStock, 14);
+        var count = calcCount(row.sySales14, row.syStock, 14);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays15(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales15,15);
     }
     function syCount15(value, row, index) {
-        return calcCount(row.sySales15, row.syStock, 15);
+        var count = calcCount(row.sySales15, row.syStock, 15);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays16(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales16,16);
     }
     function syCount16(value, row, index) {
-        return calcCount(row.sySales16, row.syStock, 16);
+        var count = calcCount(row.sySales16, row.syStock, 16);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays17(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales17,17);
     }
     function syCount17(value, row, index) {
-        return calcCount(row.sySales17, row.syStock, 17);
+        var count = calcCount(row.sySales17, row.syStock, 17);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays18(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales18,18);
     }
     function syCount18(value, row, index) {
-        return calcCount(row.sySales18, row.syStock, 18);
+        var count = calcCount(row.sySales18, row.syStock, 18);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays19(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales19,19);
     }
     function syCount19(value, row, index) {
-        return calcCount(row.sySales19, row.syStock, 19);
+        var count = calcCount(row.sySales19, row.syStock, 19);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays20(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales20,20);
     }
     function syCount20(value, row, index) {
-        return calcCount(row.sySales20, row.syStock, 20);
+        var count = calcCount(row.sySales20, row.syStock, 20);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays21(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales21,21);
     }
     function syCount21(value, row, index) {
-        return calcCount(row.sySales21, row.syStock, 21);
+        var count = calcCount(row.sySales21, row.syStock, 21);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays22(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales22,22);
     }
     function syCount22(value, row, index) {
-        return calcCount(row.sySales22, row.syStock, 22);
+        var count = calcCount(row.sySales22, row.syStock, 22);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays23(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales23,23);
     }
     function syCount23(value, row, index) {
-        return calcCount(row.sySales23, row.syStock, 23);
+        var count = calcCount(row.sySales23, row.syStock, 23);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays24(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales24,24);
     }
     function syCount24(value, row, index) {
-        return calcCount(row.sySales24, row.syStock, 24);
+        var count = calcCount(row.sySales24, row.syStock, 24);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays25(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales25,25);
     }
     function syCount25(value, row, index) {
-        return calcCount(row.sySales25, row.syStock, 25);
+        var count = calcCount(row.sySales25, row.syStock, 25);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays26(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales26,26);
     }
     function syCount26(value, row, index) {
-        return calcCount(row.sySales26, row.syStock, 26);
+        var count = calcCount(row.sySales26, row.syStock, 26);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays27(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales27,27);
     }
     function syCount27(value, row, index) {
-        return calcCount(row.sySales27, row.syStock, 27);
+        var count = calcCount(row.sySales27, row.syStock, 27);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays28(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales28,28);
     }
     function syCount28(value, row, index) {
-        return calcCount(row.sySales28, row.syStock, 28);
+        var count = calcCount(row.sySales28, row.syStock, 28);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
+
     function syTurnoverDays29(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales29,29);
     }
     function syCount29(value, row, index) {
-        return calcCount(row.sySales29, row.syStock, 29);
+        var count = calcCount(row.sySales29, row.syStock, 29);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays30(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales30,30);
     }
     function syCount30(value, row, index) {
-        return calcCount(row.sySales30, row.syStock, 30);
+        var count = calcCount(row.sySales30, row.syStock, 30);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function syTurnoverDays31(value, row, index) {
         return calcTurnoverDays(row.syStock, row.sySales31,31);
     }
     function syCount31(value, row, index) {
-        return calcCount(row.sySales31, row.syStock, 31);
+        var count = calcCount(row.sySales31, row.syStock, 31);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
+    }
+    function syTurnoverDays90(value, row, index) {
+        return calcTurnoverDays(row.syStock, row.sySales90,90);
+    }
+    function syCount90(value, row, index) {
+        var count = calcCount(row.sySales90, row.syStock, 90);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
 
     // 西安
@@ -7888,188 +8255,227 @@
         return calcTurnoverDays(row.xaStock, row.xaSales1,1);
     }
     function xaCount1(value, row, index) {
-        return calcCount(row.xaSales1, row.xaStock, 1);
+        var count = calcCount(row.xaSales1, row.xaStock, 1);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays2(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales2,2);
     }
     function xaCount2(value, row, index) {
-        return calcCount(row.xaSales2, row.xaStock, 2);
+        var count = calcCount(row.xaSales2, row.xaStock, 2);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays3(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales3,3);
     }
     function xaCount3(value, row, index) {
-        return calcCount(row.xaSales3, row.xaStock, 3);
+        var count = calcCount(row.xaSales3, row.xaStock, 3);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays4(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales4,4);
     }
     function xaCount4(value, row, index) {
-        return calcCount(row.xaSales4, row.xaStock, 4);
+        var count = calcCount(row.xaSales4, row.xaStock, 4);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays5(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales5,5);
     }
     function xaCount5(value, row, index) {
-        return calcCount(row.xaSales5, row.xaStock, 5);
+        var count = calcCount(row.xaSales5, row.xaStock, 5);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays6(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales6,6);
     }
     function xaCount6(value, row, index) {
-        return calcCount(row.xaSales6, row.xaStock, 6);
+        var count = calcCount(row.xaSales6, row.xaStock, 6);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays7(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales7,7);
     }
     function xaCount7(value, row, index) {
-        return calcCount(row.xaSales7, row.xaStock, 7);
+        var count = calcCount(row.xaSales7, row.xaStock, 7);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays8(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales8,8);
     }
     function xaCount8(value, row, index) {
-        return calcCount(row.xaSales8, row.xaStock, 8);
+        var count = calcCount(row.xaSales8, row.xaStock, 8);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays9(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales9,9);
     }
     function xaCount9(value, row, index) {
-        return calcCount(row.xaSales9, row.xaStock, 9);
+        var count = calcCount(row.xaSales9, row.xaStock, 9);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays10(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales10,10);
     }
     function xaCount10(value, row, index) {
-        return calcCount(row.xaSales10, row.xaStock, 10);
+        var count = calcCount(row.xaSales10, row.xaStock, 10);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays11(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales11,11);
     }
     function xaCount11(value, row, index) {
-        return calcCount(row.xaSales11, row.xaStock, 11);
+        var count = calcCount(row.xaSales11, row.xaStock, 11);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays12(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales12,12);
     }
     function xaCount12(value, row, index) {
-        return calcCount(row.xaSales12, row.xaStock, 12);
+        var count = calcCount(row.xaSales12, row.xaStock, 12);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays13(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales13,13);
     }
     function xaCount13(value, row, index) {
-        return calcCount(row.xaSales13, row.xaStock, 13);
+        var count = calcCount(row.xaSales13, row.xaStock, 13);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays14(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales14,14);
     }
     function xaCount14(value, row, index) {
-        return calcCount(row.xaSales14, row.xaStock, 14);
+        var count = calcCount(row.xaSales14, row.xaStock, 14);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays15(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales15,15);
     }
     function xaCount15(value, row, index) {
-        return calcCount(row.xaSales15, row.xaStock, 15);
+        var count = calcCount(row.xaSales15, row.xaStock, 15);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays16(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales16,16);
     }
     function xaCount16(value, row, index) {
-        return calcCount(row.xaSales16, row.xaStock, 16);
+        var count = calcCount(row.xaSales16, row.xaStock, 16);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays17(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales17,17);
     }
     function xaCount17(value, row, index) {
-        return calcCount(row.xaSales17, row.xaStock, 17);
+        var count = calcCount(row.xaSales17, row.xaStock, 17);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays18(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales18,18);
     }
     function xaCount18(value, row, index) {
-        return calcCount(row.xaSales18, row.xaStock, 18);
+        var count = calcCount(row.xaSales18, row.xaStock, 18);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays19(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales19,19);
     }
     function xaCount19(value, row, index) {
-        return calcCount(row.xaSales19, row.xaStock, 19);
+        var count = calcCount(row.xaSales19, row.xaStock, 19);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays20(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales20,20);
     }
     function xaCount20(value, row, index) {
-        return calcCount(row.xaSales20, row.xaStock, 20);
+        var count = calcCount(row.xaSales20, row.xaStock, 20);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays21(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales21,21);
     }
     function xaCount21(value, row, index) {
-        return calcCount(row.xaSales21, row.xaStock, 21);
+        var count = calcCount(row.xaSales21, row.xaStock, 21);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays22(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales22,22);
     }
     function xaCount22(value, row, index) {
-        return calcCount(row.xaSales22, row.xaStock, 22);
+        var count = calcCount(row.xaSales22, row.xaStock, 22);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays23(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales23,23);
     }
     function xaCount23(value, row, index) {
-        return calcCount(row.xaSales23, row.xaStock, 23);
+        var count = calcCount(row.xaSales23, row.xaStock, 23);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays24(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales24,24);
     }
     function xaCount24(value, row, index) {
-        return calcCount(row.xaSales24, row.xaStock, 24);
+        var count = calcCount(row.xaSales24, row.xaStock, 24);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays25(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales25,25);
     }
     function xaCount25(value, row, index) {
-        return calcCount(row.xaSales25, row.xaStock, 25);
+        var count = calcCount(row.xaSales25, row.xaStock, 25);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays26(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales26,26);
     }
     function xaCount26(value, row, index) {
-        return calcCount(row.xaSales26, row.xaStock, 26);
+        var count = calcCount(row.xaSales26, row.xaStock, 26);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays27(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales27,27);
     }
     function xaCount27(value, row, index) {
-        return calcCount(row.xaSales27, row.xaStock, 27);
+        var count = calcCount(row.xaSales27, row.xaStock, 27);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays28(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales28,28);
     }
     function xaCount28(value, row, index) {
-        return calcCount(row.xaSales28, row.xaStock, 28);
+        var count = calcCount(row.xaSales28, row.xaStock, 28);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays29(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales29,29);
     }
     function xaCount29(value, row, index) {
-        return calcCount(row.xaSales29, row.xaStock, 29);
+        var count = calcCount(row.xaSales29, row.xaStock, 29);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays30(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales30,30);
     }
     function xaCount30(value, row, index) {
-        return calcCount(row.xaSales30, row.xaStock, 30);
+        var count = calcCount(row.xaSales30, row.xaStock, 30);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function xaTurnoverDays31(value, row, index) {
         return calcTurnoverDays(row.xaStock, row.xaSales31,31);
     }
     function xaCount31(value, row, index) {
-        return calcCount(row.xaSales31, row.xaStock, 31);
+        var count = calcCount(row.xaSales31, row.xaStock, 31);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
+    function xaTurnoverDays90(value, row, index) {
+        return calcTurnoverDays(row.xaStock, row.xaSales90,90);
+    }
+    function xaCount90(value, row, index) {
+        var count = calcCount(row.xaSales90, row.xaStock, 90);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
+    }
+
 
 
     // 固安
@@ -8077,187 +8483,225 @@
         return calcTurnoverDays(row.gaStock, row.gaSales1,1);
     }
     function gaCount1(value, row, index) {
-        return calcCount(row.gaSales1, row.gaStock, 1);
+        var count = calcCount(row.gaSales1, row.gaStock, 1);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays2(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales2,2);
     }
     function gaCount2(value, row, index) {
-        return calcCount(row.gaSales2, row.gaStock, 2);
+        var count = calcCount(row.gaSales2, row.gaStock, 2);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays3(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales3,3);
     }
     function gaCount3(value, row, index) {
-        return calcCount(row.gaSales3, row.gaStock, 3);
+        var count = calcCount(row.gaSales3, row.gaStock, 3);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays4(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales4,4);
     }
     function gaCount4(value, row, index) {
-        return calcCount(row.gaSales4, row.gaStock, 4);
+        var count = calcCount(row.gaSales4, row.gaStock, 4);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays5(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales5,5);
     }
     function gaCount5(value, row, index) {
-        return calcCount(row.gaSales5, row.gaStock, 5);
+        var count = calcCount(row.gaSales5, row.gaStock, 5);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays6(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales6,6);
     }
     function gaCount6(value, row, index) {
-        return calcCount(row.gaSales6, row.gaStock, 6);
+        var count = calcCount(row.gaSales6, row.gaStock, 6);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays7(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales7,7);
     }
     function gaCount7(value, row, index) {
-        return calcCount(row.gaSales7, row.gaStock, 7);
+        var count = calcCount(row.gaSales7, row.gaStock, 7);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays8(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales8,8);
     }
     function gaCount8(value, row, index) {
-        return calcCount(row.gaSales8, row.gaStock, 8);
+        var count = calcCount(row.gaSales8, row.gaStock, 8);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays9(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales9,9);
     }
     function gaCount9(value, row, index) {
-        return calcCount(row.gaSales9, row.gaStock, 9);
+        var count = calcCount(row.gaSales9, row.gaStock, 9);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays10(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales10,10);
     }
     function gaCount10(value, row, index) {
-        return calcCount(row.gaSales10, row.gaStock, 10);
+        var count = calcCount(row.gaSales10, row.gaStock, 10);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays11(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales11,11);
     }
     function gaCount11(value, row, index) {
-        return calcCount(row.gaSales11, row.gaStock, 11);
+        var count = calcCount(row.gaSales11, row.gaStock, 11);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays12(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales12,12);
     }
     function gaCount12(value, row, index) {
-        return calcCount(row.gaSales12, row.gaStock, 12);
+        var count = calcCount(row.gaSales12, row.gaStock, 12);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays13(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales13,13);
     }
     function gaCount13(value, row, index) {
-        return calcCount(row.gaSales13, row.gaStock, 13);
+        var count = calcCount(row.gaSales13, row.gaStock, 13);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays14(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales14,14);
     }
     function gaCount14(value, row, index) {
-        return calcCount(row.gaSales14, row.gaStock, 14);
+        var count = calcCount(row.gaSales14, row.gaStock, 14);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays15(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales15,15);
     }
     function gaCount15(value, row, index) {
-        return calcCount(row.gaSales15, row.gaStock, 15);
+        var count = calcCount(row.gaSales15, row.gaStock, 15);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays16(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales16,16);
     }
     function gaCount16(value, row, index) {
-        return calcCount(row.gaSales16, row.gaStock, 16);
+        var count = calcCount(row.gaSales16, row.gaStock, 16);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays17(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales17,17);
     }
     function gaCount17(value, row, index) {
-        return calcCount(row.gaSales17, row.gaStock, 17);
+        var count = calcCount(row.gaSales17, row.gaStock, 17);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays18(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales18,18);
     }
     function gaCount18(value, row, index) {
-        return calcCount(row.gaSales18, row.gaStock, 18);
+        var count = calcCount(row.gaSales18, row.gaStock, 18);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays19(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales19,19);
     }
     function gaCount19(value, row, index) {
-        return calcCount(row.gaSales19, row.gaStock, 19);
+        var count = calcCount(row.gaSales19, row.gaStock, 19);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays20(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales20,20);
     }
     function gaCount20(value, row, index) {
-        return calcCount(row.gaSales20, row.gaStock, 20);
+        var count = calcCount(row.gaSales20, row.gaStock, 20);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays21(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales21,21);
     }
     function gaCount21(value, row, index) {
-        return calcCount(row.gaSales21, row.gaStock, 21);
+        var count = calcCount(row.gaSales21, row.gaStock, 21);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays22(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales22,22);
     }
     function gaCount22(value, row, index) {
-        return calcCount(row.gaSales22, row.gaStock, 22);
+        var count = calcCount(row.gaSales22, row.gaStock, 22);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays23(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales23,23);
     }
     function gaCount23(value, row, index) {
-        return calcCount(row.gaSales23, row.gaStock, 23);
+        var count = calcCount(row.gaSales23, row.gaStock, 23);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays24(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales24,24);
     }
     function gaCount24(value, row, index) {
-        return calcCount(row.gaSales24, row.gaStock, 24);
+        var count = calcCount(row.gaSales24, row.gaStock, 24);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays25(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales25,25);
     }
     function gaCount25(value, row, index) {
-        return calcCount(row.gaSales25, row.gaStock, 25);
+        var count = calcCount(row.gaSales25, row.gaStock, 25);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays26(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales26,26);
     }
     function gaCount26(value, row, index) {
-        return calcCount(row.gaSales26, row.gaStock, 26);
+        var count = calcCount(row.gaSales26, row.gaStock, 26);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays27(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales27,27);
     }
     function gaCount27(value, row, index) {
-        return calcCount(row.gaSales27, row.gaStock, 27);
+        var count = calcCount(row.gaSales27, row.gaStock, 27);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays28(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales28,28);
     }
     function gaCount28(value, row, index) {
-        return calcCount(row.gaSales28, row.gaStock, 28);
+        var count = calcCount(row.gaSales28, row.gaStock, 28);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays29(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales29,29);
     }
     function gaCount29(value, row, index) {
-        return calcCount(row.gaSales29, row.gaStock, 29);
+        var count = calcCount(row.gaSales29, row.gaStock, 29);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays30(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales30,30);
     }
     function gaCount30(value, row, index) {
-        return calcCount(row.gaSales30, row.gaStock, 30);
+        var count = calcCount(row.gaSales30, row.gaStock, 30);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function gaTurnoverDays31(value, row, index) {
         return calcTurnoverDays(row.gaStock, row.gaSales31,31);
     }
     function gaCount31(value, row, index) {
-        return calcCount(row.gaSales31, row.gaStock, 31);
+        var count = calcCount(row.gaSales31, row.gaStock, 31);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
+    }
+    function gaTurnoverDays90(value, row, index) {
+        return calcTurnoverDays(row.gaStock, row.gaSales90,90);
+    }
+    function gaCount90(value, row, index) {
+        var count = calcCount(row.gaSales90, row.gaStock, 90);
+        return count > 0 ? "<span style='color:red; font-weight: bold;'>" + count + "</span>" : 0;
     }
     function price(value, row, index) {
         return value.toFixed(2);

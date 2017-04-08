@@ -30,8 +30,9 @@
             <h3 style="text-align: center;">
                 上传文件
             </h3>
-            <form action="<%=path%>/files/addFile" method="post" enctype="multipart/form-data">
+            <form action="<%=path%>/files/addFile" method="post" id="form" enctype="multipart/form-data">
             <div role="form">
+                <div id="error" style="color: red;"></div>
                 <div>
                     <label>表格类型：</label>
                     <select class="combobox" name="ftype" onchange="checkType(this)">
@@ -47,6 +48,7 @@
                 <div id="days">
                     <label>天数：</label>
                     <select name="days" class="combobox">
+                        <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="7">7</option>
@@ -88,7 +90,7 @@
                     </select>
                 </div>
                 <br/>
-                <input type="submit" class="btn btn-default" value="提交"/>
+                <input type="button" onclick="upload()" class="btn btn-default" id="btn" style="cursor: pointer;" value="提交"/>
 
              </div>
             </form>
@@ -97,7 +99,14 @@
     </div>
 </div>
 
+<script type="text/javascript" src="<%=path %>/js/jquery.min.js"></script>
+
 <script>
+    var count;
+    $(function() {
+        count = 0;
+    });
+
     function checkType(comboBox) {
         var val = comboBox.value;
         var div = document.getElementById("days");
@@ -107,6 +116,22 @@
         } else {
             div.style = "display: none;";
         }
+    }
+
+    function upload() {
+        count++;
+        var file = document.getElementById("exampleInputFile").value;
+        var div = document.getElementById("error");
+        if (file != null && file != undefined && file != "") {
+            if (count == 1) {
+                document.getElementById("form").submit();
+                document.getElementById("btn").style.cursor='not-allowed';
+            }
+        } else {
+            count = 0;
+            div.innerHTML = "请选择文件";
+        }
+
     }
 </script>
 
