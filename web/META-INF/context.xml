@@ -9,6 +9,6 @@
 		password="123456"
 		maxTotal="20"
 		maxIdle="5"
-		maxWaitMillis="30000"
+		maxWaitMillis="90000"
 	/>
 </Context>
