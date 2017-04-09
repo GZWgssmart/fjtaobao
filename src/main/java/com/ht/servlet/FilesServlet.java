@@ -22,6 +22,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
+import sun.security.provider.MD5;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +35,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by ArrayBin on 2017/3/17.
@@ -59,7 +61,9 @@ public class FilesServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String method = WebUtil.getURIMethod(req);
-        if (method.equals("queryAll")) {
+        if (method.equals("login")) {
+            login(req, resp);
+        } else if (method.equals("queryAll")) {
             queryFiles(req, resp);
         } else if (method.equals("addFile")) {
             addFiles(req, resp);
@@ -74,6 +78,25 @@ public class FilesServlet extends HttpServlet {
         } else if (method.equals("maxTable")) {
             maxTable(req, resp);
         }
+    }
+
+
+    public void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter("name");
+        String pwd = req.getParameter("pwd");
+        String md5Pwd = EncryptUtil.md5Encrypt(pwd);
+        if (name != null && !name.equals("") && pwd != null && !pwd.equals("")) {
+            if (name.equals("bb") && md5Pwd.equals(EncryptUtil.md5Encrypt("123456"))) {
+                req.getRequestDispatcher("/home.jsp").forward(req,resp);
+            } else {
+                req.setAttribute("error","你的账户密码错误，请重新输入");
+                req.getRequestDispatcher("/index.jsp").forward(req, resp);
+            }
+        } else {
+            req.setAttribute("error","请输入你的账户密码");
+            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        }
+
     }
 
     private void queryFiles(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
