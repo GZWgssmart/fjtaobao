@@ -86,7 +86,7 @@ public class FilesServlet extends HttpServlet {
         String pwd = req.getParameter("pwd");
         String md5Pwd = EncryptUtil.md5Encrypt(pwd);
         if (name != null && !name.equals("") && pwd != null && !pwd.equals("")) {
-            if (name.equals("bb") && md5Pwd.equals(EncryptUtil.md5Encrypt("123456"))) {
+            if (name.equals("root") && md5Pwd.equals(EncryptUtil.md5Encrypt("123456"))) {
                 req.getRequestDispatcher("/home.jsp").forward(req,resp);
             } else {
                 req.setAttribute("error","你的账户密码错误，请重新输入");
