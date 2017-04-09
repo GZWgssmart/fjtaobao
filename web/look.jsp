@@ -95,7 +95,8 @@
                            class="easyui-linkbutton" iconCls="icon-cancel">删除文档</a>
                     </div>
                 </div>
-                <div style="text-align: right; margin-right: 50px;"><a href="<%=path %>/index.jsp">返回首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=path %>/upload.jsp">上传文档</a></div>
+
+                <div style="text-align: right; margin-right: 50px;"><a href="<%=path %>/home.jsp">返回首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=path %>/upload.jsp">上传文档</a></div>
             </div>
         </div>
     </div>

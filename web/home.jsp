@@ -22,6 +22,9 @@
     <a href="<%=path %>/look.jsp">
         <button type="button" class="btn btn-default btn-lg">查看文件</button>
     </a>
+    <a href="<%=path %>/index.jsp">
+        <button type="button" class="btn btn-default btn-lg">退出登录</button>
+    </a>
 </p>
 </body>
 </html>

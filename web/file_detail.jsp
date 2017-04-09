@@ -145,7 +145,7 @@
 </div>
 
 
-<div style="text-align: right; margin-right: 50px;"><a href="<%=path %>/index.jsp">返回首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+<div style="text-align: right; margin-right: 50px;"><a href="<%=path %>/home.jsp">返回首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
         href="<%=path %>/look.jsp">查看文档</a></div>
 
 <script>
