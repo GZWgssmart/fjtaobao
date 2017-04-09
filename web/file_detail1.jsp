@@ -22,6 +22,36 @@
     <script type="text/javascript" src="<%=path %>/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
 
     <script type="text/javascript" src="<%=path %>/js/main.js"></script>
+    <style>
+        .datagrid-cell-c1-totalStock {
+            background-color: #d0cece;
+        }
+        .datagrid-cell-c1-bjStock {
+            background-color: #d0cece;
+        }
+        .datagrid-cell-c1-shStock {
+            background-color: #d0cece;
+        }
+        .datagrid-cell-c1-gzStock {
+            background-color: #d0cece;
+        }
+        .datagrid-cell-c1-cdStock {
+            background-color: #d0cece;
+        }
+        .datagrid-cell-c1-whStock {
+            background-color: #d0cece;
+        }
+        .datagrid-cell-c1-syStock {
+            background-color: #d0cece;
+        }
+        .datagrid-cell-c1-xaStock {
+            background-color: #d0cece;
+        }
+        .datagrid-cell-c1-gaStock {
+            background-color: #d0cece;
+        }
+
+    </style>
 </head>
 <body>
 <h3 style="text-align: center;">
