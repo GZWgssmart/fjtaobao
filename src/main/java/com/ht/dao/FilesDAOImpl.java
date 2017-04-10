@@ -47,6 +47,7 @@ public class FilesDAOImpl extends BaseDAO implements FilesDAO {
             ps.setString(9, files.getfPath());
             ps.setDate(10,  files.getCreateTime());
             ps.execute();
+            ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -70,6 +71,8 @@ public class FilesDAOImpl extends BaseDAO implements FilesDAO {
                 setFiles(files, rs);
                 filesList.add(files);
            }
+           rs.close();
+           ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -88,9 +91,12 @@ public class FilesDAOImpl extends BaseDAO implements FilesDAO {
             if (rs.next()) {
                 count = rs.getInt(1);
             }
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        close();
         return count;
     }
 
@@ -107,6 +113,8 @@ public class FilesDAOImpl extends BaseDAO implements FilesDAO {
                 setFiles(files, rs);
                 filesList.add(files);
             }
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -132,6 +140,8 @@ public class FilesDAOImpl extends BaseDAO implements FilesDAO {
                 files = new Files();
                 setFiles(files, rs);
             }
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -150,6 +160,8 @@ public class FilesDAOImpl extends BaseDAO implements FilesDAO {
             ps.execute();
             PreparedStatement ps1 = conn.prepareStatement(sql1);
             ps1.execute();
+            ps.close();
+            ps1.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

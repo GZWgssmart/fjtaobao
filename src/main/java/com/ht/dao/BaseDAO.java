@@ -29,12 +29,12 @@ public class BaseDAO {
     }
 
     public void close() {
-        if (conn != null) {
-            try {
+        try {
+            if (conn != null && conn.isClosed()) {
                 conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -79,6 +79,7 @@ public class ProductDAOImpl extends BaseDAO implements ProductDAO {
             ps.setInt(24,product.getGzSales());
             ps.setInt(25, product.getGaStock());
             ps.execute();
+            ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -101,6 +102,8 @@ public class ProductDAOImpl extends BaseDAO implements ProductDAO {
                 setProduct(product, rs);
                 productList.add(product);
             }
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -120,6 +123,8 @@ public class ProductDAOImpl extends BaseDAO implements ProductDAO {
             if (rs.next()) {
                 count = rs.getInt(1);
             }
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -100,7 +100,7 @@ public class FilesServlet extends HttpServlet {
         if (name != null && !name.equals("") && pwd != null && !pwd.equals("")) {
             if (name.equals("root") && md5Pwd.equals(EncryptUtil.md5Encrypt("123456"))) {
                 req.getSession().setAttribute("name", name);
-                req.getRequestDispatcher("/home.jsp").forward(req, resp);
+                req.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(req, resp);
             } else {
                 req.setAttribute("error", "你的账户密码错误，请重新输入");
                 req.getRequestDispatcher("/index.jsp").forward(req, resp);
@@ -114,7 +114,7 @@ public class FilesServlet extends HttpServlet {
 
     private void home(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("name") != null) {
-            req.getRequestDispatcher("/home.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(req, resp);
         } else {
             req.getRequestDispatcher("/index.jsp").forward(req, resp);
         }
@@ -123,7 +123,7 @@ public class FilesServlet extends HttpServlet {
 
     public void addFilePage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("name") != null) {
-            req.getRequestDispatcher("/upload.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/upload.jsp").forward(req, resp);
         } else {
             req.getRequestDispatcher("/index.jsp").forward(req, resp);
         }
@@ -132,7 +132,7 @@ public class FilesServlet extends HttpServlet {
 
     public void queryFilesPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("name") != null) {
-            req.getRequestDispatcher("/look.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/look.jsp").forward(req, resp);
         } else {
             req.getRequestDispatcher("/index.jsp").forward(req, resp);
         }
@@ -141,7 +141,7 @@ public class FilesServlet extends HttpServlet {
 
     public void file1(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("name") != null) {
-            req.getRequestDispatcher("/file_detail.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/file_detail.jsp").forward(req, resp);
         } else {
             req.getRequestDispatcher("/index.jsp").forward(req, resp);
         }
@@ -150,7 +150,7 @@ public class FilesServlet extends HttpServlet {
 
     public void file2(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("name") != null) {
-            req.getRequestDispatcher("/file_detail1.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/file_detail1.jsp").forward(req, resp);
         } else {
             req.getRequestDispatcher("/index.jsp").forward(req, resp);
         }
@@ -178,7 +178,7 @@ public class FilesServlet extends HttpServlet {
         for (Files files : rows) {
         }
         total = filesService.count();
-        req.getRequestDispatcher("/look.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/look.jsp").forward(req, resp);
     }
 
 
@@ -249,7 +249,7 @@ public class FilesServlet extends HttpServlet {
                     String prefix = files.getfPath().substring(files.getfPath().lastIndexOf(".") + 1);
                     inputExcel1(files.getfPath(), req, files.getFileNo(), prefix);
                 }
-                resp.sendRedirect("/look.jsp");
+                resp.sendRedirect("/WEB-INF/views/look.jsp");
             } catch (FileUploadException e) {
                 e.printStackTrace();
             }
@@ -692,9 +692,9 @@ public class FilesServlet extends HttpServlet {
                     }
                 }
                 session.setAttribute("salesList", salesList);
-                resp.sendRedirect("/file_detail1.jsp");
+                req.getRequestDispatcher("/WEB-INF/views/file_detail1.jsp").forward(req,resp);
             } else {
-                resp.sendRedirect("/look.jsp");
+                req.getRequestDispatcher("/WEB-INF/views/look.jsp").forward(req,resp);
             }
         } else{
             req.getRequestDispatcher("/index.jsp").forward(req,resp);
