@@ -249,7 +249,7 @@ public class FilesServlet extends HttpServlet {
                     String prefix = files.getfPath().substring(files.getfPath().lastIndexOf(".") + 1);
                     inputExcel1(files.getfPath(), req, files.getFileNo(), prefix);
                 }
-                resp.sendRedirect("/WEB-INF/views/look.jsp");
+                req.getRequestDispatcher("/WEB-INF/views/look.jsp").forward(req, resp);
             } catch (FileUploadException e) {
                 e.printStackTrace();
             }
