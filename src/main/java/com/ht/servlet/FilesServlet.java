@@ -916,6 +916,9 @@ public class FilesServlet extends HttpServlet {
             if (pi.getTotalStock() > mt.getTotalStock()) {
                 mt.setTotalStock(pi.getTotalStock());
             }
+            if (pi.getTotalSales() > mt.getTotalSales()) {
+                mt.setTotalSales(pi.getTotalSales());
+            }
 
             if (bjStock > mt.getBjStock()) {
                 mt.setBjStock(bjStock);

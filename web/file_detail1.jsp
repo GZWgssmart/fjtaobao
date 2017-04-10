@@ -77,6 +77,9 @@
         <th data-options="field:'price',width:100,align:'center'" formatter="price">商品价格</th>
         <th data-options="field:'totalStock',width:100,align:'center'">全国总库存</th>
         <th data-options="field:'totalStockCount',width:100,align:'center'" formatter="totalStockCount">全国总库存额</th>
+        <th data-options="field:'totalSales',width:100,align:'center'">全国总销量</th>
+        <th data-options="field:'totalSalesCount',width:100,align:'center'" formatter="totalSalesCount">全国总销量额</th>
+
         <c:choose>
             <c:when test="${sessionScope.city == 'bj'}">
                 <th data-options="field:'bjStock',width:100,align:'center'">北京库存</th>
@@ -6920,7 +6923,12 @@
     function totalStockCount(value, row, index) {
         return parseInt(row.price) * parseInt(row.totalStock);
     }
-    // 北京calcCount(row.bjSales1, row.bjStock, 1)
+
+    function totalSalesCount(value, row, index) {
+        return parseInt(row.price) * parseInt(row.totalSales);
+    }
+
+    // 北京
     function bjTurnoverDays1(value, row, index) {
         return calcTurnoverDays(row.bjStock, row.bjSales1, 1);
     }
