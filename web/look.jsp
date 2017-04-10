@@ -96,7 +96,7 @@
                     </div>
                 </div>
 
-                <div style="text-align: right; margin-right: 50px;"><a href="<%=path %>/home.jsp">返回首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=path %>/upload.jsp">上传文档</a></div>
+                <div style="text-align: right; margin-right: 50px;"><a href="<%=path %>/files/returnHome">返回首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=path %>/files/addFilePage">上传文档</a></div>
             </div>
         </div>
     </div>

@@ -94,7 +94,7 @@
 
              </div>
             </form>
-            <div style="text-align: right;"><a href="<%=path %>/index.jsp">返回首页</a></div>
+            <div style="text-align: right;"><a href="<%=path %>/files/returnHome">返回首页</a></div>
         </div>
     </div>
 </div>

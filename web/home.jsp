@@ -16,13 +16,13 @@
 </head>
 <body>
 <p style="text-align: center; margin-top: 300px;">
-    <a href="<%=path %>/upload.jsp">
+    <a href="<%=path %>/files/addFilePage">
         <button type="button" class="btn btn-primary btn-lg">上传文件</button>
     </a>
-    <a href="<%=path %>/look.jsp">
+    <a href="<%=path %>/files/queryFilesPage">
         <button type="button" class="btn btn-default btn-lg">查看文件</button>
     </a>
-    <a href="<%=path %>/index.jsp">
+    <a href="<%=path %>/files/outSession">
         <button type="button" class="btn btn-default btn-lg">退出登录</button>
     </a>
 </p>

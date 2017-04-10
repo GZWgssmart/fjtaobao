@@ -63,10 +63,20 @@ public class FilesServlet extends HttpServlet {
         String method = WebUtil.getURIMethod(req);
         if (method.equals("login")) {
             login(req, resp);
+        } else if (method.equals("returnHome")) {
+            home(req, resp);
+        } else if (method.equals("queryFilesPage")) {
+            queryFilesPage(req, resp);
         } else if (method.equals("queryAll")) {
             queryFiles(req, resp);
+        } else if (method.equals("addFilePage")) {
+            addFilePage(req, resp);
         } else if (method.equals("addFile")) {
             addFiles(req, resp);
+        } else if (method.equals("file1")) {
+            file1(req, resp);
+        } else if (method.equals("file2")) {
+            file2(req, resp);
         } else if (method.equals("pager")) {
             searchFilePager(req, resp);
         } else if (method.equals("search")) {
@@ -77,6 +87,8 @@ public class FilesServlet extends HttpServlet {
             deleteFiles(req, resp);
         } else if (method.equals("maxTable")) {
             maxTable(req, resp);
+        } else if (method.equals("outSession")) {
+            outSession(req, resp);
         }
     }
 
@@ -88,17 +100,68 @@ public class FilesServlet extends HttpServlet {
         if (name != null && !name.equals("") && pwd != null && !pwd.equals("")) {
             if (name.equals("root") && md5Pwd.equals(EncryptUtil.md5Encrypt("123456"))) {
                 req.getSession().setAttribute("name", name);
-                req.getRequestDispatcher("/home.jsp").forward(req,resp);
+                req.getRequestDispatcher("/home.jsp").forward(req, resp);
             } else {
-                req.setAttribute("error","你的账户密码错误，请重新输入");
+                req.setAttribute("error", "你的账户密码错误，请重新输入");
                 req.getRequestDispatcher("/index.jsp").forward(req, resp);
             }
         } else {
-            req.setAttribute("error","请输入你的账户密码");
+            req.setAttribute("error", "请输入你的账户密码");
             req.getRequestDispatcher("/index.jsp").forward(req, resp);
         }
 
     }
+
+    private void home(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getSession().getAttribute("name") != null) {
+            req.getRequestDispatcher("/home.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        }
+
+    }
+
+    public void addFilePage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getSession().getAttribute("name") != null) {
+            req.getRequestDispatcher("/upload.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        }
+
+    }
+
+    public void queryFilesPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getSession().getAttribute("name") != null) {
+            req.getRequestDispatcher("/look.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        }
+
+    }
+
+    public void file1(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getSession().getAttribute("name") != null) {
+            req.getRequestDispatcher("/file_detail.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        }
+
+    }
+
+    public void file2(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getSession().getAttribute("name") != null) {
+            req.getRequestDispatcher("/file_detail1.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        }
+
+    }
+
+    public void outSession(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getSession().invalidate();
+        req.getRequestDispatcher("/index.jsp").forward(req, resp);
+    }
+
 
     private void queryFiles(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String pageNoStr = req.getParameter("page");
@@ -275,362 +338,368 @@ public class FilesServlet extends HttpServlet {
     }
 
 
-    private void setCondition(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        HttpSession session = req.getSession();
-        resp.setCharacterEncoding("utf-8");
-        String daysStr = req.getParameter("days");
-        String cityStr = req.getParameter("city");
-        String idsStr = req.getParameter("ids");
-        String fTypeStr = req.getParameter("fType");
-        String days1Str = req.getParameter("days1");
-        days = 28;
-        city = "all";
-        if (daysStr != null && !"".equals(daysStr) && cityStr != null && !"".equals(cityStr) && idsStr != null && !"".equals(idsStr)) {
-            try {
-                days = Integer.valueOf(daysStr);
-                city = cityStr;
-                ids = idsStr;
-                fType = fTypeStr;
-            } catch (NumberFormatException e) {
+    private void setCondition(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        if (req.getSession().getAttribute("name") != null) {
 
+            HttpSession session = req.getSession();
+            resp.setCharacterEncoding("utf-8");
+            String daysStr = req.getParameter("days");
+            String cityStr = req.getParameter("city");
+            String idsStr = req.getParameter("ids");
+            String fTypeStr = req.getParameter("fType");
+            String days1Str = req.getParameter("days1");
+            days = 28;
+            city = "all";
+            if (daysStr != null && !"".equals(daysStr) && cityStr != null && !"".equals(cityStr) && idsStr != null && !"".equals(idsStr)) {
+                try {
+                    days = Integer.valueOf(daysStr);
+                    city = cityStr;
+                    ids = idsStr;
+                    fType = fTypeStr;
+                } catch (NumberFormatException e) {
+
+                }
+                if (city.equals("all")) {
+                    session.setAttribute("city", "all");
+                } else if (city.equals("bj")) {
+                    session.setAttribute("city", "bj");
+                } else if (city.equals("sh")) {
+                    session.setAttribute("city", "sh");
+                } else if (city.equals("gz")) {
+                    session.setAttribute("city", "gz");
+                } else if (city.equals("cd")) {
+                    session.setAttribute("city", "cd");
+                } else if (city.equals("wh")) {
+                    session.setAttribute("city", "wh");
+                } else if (city.equals("sy")) {
+                    session.setAttribute("city", "sy");
+                } else if (city.equals("xa")) {
+                    session.setAttribute("city", "xa");
+                } else if (city.equals("ga")) {
+                    session.setAttribute("city", "ga");
+                }
+                session.setAttribute("days", days);
+
+                int page = 1;
+                int rows = 20;
+                try {
+                    page = Integer.valueOf(req.getParameter("page"));
+                    rows = Integer.valueOf(req.getParameter("rows"));
+                } catch (NumberFormatException e) {
+
+                }
+                Pager4EasyUI<ProductInfo> pager = new Pager4EasyUI<ProductInfo>();
+                pager.setPageNo(page);
+                pager.setPageSize(rows);
+                pager = productService.pager(pager, ids, fType);
+                List<ProductInfo> pis = pager.getRows();
+                List<MaxTable> mts = new ArrayList<MaxTable>();
+
+                for (ProductInfo pi : pis) {
+                    MaxTable mt = new MaxTable();
+                    mt.setProductNo(pi.getProductNo());
+                    int idx = mts.indexOf(mt);
+                    if (idx >= 0) {
+                        mt = mts.get(idx);
+                    } else {
+                        mts.add(mt);
+                    }
+
+                    int bjSales = pi.getBjSales();
+                    int bjStock = pi.getBjStock();
+                    int shSales = pi.getShSales();
+                    int shStock = pi.getShStock();
+                    int gzSales = pi.getGzSales();
+                    int gzStock = pi.getGzStock();
+                    int cdSales = pi.getCdSales();
+                    int cdStock = pi.getCdStock();
+                    int whSales = pi.getWhSales();
+                    int whStock = pi.getWhStock();
+                    int sySales = pi.getSySales();
+                    int syStock = pi.getSyStock();
+                    int xaSales = pi.getXaSales();
+                    int xaStock = pi.getXaStock();
+                    int gaSales = pi.getGaSales();
+                    int gaStock = pi.getGaStock();
+
+                    int cycle = pi.getDays();
+
+                    mt.setId(pi.getId());
+                    mt.setName(pi.getName());
+                    mt.setBrand(pi.getBrand());
+                    mt.setStatus(pi.getStatus());
+                    mt.setPrice(pi.getPrice());
+                    if (pi.getTotalStock() > mt.getTotalStock()) {
+                        mt.setTotalStock(pi.getTotalStock());
+                    }
+
+                    if (bjStock > mt.getBjStock()) {
+                        mt.setBjStock(bjStock);
+                    }
+                    if (shStock > mt.getShStock()) {
+                        mt.setShStock(shStock);
+                    }
+                    if (gzStock > mt.getGzStock()) {
+                        mt.setGzStock(gzStock);
+                    }
+                    if (cdStock > mt.getCdStock()) {
+                        mt.setCdStock(cdStock);
+                    }
+                    if (whStock > mt.getWhStock()) {
+                        mt.setWhStock(whStock);
+                    }
+                    if (syStock > mt.getSyStock()) {
+                        mt.setSyStock(syStock);
+                    }
+                    if (xaStock > mt.getXaStock()) {
+                        mt.setXaStock(xaStock);
+                    }
+                    if (gaStock > mt.getGaStock()) {
+                        mt.setGaStock(gaStock);
+                    }
+
+                    setSales(mt, cycle, bjSales, shSales, gzSales, cdSales, whSales, sySales, xaSales, gaSales);
+
+                }
+
+
+                int flagSales1 = 0;
+                int flagSales2 = 0;
+                int flagSales3 = 0;
+                int flagSales4 = 0;
+                int flagSales5 = 0;
+                int flagSales6 = 0;
+                int flagSales7 = 0;
+                int flagSales8 = 0;
+                int flagSales9 = 0;
+                int flagSales10 = 0;
+                int flagSales11 = 0;
+                int flagSales12 = 0;
+                int flagSales13 = 0;
+                int flagSales14 = 0;
+                int flagSales15 = 0;
+                int flagSales16 = 0;
+                int flagSales17 = 0;
+                int flagSales18 = 0;
+                int flagSales19 = 0;
+                int flagSales20 = 0;
+                int flagSales21 = 0;
+                int flagSales22 = 0;
+                int flagSales23 = 0;
+                int flagSales24 = 0;
+                int flagSales25 = 0;
+                int flagSales26 = 0;
+                int flagSales27 = 0;
+                int flagSales28 = 0;
+                int flagSales29 = 0;
+                int flagSales30 = 0;
+                int flagSales31 = 0;
+                int flagSales90 = 0;
+
+                List<Integer> salesList = new ArrayList<Integer>();
+                for (MaxTable m : mts) {
+                    if (m.getBjSales1() != 0) {
+                        if (flagSales1 == 0) {
+                            flagSales1 = 1;
+                            salesList.add(1);
+                        }
+                    }
+                    if (m.getBjSales2() != 0) {
+                        if (flagSales2 == 0) {
+                            flagSales2 = 1;
+                            salesList.add(2);
+                        }
+                    }
+                    if (m.getBjSales3() != 0) {
+                        if (flagSales3 == 0) {
+                            flagSales3 = 1;
+                            salesList.add(3);
+                        }
+                    }
+                    if (m.getBjSales4() != 0) {
+                        if (flagSales4 == 0) {
+                            flagSales4 = 1;
+                            salesList.add(4);
+                        }
+                    }
+                    if (m.getBjSales5() != 0) {
+                        if (flagSales5 == 0) {
+                            flagSales5 = 1;
+                            salesList.add(5);
+                        }
+                    }
+                    if (m.getBjSales6() != 0) {
+                        if (flagSales6 == 0) {
+                            flagSales6 = 1;
+                            salesList.add(6);
+                        }
+                    }
+                    if (m.getBjSales7() != 0) {
+                        if (flagSales7 == 0) {
+                            flagSales7 = 1;
+                            salesList.add(7);
+                        }
+                    }
+                    if (m.getBjSales8() != 0) {
+                        if (flagSales8 == 0) {
+                            flagSales8 = 1;
+                            salesList.add(8);
+                        }
+                    }
+                    if (m.getBjSales9() != 0) {
+                        if (flagSales9 == 0) {
+                            flagSales9 = 1;
+                            salesList.add(9);
+                        }
+                    }
+                    if (m.getBjSales10() != 0) {
+                        if (flagSales10 == 0) {
+                            flagSales10 = 1;
+                            salesList.add(10);
+                        }
+                    }
+                    if (m.getBjSales11() != 0) {
+                        if (flagSales11 == 0) {
+                            flagSales11 = 1;
+                            salesList.add(11);
+                        }
+                    }
+                    if (m.getBjSales12() != 0) {
+                        if (flagSales12 == 0) {
+                            flagSales12 = 1;
+                            salesList.add(12);
+                        }
+                    }
+                    if (m.getBjSales13() != 0) {
+                        if (flagSales13 == 0) {
+                            flagSales13 = 1;
+                            salesList.add(13);
+                        }
+                    }
+                    if (m.getBjSales14() != 0) {
+                        if (flagSales14 == 0) {
+                            flagSales14 = 1;
+                            salesList.add(14);
+                        }
+                    }
+                    if (m.getBjSales15() != 0) {
+                        if (flagSales15 == 0) {
+                            flagSales15 = 1;
+                            salesList.add(15);
+                        }
+                    }
+                    if (m.getBjSales16() != 0) {
+                        if (flagSales16 == 0) {
+                            flagSales16 = 1;
+                            salesList.add(16);
+                        }
+                    }
+                    if (m.getBjSales17() != 0) {
+                        if (flagSales17 == 0) {
+                            flagSales17 = 1;
+                            salesList.add(17);
+                        }
+                    }
+                    if (m.getBjSales18() != 0) {
+                        if (flagSales18 == 0) {
+                            flagSales18 = 1;
+                            salesList.add(18);
+                        }
+                    }
+                    if (m.getBjSales19() != 0) {
+                        if (flagSales19 == 0) {
+                            flagSales19 = 1;
+                            salesList.add(19);
+                        }
+                    }
+                    if (m.getBjSales20() != 0) {
+                        if (flagSales20 == 0) {
+                            flagSales20 = 1;
+                            salesList.add(20);
+                        }
+                    }
+                    if (m.getBjSales21() != 0) {
+                        if (flagSales21 == 0) {
+                            flagSales21 = 1;
+                            salesList.add(21);
+                        }
+                    }
+                    if (m.getBjSales22() != 0) {
+                        if (flagSales22 == 0) {
+                            flagSales22 = 1;
+                            salesList.add(22);
+                        }
+                    }
+                    if (m.getBjSales23() != 0) {
+                        if (flagSales23 == 0) {
+                            flagSales23 = 1;
+                            salesList.add(23);
+                        }
+                    }
+                    if (m.getBjSales24() != 0) {
+                        if (flagSales24 == 0) {
+                            flagSales24 = 1;
+                            salesList.add(24);
+                        }
+                    }
+                    if (m.getBjSales25() != 0) {
+                        if (flagSales25 == 0) {
+                            flagSales25 = 1;
+                            salesList.add(25);
+                        }
+                    }
+                    if (m.getBjSales26() != 0) {
+                        if (flagSales26 == 0) {
+                            flagSales26 = 1;
+                            salesList.add(26);
+                        }
+                    }
+                    if (m.getBjSales27() != 0) {
+                        if (flagSales27 == 0) {
+                            flagSales27 = 1;
+                            salesList.add(27);
+                        }
+                    }
+                    if (m.getBjSales28() != 0) {
+                        if (flagSales28 == 0) {
+                            flagSales28 = 1;
+                            salesList.add(28);
+                        }
+                    }
+                    if (m.getBjSales29() != 0) {
+                        if (flagSales29 == 0) {
+                            flagSales29 = 1;
+                            salesList.add(29);
+                        }
+                    }
+                    if (m.getBjSales30() != 0) {
+                        if (flagSales30 == 0) {
+                            flagSales30 = 1;
+                            salesList.add(30);
+                        }
+                    }
+                    if (m.getBjSales31() != 0) {
+                        if (flagSales31 == 0) {
+                            flagSales31 = 1;
+                            salesList.add(31);
+                        }
+                    }
+                    if (m.getBjSales90() != 0) {
+                        if (flagSales90 == 0) {
+                            flagSales90 = 1;
+                            salesList.add(90);
+                        }
+                    }
+                }
+                session.setAttribute("salesList", salesList);
+                resp.sendRedirect("/file_detail1.jsp");
+            } else {
+                resp.sendRedirect("/look.jsp");
             }
-            if (city.equals("all")) {
-                session.setAttribute("city", "all");
-            } else if (city.equals("bj")) {
-                session.setAttribute("city", "bj");
-            } else if (city.equals("sh")) {
-                session.setAttribute("city", "sh");
-            } else if (city.equals("gz")) {
-                session.setAttribute("city", "gz");
-            } else if (city.equals("cd")) {
-                session.setAttribute("city", "cd");
-            } else if (city.equals("wh")) {
-                session.setAttribute("city", "wh");
-            } else if (city.equals("sy")) {
-                session.setAttribute("city", "sy");
-            } else if (city.equals("xa")) {
-                session.setAttribute("city", "xa");
-            } else if (city.equals("ga")) {
-                session.setAttribute("city", "ga");
-            }
-            session.setAttribute("days", days);
-
-            int page = 1;
-            int rows = 20;
-            try {
-                page = Integer.valueOf(req.getParameter("page"));
-                rows = Integer.valueOf(req.getParameter("rows"));
-            } catch (NumberFormatException e) {
-
-            }
-            Pager4EasyUI<ProductInfo> pager = new Pager4EasyUI<ProductInfo>();
-            pager.setPageNo(page);
-            pager.setPageSize(rows);
-            pager = productService.pager(pager, ids, fType);
-            List<ProductInfo> pis = pager.getRows();
-            List<MaxTable> mts = new ArrayList<MaxTable>();
-
-            for (ProductInfo pi : pis) {
-                MaxTable mt = new MaxTable();
-                mt.setProductNo(pi.getProductNo());
-                int idx = mts.indexOf(mt);
-                if (idx >= 0) {
-                    mt = mts.get(idx);
-                } else {
-                    mts.add(mt);
-                }
-
-                int bjSales = pi.getBjSales();
-                int bjStock = pi.getBjStock();
-                int shSales = pi.getShSales();
-                int shStock = pi.getShStock();
-                int gzSales = pi.getGzSales();
-                int gzStock = pi.getGzStock();
-                int cdSales = pi.getCdSales();
-                int cdStock = pi.getCdStock();
-                int whSales = pi.getWhSales();
-                int whStock = pi.getWhStock();
-                int sySales = pi.getSySales();
-                int syStock = pi.getSyStock();
-                int xaSales = pi.getXaSales();
-                int xaStock = pi.getXaStock();
-                int gaSales = pi.getGaSales();
-                int gaStock = pi.getGaStock();
-
-                int cycle = pi.getDays();
-
-                mt.setId(pi.getId());
-                mt.setName(pi.getName());
-                mt.setBrand(pi.getBrand());
-                mt.setStatus(pi.getStatus());
-                mt.setPrice(pi.getPrice());
-                if (pi.getTotalStock() > mt.getTotalStock()) {
-                    mt.setTotalStock(pi.getTotalStock());
-                }
-
-                if (bjStock > mt.getBjStock()) {
-                    mt.setBjStock(bjStock);
-                }
-                if (shStock > mt.getShStock()) {
-                    mt.setShStock(shStock);
-                }
-                if (gzStock > mt.getGzStock()) {
-                    mt.setGzStock(gzStock);
-                }
-                if (cdStock > mt.getCdStock()) {
-                    mt.setCdStock(cdStock);
-                }
-                if (whStock > mt.getWhStock()) {
-                    mt.setWhStock(whStock);
-                }
-                if (syStock > mt.getSyStock()) {
-                    mt.setSyStock(syStock);
-                }
-                if (xaStock > mt.getXaStock()) {
-                    mt.setXaStock(xaStock);
-                }
-                if (gaStock > mt.getGaStock()) {
-                    mt.setGaStock(gaStock);
-                }
-
-                setSales(mt, cycle, bjSales, shSales, gzSales, cdSales, whSales, sySales, xaSales, gaSales);
-
-            }
-
-
-            int flagSales1 = 0;
-            int flagSales2 = 0;
-            int flagSales3 = 0;
-            int flagSales4 = 0;
-            int flagSales5 = 0;
-            int flagSales6 = 0;
-            int flagSales7 = 0;
-            int flagSales8 = 0;
-            int flagSales9 = 0;
-            int flagSales10 = 0;
-            int flagSales11 = 0;
-            int flagSales12 = 0;
-            int flagSales13 = 0;
-            int flagSales14 = 0;
-            int flagSales15 = 0;
-            int flagSales16 = 0;
-            int flagSales17 = 0;
-            int flagSales18 = 0;
-            int flagSales19 = 0;
-            int flagSales20 = 0;
-            int flagSales21 = 0;
-            int flagSales22 = 0;
-            int flagSales23 = 0;
-            int flagSales24 = 0;
-            int flagSales25 = 0;
-            int flagSales26 = 0;
-            int flagSales27 = 0;
-            int flagSales28 = 0;
-            int flagSales29 = 0;
-            int flagSales30 = 0;
-            int flagSales31 = 0;
-            int flagSales90 = 0;
-
-            List<Integer> salesList = new ArrayList<Integer>();
-            for (MaxTable m : mts) {
-                if (m.getBjSales1() != 0) {
-                    if (flagSales1 == 0) {
-                        flagSales1 = 1;
-                        salesList.add(1);
-                    }
-                }
-                if (m.getBjSales2() != 0) {
-                    if (flagSales2 == 0) {
-                        flagSales2 = 1;
-                        salesList.add(2);
-                    }
-                }
-                if (m.getBjSales3() != 0) {
-                    if (flagSales3 == 0) {
-                        flagSales3 = 1;
-                        salesList.add(3);
-                    }
-                }
-                if (m.getBjSales4() != 0) {
-                    if (flagSales4 == 0) {
-                        flagSales4 = 1;
-                        salesList.add(4);
-                    }
-                }
-                if (m.getBjSales5() != 0) {
-                    if (flagSales5 == 0) {
-                        flagSales5 = 1;
-                        salesList.add(5);
-                    }
-                }
-                if (m.getBjSales6() != 0) {
-                    if (flagSales6 == 0) {
-                        flagSales6 = 1;
-                        salesList.add(6);
-                    }
-                }
-                if (m.getBjSales7() != 0) {
-                    if (flagSales7 == 0) {
-                        flagSales7 = 1;
-                        salesList.add(7);
-                    }
-                }
-                if (m.getBjSales8() != 0) {
-                    if (flagSales8 == 0) {
-                        flagSales8 = 1;
-                        salesList.add(8);
-                    }
-                }
-                if (m.getBjSales9() != 0) {
-                    if (flagSales9 == 0) {
-                        flagSales9 = 1;
-                        salesList.add(9);
-                    }
-                }
-                if (m.getBjSales10() != 0) {
-                    if (flagSales10 == 0) {
-                        flagSales10 = 1;
-                        salesList.add(10);
-                    }
-                }
-                if (m.getBjSales11() != 0) {
-                    if (flagSales11 == 0) {
-                        flagSales11 = 1;
-                        salesList.add(11);
-                    }
-                }
-                if (m.getBjSales12() != 0) {
-                    if (flagSales12 == 0) {
-                        flagSales12 = 1;
-                        salesList.add(12);
-                    }
-                }
-                if (m.getBjSales13() != 0) {
-                    if (flagSales13 == 0) {
-                        flagSales13 = 1;
-                        salesList.add(13);
-                    }
-                }
-                if (m.getBjSales14() != 0) {
-                    if (flagSales14 == 0) {
-                        flagSales14 = 1;
-                        salesList.add(14);
-                    }
-                }
-                if (m.getBjSales15() != 0) {
-                    if (flagSales15 == 0) {
-                        flagSales15 = 1;
-                        salesList.add(15);
-                    }
-                }
-                if (m.getBjSales16() != 0) {
-                    if (flagSales16 == 0) {
-                        flagSales16 = 1;
-                        salesList.add(16);
-                    }
-                }
-                if (m.getBjSales17() != 0) {
-                    if (flagSales17 == 0) {
-                        flagSales17 = 1;
-                        salesList.add(17);
-                    }
-                }
-                if (m.getBjSales18() != 0) {
-                    if (flagSales18 == 0) {
-                        flagSales18 = 1;
-                        salesList.add(18);
-                    }
-                }
-                if (m.getBjSales19() != 0) {
-                    if (flagSales19 == 0) {
-                        flagSales19 = 1;
-                        salesList.add(19);
-                    }
-                }
-                if (m.getBjSales20() != 0) {
-                    if (flagSales20 == 0) {
-                        flagSales20 = 1;
-                        salesList.add(20);
-                    }
-                }
-                if (m.getBjSales21() != 0) {
-                    if (flagSales21 == 0) {
-                        flagSales21 = 1;
-                        salesList.add(21);
-                    }
-                }
-                if (m.getBjSales22() != 0) {
-                    if (flagSales22 == 0) {
-                        flagSales22 = 1;
-                        salesList.add(22);
-                    }
-                }
-                if (m.getBjSales23() != 0) {
-                    if (flagSales23 == 0) {
-                        flagSales23 = 1;
-                        salesList.add(23);
-                    }
-                }
-                if (m.getBjSales24() != 0) {
-                    if (flagSales24 == 0) {
-                        flagSales24 = 1;
-                        salesList.add(24);
-                    }
-                }
-                if (m.getBjSales25() != 0) {
-                    if (flagSales25 == 0) {
-                        flagSales25 = 1;
-                        salesList.add(25);
-                    }
-                }
-                if (m.getBjSales26() != 0) {
-                    if (flagSales26 == 0) {
-                        flagSales26 = 1;
-                        salesList.add(26);
-                    }
-                }
-                if (m.getBjSales27() != 0) {
-                    if (flagSales27 == 0) {
-                        flagSales27 = 1;
-                        salesList.add(27);
-                    }
-                }
-                if (m.getBjSales28() != 0) {
-                    if (flagSales28 == 0) {
-                        flagSales28 = 1;
-                        salesList.add(28);
-                    }
-                }
-                if (m.getBjSales29() != 0) {
-                    if (flagSales29 == 0) {
-                        flagSales29 = 1;
-                        salesList.add(29);
-                    }
-                }
-                if (m.getBjSales30() != 0) {
-                    if (flagSales30 == 0) {
-                        flagSales30 = 1;
-                        salesList.add(30);
-                    }
-                }
-                if (m.getBjSales31() != 0) {
-                    if (flagSales31 == 0) {
-                        flagSales31 = 1;
-                        salesList.add(31);
-                    }
-                }
-                if (m.getBjSales90() != 0) {
-                    if (flagSales90 == 0) {
-                        flagSales90 = 1;
-                        salesList.add(90);
-                    }
-                }
-            }
-            session.setAttribute("salesList", salesList);
-            resp.sendRedirect("/file_detail1.jsp");
-        } else {
-            resp.sendRedirect("/look.jsp");
+        } else{
+            req.getRequestDispatcher("/index.jsp").forward(req,resp);
         }
+
     }
 
     private void searchProductPager(HttpServletRequest req, HttpServletResponse resp) {
@@ -887,6 +956,7 @@ public class FilesServlet extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     private void setSales(MaxTable mt, int cycle, int bjSales, int shSales, int gzSales, int cdSales, int whSales, int sySales, int xaSales, int gaSales) {
