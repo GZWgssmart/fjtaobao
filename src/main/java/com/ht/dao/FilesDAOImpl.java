@@ -103,7 +103,7 @@ public class FilesDAOImpl extends BaseDAO implements FilesDAO {
     @Override
     public Pager4EasyUI<Files> pager(Pager4EasyUI<Files> pager) {
         getConn();
-        String sql = "select * from t_file order by createtime desc limit " + pager.getBeginIndex() + ", " + pager.getPageSize();
+        String sql = "select * from t_file order by createtime desc, days limit " + pager.getBeginIndex() + ", " + pager.getPageSize();
         List<Files> filesList = new ArrayList<>();
         try {
             PreparedStatement ps  =  conn.prepareStatement(sql);

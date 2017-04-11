@@ -32,10 +32,7 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by ArrayBin on 2017/3/17.
@@ -432,6 +429,9 @@ public class FilesServlet extends HttpServlet {
                     if (pi.getTotalStock() > mt.getTotalStock()) {
                         mt.setTotalStock(pi.getTotalStock());
                     }
+                    if (pi.getTotalSales() > mt.getTotalSales()) {
+                        mt.setTotalSales(pi.getTotalSales());
+                    }
 
                     if (bjStock > mt.getBjStock()) {
                         mt.setBjStock(bjStock);
@@ -459,6 +459,7 @@ public class FilesServlet extends HttpServlet {
                     }
 
                     setSales(mt, cycle, bjSales, shSales, gzSales, cdSales, whSales, sySales, xaSales, gaSales);
+
 
                 }
 
@@ -691,6 +692,7 @@ public class FilesServlet extends HttpServlet {
                         }
                     }
                 }
+                Collections.sort(salesList);
                 session.setAttribute("salesList", salesList);
                 req.getRequestDispatcher("/WEB-INF/views/file_detail1.jsp").forward(req,resp);
             } else {

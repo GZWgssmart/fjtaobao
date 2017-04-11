@@ -7,8 +7,8 @@
 		url="jdbc:mysql://localhost:3306/d_goods?characterEncoding=utf-8"
 		username="root"
 		password="123456"
-		maxTotal="100"
-		maxIdle="100"
+		maxTotal="200"
+		maxIdle="200"
 		maxWaitMillis="90000"
 	/>
 </Context>

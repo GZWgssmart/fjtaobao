@@ -30,7 +30,7 @@ public class BaseDAO {
 
     public void close() {
         try {
-            if (conn != null && conn.isClosed()) {
+            if (conn != null) {
                 conn.close();
             }
         } catch (SQLException e) {
