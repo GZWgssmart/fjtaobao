@@ -915,14 +915,25 @@ public class FilesServlet extends HttpServlet {
             mt.setBrand(pi.getBrand());
             mt.setStatus(pi.getStatus());
             mt.setPrice(pi.getPrice());
-            if (pi.getTotalStock() > mt.getTotalStock()) {
-                mt.setTotalStock(pi.getTotalStock());
-            }
-            if (cycle == 28) {
+            if (fType.equals("xc")) {
+                if (pi.getTotalStock() > mt.getTotalStock()) {
+                    mt.setTotalStock(pi.getTotalStock());
+                }
                 if (pi.getTotalSales() > mt.getTotalSales()) {
                     mt.setTotalSales(pi.getTotalSales());
                 }
+            } else if (fType.equals("dc")) {
+                if (pi.getTotalStock() > mt.getTotalStock()) {
+                    mt.setTotalStock(pi.getTotalStock());
+                }
+                if (cycle == 28) {
+
+                    if (pi.getTotalSales() > mt.getTotalSales()) {
+                        mt.setTotalSales(pi.getTotalSales());
+                    }
+                }
             }
+
 
             if (bjStock > mt.getBjStock()) {
                 mt.setBjStock(bjStock);
